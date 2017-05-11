@@ -21,13 +21,17 @@ public class RockBreak : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        //竜の骨とぶつかったので岩が壊れる
-        BreakAnim.SetBool("Break", true);
+        if (other.gameObject.name == "Bone006")
+        {
+            //竜の骨とぶつかったので岩が壊れる
+            BreakAnim.SetBool("Break", true);
 
-        //岩の破砕音を再生
-        AudioManager.Instance.PlaySE("RockTap");
+            //岩の破砕音を再生
+            AudioManager.Instance.PlaySE("RockTap");
 
-        RockBreakFlag = true;
+            //岩が壊れたかのフラグをtrueに
+            RockBreakFlag = true;
+        }
     }
 
     // Use this for initialization

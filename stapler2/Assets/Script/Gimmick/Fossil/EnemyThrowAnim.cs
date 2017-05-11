@@ -26,11 +26,6 @@ public class EnemyThrowAnim : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        //岩がタップされたかのフラグを取得
-        RockTap rocktap = Rock.GetComponent<RockTap>();
-        PlaybackFlag = rocktap.GetRockTapFlag();
-
-        //フラグがtrueならば再生
-        anim.SetBool("Action", PlaybackFlag);
+       
 	}
 }

@@ -10,7 +10,7 @@ public class BoneStop : MonoBehaviour {
     // 変数宣言----------------------------------------------------------------------
 
     //壁の一部分に当たっているかのフラグ
-    public bool WallCollFlag;
+    private bool WallCollFlag;
 
     //岩をタップしたかのフラグを受け取る変数
     private bool PlaybackFlag;
@@ -22,9 +22,14 @@ public class BoneStop : MonoBehaviour {
     //上記と同じオブジェクトを格納する
     public GameObject bone;
 
-    //骨の竜のアニメーション再生用
-    public Animator DragonAnim;
-    public GameObject dragon;
+    //骨をタップして壁に止められたかのフラグ
+    private bool BoneTapStopFlag;
+    //骨をタップして壁に止められたかのフラグを別のスクリプトへ渡す関数
+    public bool GetBoneTapStopFlag()
+    {
+        return BoneTapStopFlag;
+    }
+
 
     //Ray関係
     private RaycastHit hit;
@@ -51,8 +56,8 @@ public class BoneStop : MonoBehaviour {
     // Use this for initialization
     void Start () {
         WallCollFlag = false;
+        BoneTapStopFlag = false;
         anim = bone.GetComponent<Animation>();
-        DragonAnim = dragon.GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
@@ -68,11 +73,13 @@ public class BoneStop : MonoBehaviour {
             //タップしたものが骨のオブジェクトなら処理
             if (TouchManager.SelectedGameObject == gameObject)
             {
-                //アニメーションをストップさせて
-                //そこに止められたように見せる
+                //アニメーションをストップさせてそこに止められたように見せる
                 anim.Stop();
-                DragonAnim.SetBool("Break", true);
-                AudioManager.Instance.PlaySE("dragon_roar_01");
+
+                //止められたのでフラグをtrueにする
+                BoneTapStopFlag = true;
+
+                gameObject.transform.parent = null;
 
                 //Rayを飛ばして
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);

@@ -39,8 +39,8 @@ public class RockTap : MonoBehaviour {
             if (rockBreak.GetClearFlag() == false)
             {
                 audioSource.PlayOneShot(audioSource.clip);
+                RockTapFlag = true;
             }
-            RockTapFlag = true;
         }
         else
         {

@@ -10,9 +10,9 @@ public class StoryChange : MonoBehaviour {
 
     // 変数宣言----------------------------------------------------------------------
     //表示するマテリアル
-    public Material[] material;
+    public Sprite[] sprite;
     //表示するマテリアルを切り替える変数
-    public int ChangeStoryNum=0;
+    private int ChangeStoryNum=0;
     public int GetNum()
     {
         return ChangeStoryNum;
@@ -40,7 +40,8 @@ public class StoryChange : MonoBehaviour {
             }
         }
 
-        //ストーリーの表示するマテリアル
-        this.GetComponent<Renderer>().material = material[ChangeStoryNum];
+        SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
+        sr.sprite = sprite[ChangeStoryNum];
+
     }
 }

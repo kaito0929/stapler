@@ -16,7 +16,7 @@ public class ufoMove : MonoBehaviour {
         COLL,
     }
     //enumを変数として宣言
-    //この変数を使って移動する方向を決める
+    //この変数でUFOの行動を決定
     private ufoState moveDir;
 
 
@@ -127,7 +127,6 @@ public class ufoMove : MonoBehaviour {
 
         if (Alice_MoveEnd.GetMoveEndFlag() == true)
         {
-
             //UFOの進む方向を変更する
             switch (moveDir)
             {
