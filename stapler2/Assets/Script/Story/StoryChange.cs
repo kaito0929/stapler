@@ -4,15 +4,15 @@ using System.Collections;
 public class StoryChange : MonoBehaviour {
 
     //===============================================================
-    //ストーリーを表示しているオブジェクトのマテリアルを切り替えて
+    //ストーリーを表示しているオブジェクトのスプライトを切り替えて
     //ストーリーが進んでいる風に見せるスクリプト
     //===============================================================
 
     // 変数宣言----------------------------------------------------------------------
-    //表示するマテリアル
+    //表示するスプライト
     public Sprite[] sprite;
-    //表示するマテリアルを切り替える変数
-    private int ChangeStoryNum=0;
+    //表示するスプライトを切り替える変数
+    private int ChangeStoryNum;
     public int GetNum()
     {
         return ChangeStoryNum;
@@ -40,6 +40,8 @@ public class StoryChange : MonoBehaviour {
             }
         }
 
+        //表示するスプライト
+        //変数が増えるたびに表示するスプライトを切り替える
         SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
         sr.sprite = sprite[ChangeStoryNum];
 

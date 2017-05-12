@@ -6,9 +6,11 @@ public class StaplerManager : MonoBehaviour {
     //===============================================================
     //ホッチキスの表示非表示を切り替えて
     //タップした位置へ移動させるスクリプト
-    //表示するマテリアルも変えて挟んでいるように見せる
+    //表示するスプライトも変えて挟んでいるように見せる
     //背景や別のオブジェクトにつけて使う
     //================================================================
+
+    // 変数宣言----------------------------------------------------------------------
 
     //ホッチキス
     public GameObject Stapler;
@@ -28,11 +30,11 @@ public class StaplerManager : MonoBehaviour {
     //タップした場所にホッチキスの先端部分へ移動させるための変数
     Vector3 pos;
 
-    //表示するマテリアル
-    public Material[] material;
-    //表示するマテリアルを切り替える変数
+    //表示するスプライト
+    public Sprite[] sprite;
+    //表示するスプライトを切り替える変数
     private int ChangeStaplerNum;
-    //二つ目のマテリアルに変化する時間
+    //二つ目のスプライトに変化する時間
     private float ChangeTime;
 
     // Use this for initialization
@@ -66,14 +68,21 @@ public class StaplerManager : MonoBehaviour {
                 Stapler.transform.position = hit.point;
                 //ホッチキスのx座標をずらしてタップした位置へ先端部分が来るようにする
                 pos = Stapler.transform.position;
-                pos.x += 1f;
+                pos.x += 0.5f;
                 //改めて場所を代入
                 Stapler.transform.position = pos;
             }
         }
 
+        StaplerSpriteChange();
+
+    }
+
+    //ホッチキスのスプライトを切り替えて動かしている風に見せる関数
+    void StaplerSpriteChange()
+    {
         //マテリアルを切り替える秒数
-        if(time>ChangeTime)
+        if (time > ChangeTime)
         {
             ChangeStaplerNum = 1;
         }
@@ -101,8 +110,9 @@ public class StaplerManager : MonoBehaviour {
             ChangeStaplerNum = 0;
         }
 
-        //ホッチキスの表示するマテリアル
-        Stapler.GetComponent<Renderer>().material = material[ChangeStaplerNum];
-
+        //ホッチキスの表示するスプライト
+        SpriteRenderer sr = Stapler.GetComponent<SpriteRenderer>();
+        sr.sprite = sprite[ChangeStaplerNum];
     }
+
 }

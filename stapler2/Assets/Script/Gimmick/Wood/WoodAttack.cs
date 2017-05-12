@@ -75,7 +75,7 @@ public class WoodAttack : MonoBehaviour
             if (time >= 4.5f)
             {
                 //弾をInstantiateで作って発射している風に見せる
-                Instantiate(WoodApple, new Vector3(-4.69f, 6.75f, -4.96f), Quaternion.identity);
+                Instantiate(WoodApple, new Vector3(-4.69f, 6.75f, -5.2f), Quaternion.identity);
                 //このタイミングでも一度変数を初期化
                 time = 0;
                 //攻撃が終了したのでフラグをfalseに

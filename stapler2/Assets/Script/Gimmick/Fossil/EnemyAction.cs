@@ -34,8 +34,11 @@ public class EnemyAction : MonoBehaviour {
     //敵が移動できるかのフラグ
     private bool EnemyMoveFlag;
 
-    //敵が止められている間の時間を取得する
+    //敵が止められている間の時間を取得する変数
     private float EnemyStopTime;
+
+    //敵が止まっている最大の時間
+    private float MaxStopTime;
 
     //Ray関係
     //ホッチキスの針を付けるために必要
@@ -53,6 +56,8 @@ public class EnemyAction : MonoBehaviour {
         moveDir = EnemyMoveDir.RIGHT;
 
         EnemyMoveFlag = true;
+
+        MaxStopTime = 8f;
 	}
 	
 	// Update is called once per frame
@@ -78,6 +83,7 @@ public class EnemyAction : MonoBehaviour {
     //敵の移動を制御する関数
     void EnemyMovePos()
     {
+        //タップされていなかったら移動する
         if (EnemyMoveFlag == true)
         {
             //敵の移動する方向を変えて移動させる
@@ -126,10 +132,14 @@ public class EnemyAction : MonoBehaviour {
         }
         else
         {
+            //タップされて動きが止まっていたら
+            //止まっている間の時間を変数に加算
             EnemyStopTime += Time.deltaTime;
         }
 
-        if(EnemyStopTime>=5f)
+        //止まっている時間がMaxStopTime(8f)を超えたら処理
+        //再び敵が左右に動き出すようになる
+        if(EnemyStopTime>=MaxStopTime)
         {
             EnemyMoveFlag = true;
             EnemyStopTime = 0;

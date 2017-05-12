@@ -18,7 +18,7 @@ public class BoneStop : MonoBehaviour {
     public GameObject Rock;
 
     //上に移動するアニメーションを持つ骨を格納する
-    public Animation anim;
+    public Animation BoneAnim;
     //上記と同じオブジェクトを格納する
     public GameObject bone;
 
@@ -31,6 +31,11 @@ public class BoneStop : MonoBehaviour {
     }
 
 
+    //骨を止める場所に設置してあるオブジェクト
+    //このオブジェクトに当たっている時に骨をタップして止める
+    public GameObject StopWallColl;
+
+
     //Ray関係
     private RaycastHit hit;
     private Ray ray;
@@ -40,8 +45,8 @@ public class BoneStop : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        //壁のコライダーと衝突した時に処理するように
-        if (other.gameObject.name == "wall")
+        //設置されたコライダーを持つオブジェクトに当たっている場合に処理
+        if (other.gameObject == StopWallColl)
         {
             WallCollFlag = true;
         }
@@ -57,7 +62,7 @@ public class BoneStop : MonoBehaviour {
     void Start () {
         WallCollFlag = false;
         BoneTapStopFlag = false;
-        anim = bone.GetComponent<Animation>();
+        BoneAnim = bone.GetComponent<Animation>();
     }
 	
 	// Update is called once per frame
@@ -74,7 +79,7 @@ public class BoneStop : MonoBehaviour {
             if (TouchManager.SelectedGameObject == gameObject)
             {
                 //アニメーションをストップさせてそこに止められたように見せる
-                anim.Stop();
+                BoneAnim.Stop();
 
                 //止められたのでフラグをtrueにする
                 BoneTapStopFlag = true;
@@ -98,7 +103,7 @@ public class BoneStop : MonoBehaviour {
             //行うようにしておく
             if (PlaybackFlag == true)
             {
-                anim.Play();
+                BoneAnim.Play();
             }
         }
         
