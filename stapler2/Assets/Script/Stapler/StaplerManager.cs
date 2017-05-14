@@ -43,7 +43,7 @@ public class StaplerManager : MonoBehaviour {
         Stapler.SetActive(false);
         time = 0;
         CountFlag = false;
-        ChangeTime = 0.5f;
+        ChangeTime = 0.2f;
         ChangeStaplerNum = 0;
     }
 	

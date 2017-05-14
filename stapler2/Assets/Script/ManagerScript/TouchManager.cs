@@ -48,7 +48,8 @@ public class TouchManager : MonoBehaviour {
         {
             SelectedGameObject = null;
         }
-       
+
+        Debug.Log(SelectedGameObject);
 
     }
 }
