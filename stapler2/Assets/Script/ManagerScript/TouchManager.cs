@@ -3,6 +3,12 @@ using System.Collections;
 
 public class TouchManager : MonoBehaviour {
 
+    //====================================================================================
+    //タップした場所にRayを飛ばしてヒットしたオブジェクトの情報を取得するスクリプト
+    //====================================================================================
+
+    // 変数宣言----------------------------------------------------------------------
+
     //自身のインスタンス
     private static TouchManager instance = null;
 
@@ -48,8 +54,6 @@ public class TouchManager : MonoBehaviour {
         {
             SelectedGameObject = null;
         }
-
-        Debug.Log(SelectedGameObject);
 
     }
 }

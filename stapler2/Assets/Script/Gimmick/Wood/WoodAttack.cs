@@ -17,7 +17,7 @@ public class WoodAttack : MonoBehaviour
     //弾の発射タイミング
     private float time;
     //Animatorを取得
-    private Animator anim;
+    private Animator WoodAnim;
 
     //木を止めるために必要な回数
     private int WoodStopNorma;
@@ -41,14 +41,19 @@ public class WoodAttack : MonoBehaviour
     public GameObject[] Needle;
     private int NeedleMoveNum;
 
+    //NeedleManagerを取得する
+    private GameObject NeedleManager;
+
     // Use this for initialization
     void Start()
     {
         time = 0;
-        anim = GetComponent<Animator>();
+        WoodAnim = GetComponent<Animator>();
         WoodStopFlag = false;
         WoodAttackFlag = false;
         WoodStopNorma = 3;
+
+        NeedleManager = GameObject.Find("NeedleManager");
     }
 
     // Update is called once per frame
@@ -64,7 +69,7 @@ public class WoodAttack : MonoBehaviour
             if (time >= 3f&& time <= 3.5f)
             {
                 //木のアニメーションを再生
-                anim.SetBool("attack", true);
+                WoodAnim.SetBool("attack", true);
                 //攻撃している時のSEを再生
                 AudioManager.Instance.PlaySE("wood");
                 //攻撃中かのフラグ
@@ -80,14 +85,17 @@ public class WoodAttack : MonoBehaviour
                 time = 0;
                 //攻撃が終了したのでフラグをfalseに
                 WoodAttackFlag = false;
-                anim.SetBool("attack", false);
+                WoodAnim.SetBool("attack", false);
             }
         }
         else
         {
             //三回以上タップされたのならアニメーションの再生を止める
-            anim.Stop();
+            WoodAnim.Stop();
         }
+
+        //NeedleAnimation内の関数を使用できるように
+        NeedleAnimation needle = NeedleManager.GetComponent<NeedleAnimation>();
 
         //木が攻撃中じゃないと処理を行わないように
         if (WoodAttackFlag == true)
@@ -113,6 +121,14 @@ public class WoodAttack : MonoBehaviour
                 {
                     NeedleMoveNum++;
                 }
+            }
+        }
+        else
+        {
+            if (TouchManager.SelectedGameObject == gameObject)
+            {
+                //針のアニメーションを再生
+                needle.NeedelAnimPlay();
             }
         }
 

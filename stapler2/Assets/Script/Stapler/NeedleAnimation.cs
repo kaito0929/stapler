@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NeedleMove : MonoBehaviour {
+public class NeedleAnimation : MonoBehaviour
+{
 
     //====================================================================
-    //正解以外の場所にタップした時の針の挙動
+    //正解以外の場所にタップした時の針のアニメーション再生
+    //アニメーションを制御する関数を用意する
     //====================================================================
 
     // 変数宣言----------------------------------------------------------------------
@@ -19,31 +21,37 @@ public class NeedleMove : MonoBehaviour {
     //表示する針の順番
     private int MoveNeedleNumber;
 
-    //タップして当たった時のオブジェクト
-    public GameObject TapHit;
+    //弾かれるアニメーションの針な最大数
+    private int NeedleMaxNum;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         MoveNeedleNumber = 0;
+        NeedleMaxNum = 8;
 
         for (int i = 0; i < 9; i++)
         {
             NeedleAnim[i] = MoveNeedle[i].GetComponent<Animation>();
         }
-	}
+    }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    public void NeedelAnimPlay()
+    {
         //9になると一巡したことになるので数字を0に戻す
-        if (MoveNeedleNumber == 8)
+        if (MoveNeedleNumber == NeedleMaxNum)
         {
             MoveNeedleNumber = 0;
         }
 
         //指定したオブジェクトとタップしたオブジェクトが一緒なら処理
-        if (TouchManager.SelectedGameObject == TapHit)
+        if (Input.GetMouseButtonDown(0))
         {
             //Rayを飛ばして
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -61,6 +69,5 @@ public class NeedleMove : MonoBehaviour {
                 MoveNeedleNumber++;
             }
         }
-
     }
 }

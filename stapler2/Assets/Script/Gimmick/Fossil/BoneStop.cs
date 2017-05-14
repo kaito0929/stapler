@@ -30,6 +30,14 @@ public class BoneStop : MonoBehaviour {
         return BoneTapStopFlag;
     }
 
+    //骨が放り投げられるアニメーションが再生中かのフラグ
+    private bool BoneAnimPlayFlag;
+    //再生中かのフラグを別のスクリプトへ渡す関数
+    public bool GetBoneAnimPlayFlag()
+    {
+        return BoneAnimPlayFlag;
+    }
+
 
     //骨を止める場所に設置してあるオブジェクト
     //このオブジェクトに当たっている時に骨をタップして止める
@@ -84,7 +92,7 @@ public class BoneStop : MonoBehaviour {
                 //止められたのでフラグをtrueにする
                 BoneTapStopFlag = true;
 
-                gameObject.transform.parent = null;
+                bone.transform.parent = StopWallColl.transform;
 
                 //Rayを飛ばして
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -107,6 +115,14 @@ public class BoneStop : MonoBehaviour {
             }
         }
         
+        if(BoneAnim.isPlaying)
+        {
+            BoneAnimPlayFlag = true;
+        }
+        else
+        {
+            BoneAnimPlayFlag = false;
+        }
 
     }
 }

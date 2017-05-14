@@ -40,6 +40,10 @@ public class EnemyAction : MonoBehaviour {
     //敵が止まっている最大の時間
     private float MaxStopTime;
 
+    //骨のアニメーションが再生中かのフラグを受け取るための変数
+    public GameObject bone;
+    private bool BoneAnimFlag;
+
     //Ray関係
     //ホッチキスの針を付けるために必要
     private RaycastHit hit;
@@ -56,6 +60,7 @@ public class EnemyAction : MonoBehaviour {
         moveDir = EnemyMoveDir.RIGHT;
 
         EnemyMoveFlag = true;
+        BoneAnimFlag = false;
 
         MaxStopTime = 8f;
 	}
@@ -83,8 +88,11 @@ public class EnemyAction : MonoBehaviour {
     //敵の移動を制御する関数
     void EnemyMovePos()
     {
+        BoneStop boneStop = bone.GetComponent<BoneStop>();
+        BoneAnimFlag = boneStop.GetBoneAnimPlayFlag();
+
         //タップされていなかったら移動する
-        if (EnemyMoveFlag == true)
+        if (EnemyMoveFlag == true&&BoneAnimFlag==false)
         {
             //敵の移動する方向を変えて移動させる
             switch (moveDir)

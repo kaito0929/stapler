@@ -31,6 +31,11 @@ public class GimmickParent : MonoBehaviour {
     //敵やギミックに取り付けるホッチキスの針
     public GameObject Needle;
 
+    //NeedleManagerを取得する
+    private GameObject NeedleManager;
+
+
+
     //オブジェクトが重なっているとフラグをtrueに
     void OnTriggerStay(Collider other)
     {
@@ -78,11 +83,22 @@ public class GimmickParent : MonoBehaviour {
     {
         BearCollFlag = false;
         TapFlag = false;
+        NeedleManager = GameObject.Find("NeedleManager");
     }
 
     // Update is called once per frame
     void Update()
     {
+        //NeedleAnimation内の関数を使用できるように
+        NeedleAnimation needle = NeedleManager.GetComponent<NeedleAnimation>();
 
+        if (TapFlag == false)
+        {
+            if (TouchManager.SelectedGameObject == gameObject)
+            {
+                //針のアニメーションを再生
+                needle.NeedelAnimPlay();
+            }
+        }
     }
 }

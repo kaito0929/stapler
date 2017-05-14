@@ -28,9 +28,12 @@ public class TapStaplerSE : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
         //画面をタップした時に処理
         if (Input.GetMouseButtonDown(0))
         {
+            //タップした先のオブジェクトがTapHitならば何も挟んでいない音を再生
+            //別のオブジェクトならば複数挟んでいる重い音を再生
             if (TouchManager.SelectedGameObject == NotInterposeObj)
             {
                 audioSource.PlayOneShot(LightStaplerSound);
