@@ -12,7 +12,7 @@ public class EnemyAction : MonoBehaviour {
     // 変数宣言----------------------------------------------------------------------
 
     //骨を投げるアニメーションを取得
-    private Animator ThrowAnim;
+    private Animator EnemyAnim;
 
     //岩をタップしたかのフラグを受け取ってアニメーションを再生させるフラグ
     private bool PlaybackFlag;
@@ -24,6 +24,7 @@ public class EnemyAction : MonoBehaviour {
     {
         RIGHT,
         LEFT,
+        ESCAPE,
     }
     //この変数を使って移動する方向を決定
     private EnemyMoveDir moveDir;
@@ -52,9 +53,11 @@ public class EnemyAction : MonoBehaviour {
     //敵やギミックに取り付けるホッチキスの針
     public GameObject Needle;
 
+    public RockBreak breakFlag;
+
     // Use this for initialization
     void Start () {
-        ThrowAnim = GetComponent<Animator>();
+        EnemyAnim = GetComponent<Animator>();
         PlaybackFlag = false;
 
         moveDir = EnemyMoveDir.RIGHT;
@@ -70,6 +73,7 @@ public class EnemyAction : MonoBehaviour {
         ThrowAnimPlay();
         EnemyMovePos();
         EnemyTap();
+        EnemyEscape();
 	}
 
     //骨を投げるアニメーションを再生する関数
@@ -80,9 +84,8 @@ public class EnemyAction : MonoBehaviour {
         PlaybackFlag = rocktap.GetRockTapFlag();
 
         //フラグがtrueならば再生
-        ThrowAnim.SetBool("Action", PlaybackFlag);
+        EnemyAnim.SetBool("Action", PlaybackFlag);
     }
-
 
 
     //敵の移動を制御する関数
@@ -136,6 +139,14 @@ public class EnemyAction : MonoBehaviour {
                     gameObject.transform.position = EnemyMoveVec;
 
                     break;
+
+                case EnemyMoveDir.ESCAPE:
+
+                    EnemyMoveVec = gameObject.transform.position;
+                    EnemyMoveVec.x -= 0.1f;
+                    gameObject.transform.position = EnemyMoveVec;
+
+                    break;
             }
         }
         else
@@ -172,6 +183,15 @@ public class EnemyAction : MonoBehaviour {
                 //gameObjectと親子関係に
                 Needle.transform.parent = gameObject.transform;
             }
+        }
+    }
+
+    void EnemyEscape()
+    {
+        if(breakFlag.GetClearFlag()==true)
+        {
+            moveDir = EnemyMoveDir.ESCAPE;
+            EnemyAnim.SetBool("Dash", true);
         }
     }
 }

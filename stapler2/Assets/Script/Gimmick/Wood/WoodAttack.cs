@@ -59,14 +59,28 @@ public class WoodAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        WoodAttackAnim();
+        WoodTapStop();
+        
 
+        if (WoodStopNorma == 0)
+        {
+            WoodStopFlag = true;
+        }
+
+        
+    }
+
+
+    void WoodAttackAnim()
+    {
         time += Time.deltaTime;
 
         //木が止められた判定を取られていなければ処理する
         if (WoodStopFlag == false)
         {
             //timeが3f以上になったら処理
-            if (time >= 3f&& time <= 3.5f)
+            if (time >= 3f && time <= 3.5f)
             {
                 //木のアニメーションを再生
                 WoodAnim.SetBool("attack", true);
@@ -93,7 +107,11 @@ public class WoodAttack : MonoBehaviour
             //三回以上タップされたのならアニメーションの再生を止める
             WoodAnim.Stop();
         }
+    }
 
+
+    void WoodTapStop()
+    {
         //NeedleAnimation内の関数を使用できるように
         NeedleAnimation needle = NeedleManager.GetComponent<NeedleAnimation>();
 
@@ -130,11 +148,6 @@ public class WoodAttack : MonoBehaviour
                 //針のアニメーションを再生
                 needle.NeedelAnimPlay();
             }
-        }
-
-        if (WoodStopNorma == 0)
-        {
-            WoodStopFlag = true;
         }
     }
 }

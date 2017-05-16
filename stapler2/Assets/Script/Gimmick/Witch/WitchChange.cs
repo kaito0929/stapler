@@ -10,9 +10,9 @@ public class WitchChange : MonoBehaviour {
 
     // 変数宣言----------------------------------------------------------------------
     //表示するマテリアル
-    public Material[] material;
+    public Material[] WitchMaterial;
 
-    public WitchColl num;
+    public WitchColl WitchCangeNum;
 
     // Use this for initialization
     void Start () {
@@ -21,6 +21,6 @@ public class WitchChange : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        this.GetComponent<Renderer>().material = material[num.GetWitchCollNorma()];
+        this.GetComponent<Renderer>().material = WitchMaterial[WitchCangeNum.GetWitchCollNorma()];
     }
 }

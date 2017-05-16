@@ -9,11 +9,6 @@ public class TubeChange : MonoBehaviour {
 
     // 変数宣言----------------------------------------------------------------------
 
-    //チューブのマテリアルを取得
-    public Material[] material;
-    //表示するマテリアルを切り替える変数
-    private int TubeChangeNum;
-
     //チューブが直ったかのフラグ
     private bool TubeRepairFlag;
     //フラグを別のスクリプトへ渡す関数
@@ -22,10 +17,19 @@ public class TubeChange : MonoBehaviour {
         return TubeRepairFlag;
     }
 
+    //Ray関係
+    //ホッチキスの針を移動させるために使う
+    private RaycastHit hit;
+    private Ray ray;
+
+    //敵やギミックに取り付けるホッチキスの針
+    public GameObject Needle;
+
+
     // Use this for initialization
     void Start () {
-        TubeChangeNum = 0;
-	}
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -35,14 +39,22 @@ public class TubeChange : MonoBehaviour {
             //タップされたら変数の数値を1にして表示するマテリアルを切り替える
             if (TouchManager.SelectedGameObject == gameObject)
             {
-                TubeChangeNum = 1;
                 TubeRepairFlag = true;
 
                 //チューブを直すことで列車が動くので列車の動く音を再生
                 AudioManager.Instance.PlaySE("locomotive-pass1_01");
+
+
+                //Rayを飛ばして
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit, 100f))
+                {
+                    //針の位置をタップした位置へと移動させる。
+                    Needle.transform.position = hit.point;
+                    //gameObjectと親子関係に
+                    Needle.transform.parent = gameObject.transform;
+                }
             }
         }
-
-        this.GetComponent<Renderer>().material = material[TubeChangeNum];
 	}
 }

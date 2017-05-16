@@ -9,9 +9,9 @@ public class WitchShot : MonoBehaviour {
 
     // 変数宣言----------------------------------------------------------------------
     //発射する弾のオブジェクトを格納する変数
-    public GameObject WitchFlame;
+    public GameObject[] WitchFlame;
     //弾の発射タイミング
-    public float time;
+    private float ShotTime;
     //火球を打ち出す座標
     private Vector3 pos;
     //火球を打ち出していいかのフラグ
@@ -23,12 +23,16 @@ public class WitchShot : MonoBehaviour {
     public GameObject objB;
 
     //アニメーションを取得
-    private Animator anim;
+    private Animator WitchAttackAnim;
+
+    //魔女の発射する弾を切り替える
+    private int WitchShotChangeNum;
 
     // Use this for initialization
     void Start () {
-        time = 0f;
-        anim = GetComponent<Animator>();
+        ShotTime = 0f;
+        WitchAttackAnim = GetComponent<Animator>();
+        WitchShotChangeNum = 0;
     }
 	
 	// Update is called once per frame
@@ -47,20 +51,27 @@ public class WitchShot : MonoBehaviour {
             //3フロア目に到達していたら処理を行う
             if (reaching.GetReachingFlag() == true)
             {
-                time += Time.deltaTime;
+                ShotTime += Time.deltaTime;
 
                 //timeが2f以上になったら処理
-                if (time >= 2f)
+                if (ShotTime >= 2f)
                 {
-                    anim.SetTrigger("Attack");
+                    WitchAttackAnim.SetTrigger("Attack");
                     //弾をInstantiateで作って発射している風に見せる
-                    Instantiate(WitchFlame, pos, Quaternion.identity);
+                    Instantiate(WitchFlame[WitchShotChangeNum], pos, Quaternion.identity);
                     //弾の発射音を再生
                     AudioManager.Instance.PlaySE("se_maoudamashii_magical12");
                     //timeを初期化する
-                    time = 0f;
+                    ShotTime = 0f;
+
+                    WitchShotChangeNum++;
                 }
             }
+        }
+
+        if (WitchShotChangeNum == 2)
+        {
+            WitchShotChangeNum = 0;
         }
 
     }

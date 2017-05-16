@@ -34,9 +34,38 @@ public class GimmickParent : MonoBehaviour {
     //NeedleManagerを取得する
     private GameObject NeedleManager;
 
+    //何かとぶつかっているかのフラグ
+    private bool CollFlag;
+
+    // Use this for initialization
+    void Start()
+    {
+        BearCollFlag = false;
+        TapFlag = false;
+        NeedleManager = GameObject.Find("NeedleManager");
+        CollFlag = false;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        //NeedleAnimation内の関数を使用できるように
+        NeedleAnimation needle;
+        needle = NeedleManager.GetComponent<NeedleAnimation>();
+
+        if (TouchManager.SelectedGameObject == gameObject)
+        {
+            if (CollFlag == false)
+            {
+                //針のアニメーションを再生
+                needle.NeedelAnimPlay();
+            }
+        }
+    }
 
 
-    //オブジェクトが重なっているとフラグをtrueに
+    
     void OnTriggerStay(Collider other)
     {
         //もしも熊とぶつかっていた場合に処理
@@ -67,7 +96,12 @@ public class GimmickParent : MonoBehaviour {
                 }
             }
         }
+
+        CollFlag = true;
     }
+
+
+
 
     void OnTriggerExit(Collider other)
     {
@@ -76,29 +110,7 @@ public class GimmickParent : MonoBehaviour {
             //壁のコライダーと離れている間はフラグをfalseになるように
             BearCollFlag = false;
         }
-    }
 
-    // Use this for initialization
-    void Start()
-    {
-        BearCollFlag = false;
-        TapFlag = false;
-        NeedleManager = GameObject.Find("NeedleManager");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //NeedleAnimation内の関数を使用できるように
-        NeedleAnimation needle = NeedleManager.GetComponent<NeedleAnimation>();
-
-        if (TapFlag == false)
-        {
-            if (TouchManager.SelectedGameObject == gameObject)
-            {
-                //針のアニメーションを再生
-                needle.NeedelAnimPlay();
-            }
-        }
+        CollFlag = false;
     }
 }

@@ -3,6 +3,12 @@ using System.Collections;
 
 public class MerryMove : MonoBehaviour {
 
+    //==============================================================
+    //メリーゴーランドの動きを制御するスクリプト
+    //==============================================================
+
+    // 変数宣言----------------------------------------------------------------------
+
     //移動する方向
     private enum MoveDir
     {
@@ -12,11 +18,13 @@ public class MerryMove : MonoBehaviour {
     //enumを変数として宣言
     //この変数を使って移動する方向を決める
     private MoveDir moveDir;
+
     //このベクトルを加算か減算して左右に動かす
     private Vector3 pos;
 
     //ホッチキスによって止められていないかのフラグ
     private bool MoveStopFlag;
+
 
     public GameObject obj;
 
@@ -30,8 +38,7 @@ public class MerryMove : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
-        GimmickParent gimmick = obj.GetComponent<GimmickParent>();
+        GimmickParent gimmick = gameObject.GetComponent<GimmickParent>();
         MoveStopFlag = gimmick.GetTapFlag();
 
         pos = gameObject.transform.position;
@@ -70,6 +77,10 @@ public class MerryMove : MonoBehaviour {
                     break;
             }
 
+        }
+        else
+        {
+            obj.SetActive(false);
         }
 
         gameObject.transform.position = pos;

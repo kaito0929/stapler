@@ -22,13 +22,25 @@ public class WitchMove : MonoBehaviour {
     //動かす変数
     private float step = 0.0f;
 
-    int num = 1;
-
-    public GameObject objA;
+    private int NextMovePointNum = 1;
     
     public WitchColl number;
 
-    Vector3 pos;
+    private Vector3 pos;
+
+    private Animator WitchAnim;
+    //アニメーションのステートを取得する
+    private AnimatorStateInfo animInfo;
+
+    private float dis;
+    public float GetDis()
+    {
+        return dis;
+    }
+
+
+    public GameObject TargetObj;
+
 
     // Use this for initialization
     void Start () {
@@ -39,82 +51,103 @@ public class WitchMove : MonoBehaviour {
         WitchMovePoint[3] = GameObject.Find("WitchMovePoint4");
         WitchMovePoint[4] = GameObject.Find("WitchMovePoint5");
 
+
+        WitchAnim = GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        switch (number.GetWitchCollNorma())
-        {
-            case 1:
-                // 五芒星の軌道
-                MoveToStar();
-                break;
-            case 2:
-                // ８の字移動
-                MoveToFigureOfEight();
-                break;
-            case 3:
-                // 円移動
-                MoveToCircle();
-                break;
-        }        
     }
 
     // 円移動--------------------------------------------------------------------------
-    void MoveToCircle()
+    public void MoveToCircle()
     {
         // 経過時間の取得
         float time = Time.time;
         // 円運動の座標演算
-        float x = 29f + Mathf.Sin(time) * 3f;
-        float y = Mathf.Cos(time) * 3f;
-        float z = -5f;
+        pos.x = 29f + Mathf.Sin(time) * 3f;
+        pos.y = Mathf.Cos(time) * 3f;
+        pos.z = -5f;
         // オブジェクトに座標を代入
-        transform.position = new Vector3(x, y, z);
+        transform.position = pos;
+
+
+        //魔女の現在の場所と次の移動場所との距離を測る
+        Vector3 Apos = gameObject.transform.position;
+        Vector3 Bpos = TargetObj.transform.position;
+        dis = Vector3.Distance(Apos, Bpos);
     }
 
     // ８の字移動-----------------------------------------------------------------------
-    void MoveToFigureOfEight()
+    public void MoveToFigureOfEight()
     {
         // 経過時間の取得
         float time = Time.time;
         // ８の字移動の座標演算
-        pos.x = 27.19f + Mathf.Cos(time) * m_radius;
+        pos.x = 27.6f + Mathf.Cos(time) * m_radius;
         pos.y = Mathf.Sin(time * 2f) * 2f;
         pos.z = -5f;
 
         // オブジェクトに座標を代入
         transform.position = pos;
+
+
+        //魔女の現在の場所と次の移動場所との距離を測る
+        Vector3 Apos = gameObject.transform.position;
+        Vector3 Bpos = TargetObj.transform.position;
+        dis = Vector3.Distance(Apos, Bpos);
     }
 
     // 五芒星の軌道---------------------------------------------------------------------
-    void MoveToStar()
+    public void MoveToStar()
     {
         //魔女の現在の場所と次の移動場所との距離を測る
-        Vector3 Apos = objA.transform.position;
-        Vector3 Bpos = WitchMovePoint[num].transform.position;
-        float dis = Vector3.Distance(Apos, Bpos);
+        Vector3 Apos = gameObject.transform.position;
+        Vector3 Bpos = WitchMovePoint[NextMovePointNum].transform.position;
+        dis = Vector3.Distance(Apos, Bpos);
 
         //目標の位置に達したら次の場所へ動くように
         if (dis <= 0f)
         {
-            num++;
+            NextMovePointNum++;
         }
 
         //numをリセット。最初の場所へ
-        if (num == 5)
+        if (NextMovePointNum == 5)
         {
-            num = 0;
+            NextMovePointNum = 0;
         }
 
         //動くスピード
         step = Time.deltaTime * speed;
         //魔女の位置を更新
         gameObject.transform.position = Vector3.MoveTowards
-            (gameObject.transform.position, WitchMovePoint[num].transform.position, step);
+            (gameObject.transform.position, WitchMovePoint[NextMovePointNum].transform.position, step);
     }
 
 
+    //攻撃を喰らった魔女が次の行動に移すインターバル
+    //指定した位置に移動するように処理
+    public void WitchStandby()
+    {
+        animInfo = WitchAnim.GetCurrentAnimatorStateInfo(0);
+
+        //魔女の現在の場所と次の移動場所との距離を測る
+        Vector3 Apos = gameObject.transform.position;
+        Vector3 Bpos = TargetObj.transform.position;
+        dis = Vector3.Distance(Apos, Bpos);
+
+        //動くスピード
+        step = Time.deltaTime * speed;
+
+        //アニメーションがDefaultになったら処理
+        if (animInfo.nameHash == Animator.StringToHash("Base Layer.Default"))
+        {
+            //魔女の位置を更新
+            gameObject.transform.position = Vector3.MoveTowards
+            (gameObject.transform.position, TargetObj.transform.position, step);
+        }
+    }
 
 }
