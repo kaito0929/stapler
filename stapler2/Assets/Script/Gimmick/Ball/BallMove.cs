@@ -22,7 +22,7 @@ public class BallMove : MonoBehaviour {
         //敵と親子関係になっていなければ画面の右側へと移動
         if (tap.GetTapFlag() == false)
         {
-            gameObject.transform.position = new Vector3(8f, -1.27f, -1.54f);
+            gameObject.transform.position = new Vector3(8f, -1.27f, gameObject.transform.position.z);
         }
     }
 

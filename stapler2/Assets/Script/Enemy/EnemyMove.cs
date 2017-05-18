@@ -49,7 +49,11 @@ public class EnemyMove : MonoBehaviour {
         if (NotTapFlag == false)
         {
             transform.position = Vector3.MoveTowards(transform.position,
-                   new Vector3(vec.x, -2.11f,-2f), speed * Time.deltaTime);
+                   new Vector3(vec.x, gameObject.transform.position.y, transform.position.z), speed * Time.deltaTime);
+        }
+        else
+        {
+            gameObject.GetComponent<BoxCollider>().enabled = false;
         }
 
     }

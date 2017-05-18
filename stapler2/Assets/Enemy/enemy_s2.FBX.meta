@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 7dd40454bdc639240a5649dc46afbb0a
-timeCreated: 1494811434
+guid: d21392cea35c13c40b2b98c09483468f
+timeCreated: 1494984332
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -19,11 +19,14 @@ ModelImporter:
     100022: Bone012
     100024: Bone013
     100026: Bone014
-    100028: //RootNode
-    100030: Plane001
-    100032: Plane002
-    100034: Plane003
-    100036: Plane004
+    100028: Bone015
+    100030: Bone016
+    100032: //RootNode
+    100034: Plane001
+    100036: Plane002
+    100038: Plane003
+    100040: Plane004
+    100042: Plane005
     400000: Bone001
     400002: Bone002
     400004: Bone003
@@ -38,22 +41,26 @@ ModelImporter:
     400022: Bone012
     400024: Bone013
     400026: Bone014
-    400028: //RootNode
-    400030: Plane001
-    400032: Plane002
-    400034: Plane003
-    400036: Plane004
+    400028: Bone015
+    400030: Bone016
+    400032: //RootNode
+    400034: Plane001
+    400036: Plane002
+    400038: Plane003
+    400040: Plane004
+    400042: Plane005
     4300000: Plane001
     4300002: Plane002
     4300004: Plane003
     4300006: Plane004
+    4300008: Plane005
     7400000: Take 001
     9500000: //RootNode
-    11100000: //RootNode
     13700000: Plane001
     13700002: Plane002
     13700004: Plane003
     13700006: Plane004
+    13700008: Plane005
   materials:
     importMaterials: 1
     materialName: 0
@@ -72,9 +79,81 @@ ModelImporter:
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
-    animationWrapMode: 2
+    animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bone014
+        weight: 1
+      - path: Bone014/Bone001
+        weight: 1
+      - path: Bone014/Bone001/Bone002
+        weight: 1
+      - path: Bone014/Bone001/Bone002/Bone003
+        weight: 1
+      - path: Bone014/Bone001/Bone002/Bone003/Bone004
+        weight: 1
+      - path: Bone014/Bone001/Bone002/Bone003/Bone004/Bone005
+        weight: 1
+      - path: Bone014/Bone001/Bone002/Bone003/Bone006
+        weight: 1
+      - path: Bone014/Bone001/Bone002/Bone003/Bone006/Bone007
+        weight: 1
+      - path: Bone014/Bone001/Bone002/Bone003/Bone006/Bone007/Bone008
+        weight: 1
+      - path: Bone014/Bone001/Bone002/Bone003/Bone006/Bone007/Bone008/Bone009
+        weight: 1
+      - path: Bone014/Bone001/Bone002/Bone003/Bone010
+        weight: 1
+      - path: Bone014/Bone001/Bone002/Bone003/Bone010/Bone011
+        weight: 1
+      - path: Bone014/Bone001/Bone002/Bone003/Bone010/Bone011/Bone012
+        weight: 1
+      - path: Bone014/Bone001/Bone002/Bone003/Bone010/Bone011/Bone012/Bone013
+        weight: 1
+      - path: Bone014/Bone001/Bone002/Bone003/Bone010/Bone011/Bone012/Bone015
+        weight: 1
+      - path: Bone014/Bone001/Bone002/Bone003/Bone010/Bone011/Bone012/Bone015/Bone016
+        weight: 1
+      - path: Plane001
+        weight: 1
+      - path: Plane002
+        weight: 1
+      - path: Plane003
+        weight: 1
+      - path: Plane004
+        weight: 1
+      - path: Plane005
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -112,7 +191,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 1
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

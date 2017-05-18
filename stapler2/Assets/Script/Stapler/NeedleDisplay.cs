@@ -23,7 +23,7 @@ public class NeedleDisplay : MonoBehaviour {
     void Update()
     {
         //アニメーションの再生が終わったのならば画面外へ移動
-        if(!NeedleAnim.IsPlaying("Take 001"))
+        if(!NeedleAnim.isPlaying)
         {
             gameObject.transform.position = new Vector3(-11.08f, 0.393f, -0.867f);
         }

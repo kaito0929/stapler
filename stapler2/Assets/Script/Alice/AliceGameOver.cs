@@ -45,7 +45,8 @@ public class AliceGameOver : MonoBehaviour {
         //指定してあるオブジェクトに当たった場合に処理
         //当たったかどうかのフラグを操作してゲームオーバー画面への遷移を行う
         if (other.gameObject.name == "panda" || other.gameObject.name == "apple(Clone)" ||
-            other.gameObject.name == "wicth_ball1(Clone)"|| other.gameObject.name == "wicth_ball2(Clone)" || other.gameObject.name == "Thunder(Clone)")
+            other.gameObject.name == "wicth_ball1(Clone)"|| other.gameObject.name == "wicth_ball2(Clone)" ||
+            other.gameObject.name == "Thunder(Clone)"|| other.gameObject.name == "rod" || other.gameObject.name == "enemy_s2")
         {
             //やられた時のアニメーションを再生
             anim.SetBool("collision", true);

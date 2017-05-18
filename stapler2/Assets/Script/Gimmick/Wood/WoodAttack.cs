@@ -51,7 +51,7 @@ public class WoodAttack : MonoBehaviour
         WoodAnim = GetComponent<Animator>();
         WoodStopFlag = false;
         WoodAttackFlag = false;
-        WoodStopNorma = 3;
+        WoodStopNorma = 6;
 
         NeedleManager = GameObject.Find("NeedleManager");
     }
@@ -91,7 +91,7 @@ public class WoodAttack : MonoBehaviour
             }
 
             //timeが4.5f以上になったら処理
-            if (time >= 4.5f)
+            if (time >= 4.0f)
             {
                 //弾をInstantiateで作って発射している風に見せる
                 Instantiate(WoodApple, new Vector3(-4.69f, 6.75f, -5.2f), Quaternion.identity);
@@ -116,7 +116,7 @@ public class WoodAttack : MonoBehaviour
         NeedleAnimation needle = NeedleManager.GetComponent<NeedleAnimation>();
 
         //木が攻撃中じゃないと処理を行わないように
-        if (WoodAttackFlag == true)
+        if (WoodAttackFlag == true && WoodStopFlag == false)
         {
             //根っこの部分がタップされるとノルマが減る
             //それに加えて根っこの部分に針を付ける処理も行う
@@ -135,7 +135,7 @@ public class WoodAttack : MonoBehaviour
                 }
 
                 //くっつける針を切り替えるために変数を加算する
-                if (NeedleMoveNum != 2)
+                if (NeedleMoveNum != 5)
                 {
                     NeedleMoveNum++;
                 }

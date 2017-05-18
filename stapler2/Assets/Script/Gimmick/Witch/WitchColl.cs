@@ -104,8 +104,6 @@ public class WitchColl : MonoBehaviour
             }
         }
 
-        Debug.Log(witchMoveState);
-
 
         //魔女の消滅処理
         WitchDestroy();

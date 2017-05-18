@@ -125,7 +125,7 @@ public class ufoMove : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Alice_MoveEnd.GetMoveEndFlag() == true)
+        if (Alice_MoveEnd.GetFloar3MoveEndFlag() == true)
         {
             //UFOの進む方向を変更する
             switch (moveDir)

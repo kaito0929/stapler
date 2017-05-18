@@ -23,9 +23,17 @@ public class AliceMove_Stage2 : MonoBehaviour {
     //移動が終了したかのフラグ
     private bool Floar2MoveMentEndFlag;
     //フロア2に到達した時のフラグを渡す関数
-    public bool GetMoveEndFlag()
+    public bool GetFloar2MoveEndFlag()
     {
         return Floar2MoveMentEndFlag;
+    }
+
+    //移動が終了したかのフラグ
+    private bool Floar3MoveMentEndFlag;
+    //フロア2に到達した時のフラグを渡す関数
+    public bool GetFloar3MoveEndFlag()
+    {
+        return Floar3MoveMentEndFlag;
     }
 
     //Animatorを取得
@@ -45,6 +53,7 @@ public class AliceMove_Stage2 : MonoBehaviour {
         HappyAnimPlayTime2 = 0;
         GetAliceCollFlag = false;
         Floar2MoveMentEndFlag = false;
+        Floar3MoveMentEndFlag = false;
     }
 	
 	// Update is called once per frame
@@ -87,6 +96,8 @@ public class AliceMove_Stage2 : MonoBehaviour {
                     {
                         //指定した位置まで移動したら待機モーションに切り替わる
                         anim.SetBool("Standby", true);
+                        //フロア3への移動が終了したのでフラグをtrueに
+                        Floar2MoveMentEndFlag = true;
                     }
                 }
             }//フロア2をクリアした場合に処理
@@ -110,8 +121,8 @@ public class AliceMove_Stage2 : MonoBehaviour {
                     else
                     {
                         anim.SetBool("Standby", true);
-                        //フロア2への移動が終了したのでフラグをtrueに
-                        Floar2MoveMentEndFlag = true;
+                        //フロア3への移動が終了したのでフラグをtrueに
+                        Floar3MoveMentEndFlag = true;
                     }
                 }
             }
