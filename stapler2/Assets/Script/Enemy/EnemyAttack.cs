@@ -51,12 +51,15 @@ public class EnemyAttack : MonoBehaviour {
         Vector3 Bpos = TargetObj.transform.position;
         Distance = Vector3.Distance(Apos, Bpos);
 
-        AliceMove_Stage2 alice = TargetObj.GetComponent<AliceMove_Stage2>();
-        MoveStateFlag = alice.GetFloar2MoveEndFlag();
 
         GimmickParent gimmick = gameObject.GetComponent<GimmickParent>();
         MoveStopFlag = gimmick.GetTapFlag();
 
+
+        if (Distance <= 11f)
+        {
+            MoveStateFlag = true;
+        }
 
         if (MoveStateFlag == true && MoveStopFlag == false)
         {

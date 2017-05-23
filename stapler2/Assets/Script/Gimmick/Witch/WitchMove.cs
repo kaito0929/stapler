@@ -10,9 +10,9 @@ public class WitchMove : MonoBehaviour {
     // 変数宣言----------------------------------------------------------------------
 
     // 移動速度
-    public float m_moveSpeed = 1f;
+    private float m_moveSpeed = 1f;
     // 円の半径
-    public float m_radius = 4f;
+    private float m_radius = 4f;
 
 
     //魔女が追尾するオブジェクト

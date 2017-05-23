@@ -22,7 +22,7 @@ public class BallMove : MonoBehaviour {
         //敵と親子関係になっていなければ画面の右側へと移動
         if (tap.GetTapFlag() == false)
         {
-            gameObject.transform.position = new Vector3(8f, -1.27f, gameObject.transform.position.z);
+            gameObject.transform.position = new Vector3(8f, gameObject.transform.position.y, gameObject.transform.position.z);
         }
     }
 
@@ -42,5 +42,8 @@ public class BallMove : MonoBehaviour {
 
         //UFOのpositionへposを代入
         gameObject.transform.position = pos;
+
+        //くるくると回転する
+        gameObject.transform.Rotate(new Vector3(0, 0, 5));
     }
 }

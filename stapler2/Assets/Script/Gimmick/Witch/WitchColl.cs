@@ -118,8 +118,12 @@ public class WitchColl : MonoBehaviour
             WitchCollNorma--;
             //攻撃を喰らったので魔女を落下させる
             witchMoveState = WitchMoveState.MOVE_STANDBY;
-            //攻撃を受けたモーションの再生
-            WitchAnim.SetTrigger("Damage");
+
+            if (WitchCollNorma > 0)
+            {
+                //攻撃を受けたモーションの再生
+                WitchAnim.SetTrigger("Damage");
+            }
         }
     }
 
@@ -132,8 +136,7 @@ public class WitchColl : MonoBehaviour
         {
             //エンディング画面へ遷移するのでフラグをfalseに戻しておく
             AliceStage3Flag = false;
-            //魔女は消滅
-            Destroy(this.gameObject);
+            WitchAnim.SetTrigger("Finish");
             //魔女が倒されたことによってフラグがtrueになり
             //エンディング画面へと遷移する
             WitchDestroyFlag = true;

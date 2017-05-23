@@ -10,14 +10,14 @@ public class CameraMove : MonoBehaviour {
     // 変数宣言----------------------------------------------------------------------
 
     //カメラが追いかけるゲームオブジェクト
-    private GameObject Player = null;
+    public GameObject Player;
 
     //カメラとプレイヤーの位置の差分を受け取る変数
     private Vector3 Offset = Vector3.zero;
 
     // Use this for initialization
     void Start () {
-        Player = GameObject.FindGameObjectWithTag("Player");
+       // Player = GameObject.FindGameObjectWithTag("Player");
         Offset = transform.position - Player.transform.position;
     }
 	

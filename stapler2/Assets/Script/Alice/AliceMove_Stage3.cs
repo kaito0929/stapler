@@ -22,11 +22,18 @@ public class AliceMove_Stage3 : MonoBehaviour
     private bool GetFloar2ClearFlag;
 
     //Animatorを取得
-    Animator anim;
+    private Animator AliceAnim;
 
-    //喜ぶアニメーションの再生時間
-    private float HappyAnimPlayTime;
-    private float HappyAnimPlayTime2;
+    private AnimatorStateInfo AliceAnimInfo;
+
+    private enum Floor
+    {
+        FLOOR1,
+        FLOOR2,
+        FLOOR3,
+    }
+    private Floor floor;
+
 
     //アリスがギミックに当たったかのフラグを受け取る変数
     private bool GetAliceCollFlag;
@@ -41,9 +48,8 @@ public class AliceMove_Stage3 : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        anim = GetComponent<Animator>();
-        HappyAnimPlayTime = 0;
-        HappyAnimPlayTime2 = 0;
+        AliceAnim = GetComponent<Animator>();
+        AliceAnimInfo = AliceAnim.GetCurrentAnimatorStateInfo(0);
         GetAliceCollFlag = false;
         Floar3_ReachingFlag = false;
     }
@@ -65,57 +71,66 @@ public class AliceMove_Stage3 : MonoBehaviour
             //フロア1をクリアした場合に処理
             if (GetFloar1ClearFlag == true && GetFloar2ClearFlag == false)
             {
-                //喜びモーションが再生されている時間
-                if (HappyAnimPlayTime < 3.66f)
-                {
-                    HappyAnimPlayTime += Time.deltaTime;
-
-                    //再生中ならばフラグをtrueにしておいて再生するように
-                    anim.SetBool("happy", true);
-                    anim.SetBool("Standby", false);
-                }
-                else
-                {
-                    //再生が終わったらフラグをfalseにしておく
-                    anim.SetBool("happy", false);
-                    //アリスの座標が指定された位置に行くまで加算
-                    if (pos.x < 8.1f)
-                    {
-                        pos = transform.position;
-                        pos.x += 0.1f;
-                        transform.position = pos;
-                    }
-                    else
-                    {
-                        //指定した位置まで移動したら待機モーションに切り替わる
-                        anim.SetBool("Standby", true);
-                    }
-                }
-            }//フロア2をクリアした場合に処理
+                floor = Floor.FLOOR2;
+            }
+            //フロア2をクリアした場合に処理
             else if (GetFloar2ClearFlag == true)
             {
-                if (HappyAnimPlayTime2 < 3.66f)
+                floor = Floor.FLOOR3;
+            }
+            AliceMovePos();
+        }
+
+    }
+
+    void AliceMovePos()
+    {
+        AliceAnimInfo = AliceAnim.GetCurrentAnimatorStateInfo(0);
+
+        switch (floor)
+        {
+            case Floor.FLOOR2:
+                if (pos.x < 8.1f)
                 {
-                    HappyAnimPlayTime2 += Time.deltaTime;
-                    anim.SetBool("happy", true);
-                    anim.SetBool("Standby", false);
-                }
-                else
-                {
-                    anim.SetBool("happy", false);
-                    if (pos.x < 21.35f)
+                    //再生中ならばフラグをtrueにしておいて再生するように
+                    AliceAnim.SetBool("happy", true);
+                    //喜びモーションが再生されている時間
+                    if (AliceAnimInfo.nameHash == Animator.StringToHash("Base Layer.Dash"))
                     {
                         pos = transform.position;
                         pos.x += 0.1f;
                         transform.position = pos;
                     }
-                    else
+                }
+                else
+                {
+                    //指定した位置まで移動したら待機モーションに切り替わる
+                    AliceAnim.SetBool("Idle", true);
+                    AliceAnim.SetBool("happy", false);
+                }
+                break;
+            case Floor.FLOOR3:
+                if (pos.x < 21.35f)
+                {
+                    AliceAnim.SetBool("Idle", false);
+                    //再生中ならばフラグをtrueにしておいて再生するように
+                    AliceAnim.SetBool("happy", true);
+                    //喜びモーションが再生されている時間
+                    if (AliceAnimInfo.nameHash == Animator.StringToHash("Base Layer.Dash"))
                     {
-                        anim.SetBool("Standby", true);
-                        Floar3_ReachingFlag = true;
+                        pos = transform.position;
+                        pos.x += 0.1f;
+                        transform.position = pos;
                     }
                 }
-            }
+                else
+                {
+                    //指定した位置まで移動したら待機モーションに切り替わる
+                    AliceAnim.SetBool("Idle", true);
+                    AliceAnim.SetBool("happy", false);
+                    Floar3_ReachingFlag = true;
+                }
+                break;
         }
     }
 

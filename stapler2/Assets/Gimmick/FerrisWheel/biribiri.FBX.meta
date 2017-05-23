@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 8df9d33807b1f4e4b9d9c87e4707adde
-timeCreated: 1495076145
+guid: 0d3901e421fd512428ed372d1e578f1a
+timeCreated: 1495439809
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -11,18 +11,21 @@ ModelImporter:
     100006: Bone003
     100008: Bone004
     100010: Plane001
+    100012: Plane002
     400000: //RootNode
     400002: Bone001
     400004: Bone002
     400006: Bone003
     400008: Bone004
     400010: Plane001
-    2300000: Plane001
-    3300000: Plane001
+    400012: Plane002
     4300000: Plane001
+    4300002: Plane002
     7400000: Take 001
     9500000: //RootNode
     11100000: //RootNode
+    13700000: Plane001
+    13700002: Plane002
   materials:
     importMaterials: 1
     materialName: 0

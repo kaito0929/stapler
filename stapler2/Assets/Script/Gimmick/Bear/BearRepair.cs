@@ -8,6 +8,7 @@ public class BearRepair : MonoBehaviour {
     //============================================================================
 
     // 変数宣言----------------------------------------------------------------------
+
     //熊の表示するマテリアルを格納する変数
     public Material[] material;
     //表示するマテリアルを示す変数
@@ -17,6 +18,11 @@ public class BearRepair : MonoBehaviour {
 
     //熊を完全に直したかのフラグ
     private bool RepairFlag;
+    //他のスクリプトへ変数を渡すための関数
+    public bool GetRepairFlag()
+    {
+        return RepairFlag;
+    }
 
     //Ray関係
     private RaycastHit hit;
@@ -26,11 +32,6 @@ public class BearRepair : MonoBehaviour {
     public GameObject[] Needle;
     private int NeedleMoveNum;
 
-    //他のスクリプトへ変数を渡すための関数
-    public bool GetRepairFlag()
-    {
-        return RepairFlag;
-    }
 
 	// Use this for initialization
 	void Start () {

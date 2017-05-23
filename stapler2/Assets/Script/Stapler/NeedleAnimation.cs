@@ -6,7 +6,6 @@ public class NeedleAnimation : MonoBehaviour
 
     //====================================================================
     //正解以外の場所にタップした時の針のアニメーション再生
-    //アニメーションを制御する関数を用意する
     //====================================================================
 
     // 変数宣言----------------------------------------------------------------------
@@ -15,22 +14,16 @@ public class NeedleAnimation : MonoBehaviour
     private RaycastHit hit;
     private Ray ray;
 
-    //表示させる針
+    //弾かれるアニメーションを持つ針
     private GameObject[] MoveNeedle = new GameObject[15];
     private Animation[] NeedleAnim = new Animation[15];
-    //表示する針の順番
-    private int MoveNeedleNumber;
 
-    //弾かれるアニメーションの針の最大数
-    private int NeedleMaxNum;
-
+    //再生する針の順番を決めるための変数を持つスクリプト
     public NeedleAnimPlayNum num;
 
     // Use this for initialization
     void Start()
     {
-        MoveNeedleNumber = 0;
-        NeedleMaxNum = 8;
 
         MoveNeedle[0] = GameObject.Find("RepelledNeedle1");
         MoveNeedle[1] = GameObject.Find("RepelledNeedle2");
@@ -58,7 +51,7 @@ public class NeedleAnimation : MonoBehaviour
     void Update()
     {
        
-        //指定したオブジェクトとタップしたオブジェクトが一緒なら処理
+        //スクリプトを持つオブジェクトをタップした時に針が弾かれるように処理を行う
         if (TouchManager.SelectedGameObject == gameObject)
         {
             //Rayを飛ばして
@@ -67,50 +60,18 @@ public class NeedleAnimation : MonoBehaviour
             {
                 //針をタップした場所へと移動
                 MoveNeedle[num.GetAnimPlayNum()].transform.position = hit.point;
-
-                if (NeedleAnim[num.GetAnimPlayNum()].isPlaying)
-                {
-                    //アニメーションを再生させる
-                    NeedleAnim[num.GetAnimPlayNum()].Stop();
-                }
-
-                //アニメーションを再生させる
-                NeedleAnim[num.GetAnimPlayNum()].Play();
             }
+
+            //針が既に再生中だったら処理
+            if (NeedleAnim[num.GetAnimPlayNum()].isPlaying)
+            {
+                //アニメーションを一時停止させる
+                NeedleAnim[num.GetAnimPlayNum()].Stop();
+            }
+            //アニメーションを再生させる
+            NeedleAnim[num.GetAnimPlayNum()].Play();
         }
 
     }
 
-    public void NeedelAnimPlay()
-    {
-        ////9になると一巡したことになるので数字を0に戻す
-        //if (MoveNeedleNumber == NeedleMaxNum)
-        //{
-        //    MoveNeedleNumber = 0;
-        //}
-
-        ////指定したオブジェクトとタップしたオブジェクトが一緒なら処理
-        //if (TouchManager.SelectedGameObject == gameObject)
-        //{
-        //    //Rayを飛ばして
-        //    ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //    if (Physics.Raycast(ray, out hit, 100f))
-        //    {
-        //        //針をタップした場所へと移動
-        //        MoveNeedle[MoveNeedleNumber].transform.position = hit.point;
-
-        //        if (!NeedleAnim[MoveNeedleNumber].isPlaying)
-        //        {
-        //            NeedleAnim[MoveNeedleNumber].Stop();
-        //        }
-
-        //        //アニメーションを再生させる
-        //        NeedleAnim[MoveNeedleNumber].Play();
-
-        //        //移動させる針を切り替える
-        //        MoveNeedleNumber++;
-        //    }
-        //}
-
-    }
 }

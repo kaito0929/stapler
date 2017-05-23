@@ -10,8 +10,8 @@ public class AliceMove : MonoBehaviour {
     // 変数宣言----------------------------------------------------------------------
 
     //ギミックがクリアされたかのフラグを持つギミック
-    public GameObject Floar1Gimmick;
-    public GameObject Floar2Gimmick;
+    public GameObject Floor1Gimmick;
+    public GameObject Floor2Gimmick;
 
     //クリアされた時にアリスを動かす変数
     private Vector3 pos;
@@ -21,11 +21,19 @@ public class AliceMove : MonoBehaviour {
     private bool GetFloar2ClearFlag;
 
     //Animatorを取得
-    Animator anim;
+    private Animator AliceAnim;
+    //AnimatorStateInfoを取得
+    private AnimatorStateInfo AliceAnimInfo;
 
-    //喜ぶアニメーションの再生時間
-    private float HappyAnimPlayTime;
-    private float HappyAnimPlayTime2;
+    //どのフロアにいるか判別するための変数
+    private enum Floor
+    {
+        FLOOR1,
+        FLOOR2,
+        FLOOR3,
+    }
+    private Floor floor;
+
 
     //アリスがギミックに当たったかのフラグを受け取る変数
     private bool GetAliceCollFlag;
@@ -39,24 +47,25 @@ public class AliceMove : MonoBehaviour {
         return Floar2_ReachingFlag;
     }
 
+
     // Use this for initialization
     void Start () {
-        anim = GetComponent<Animator>();
-        HappyAnimPlayTime = 0;
-        HappyAnimPlayTime2 = 0;
+        AliceAnim = GetComponent<Animator>();
+        AliceAnimInfo = AliceAnim.GetCurrentAnimatorStateInfo(0);
         GetAliceCollFlag = false;
         Floar2_ReachingFlag = false;
+        floor = Floor.FLOOR1;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
         //エネミーがタップされてフリーフォールと親子関係になったかのフラグを受け取る
-        Floar1Clear touch = Floar1Gimmick.GetComponent<Floar1Clear>();
+        Floor1Clear touch = Floor1Gimmick.GetComponent<Floor1Clear>();
         GetFloar1ClearFlag = touch.GetClear();
 
         //馬とメリーゴーランドが親子関係になったかのフラグを受け取る
-        GimmickParent touch2 = Floar2Gimmick.GetComponent<GimmickParent>();
+        GimmickParent touch2 = Floor2Gimmick.GetComponent<GimmickParent>();
         GetFloar2ClearFlag = touch2.GetTapFlag();
 
         //アリスが敵か何かとぶつかった際のフラグを受け取る
@@ -69,61 +78,72 @@ public class AliceMove : MonoBehaviour {
             //フロア1をクリアした場合に処理
             if (GetFloar1ClearFlag == true && GetFloar2ClearFlag == false)
             {
-                //喜びモーションが再生されている時間
-                if (HappyAnimPlayTime < 3.66f)
-                {
-                    HappyAnimPlayTime += Time.deltaTime;
-
-                    //再生中ならばフラグをtrueにしておいて再生するように
-                    anim.SetBool("happy", true);
-                    anim.SetBool("Standby", false);
-                }
-                else
-                {
-                    //再生が終わったらフラグをfalseにしておく
-                    anim.SetBool("happy", false);
-                    //アリスの座標が指定された位置に行くまで加算
-                    if (pos.x < 8.1f)
-                    {
-                        pos = transform.position;
-                        pos.x += 0.1f;
-                        transform.position = pos;
-                    }
-                    else
-                    {
-                        //指定した位置まで移動したら待機モーションに切り替わる
-                        anim.SetBool("Standby", true);
-                        Floar2_ReachingFlag = true;                       
-                    }
-                }
+                floor = Floor.FLOOR2;
             }
             //フロア2にをクリアした場合に処理
-            //内容は上と同じなのでコメントはそっちを参考に
             else if (GetFloar2ClearFlag == true)
             {
-                if (HappyAnimPlayTime2 < 3.66f)
+                floor = Floor.FLOOR3;
+            }
+
+            AliceMovePos();
+        }
+        
+        
+    }
+
+
+    //アリスのアニメーションを制御して、移動させるための関数
+    void AliceMovePos()
+    {
+        AliceAnimInfo = AliceAnim.GetCurrentAnimatorStateInfo(0);
+
+        switch (floor)
+        {
+            case Floor.FLOOR2:
+                if (pos.x < 8.1f)
                 {
-                    HappyAnimPlayTime2 += Time.deltaTime;
-                    anim.SetBool("happy", true);
-                    anim.SetBool("Standby", false);
-                }
-                else
-                {
-                    anim.SetBool("happy", false);
-                    if (pos.x < 21.35f)
+                    //再生中ならばフラグをtrueにしておいて再生するように
+                    AliceAnim.SetBool("happy", true);
+                    //喜びモーションが再生されている時間
+                    if (AliceAnimInfo.nameHash == Animator.StringToHash("Base Layer.Dash"))
                     {
                         pos = transform.position;
                         pos.x += 0.1f;
                         transform.position = pos;
                     }
-                    else
+                }
+                else
+                {
+                    //指定した位置まで移動したら待機モーションに切り替わる
+                    AliceAnim.SetBool("Idle",true);
+                    AliceAnim.SetBool("happy", false);
+                    Floar2_ReachingFlag = true;
+                }
+                break;
+            case Floor.FLOOR3:
+                if (pos.x < 21.35f)
+                {
+                    AliceAnim.SetBool("Idle", false);
+                    //再生中ならばフラグをtrueにしておいて再生するように
+                    AliceAnim.SetBool("happy", true);
+                    //喜びモーションが再生されている時間
+                    if (AliceAnimInfo.nameHash == Animator.StringToHash("Base Layer.Dash"))
                     {
-                        anim.SetBool("Standby", true);
+                        pos = transform.position;
+                        pos.x += 0.1f;
+                        transform.position = pos;
                     }
                 }
-            }
+                else
+                {
+                    //指定した位置まで移動したら待機モーションに切り替わる
+                    AliceAnim.SetBool("Idle", true);
+                    AliceAnim.SetBool("happy", false);
+                }
+                break;
         }
-
-        
     }
+
+
 }

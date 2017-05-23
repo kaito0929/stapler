@@ -28,6 +28,8 @@ public class ElectricalConnect : MonoBehaviour {
     //敵やギミックに取り付けるホッチキスの針
     public GameObject Needle;
 
+    public GameObject Spark;
+
     // Use this for initialization
     void Start () {
         ConnectFlag = false;
@@ -45,6 +47,7 @@ public class ElectricalConnect : MonoBehaviour {
             {
                 anim.Play();
                 ConnectFlag = true;
+                Spark.SetActive(false);
                 //Rayを飛ばして
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit, 100f))

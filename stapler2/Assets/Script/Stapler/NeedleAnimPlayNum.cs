@@ -36,7 +36,5 @@ public class NeedleAnimPlayNum : MonoBehaviour {
         {
             AnimPlayNum = 0;
         }
-
-        Debug.Log(AnimPlayNum);
     }
 }

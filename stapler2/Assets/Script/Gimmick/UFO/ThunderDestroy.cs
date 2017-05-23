@@ -7,10 +7,10 @@ public class ThunderDestroy : MonoBehaviour {
     //UFOの弾（雷）が猫に当たった時に消えるようにするスクリプト
     //==========================================================================
 
-    //猫と衝突した場合に弾をDestroyで消しておく
+    //猫とアリスに衝突した場合に弾をDestroyで消しておく
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "toy_cat_1"|| other.gameObject.name == "alice")
+        if (other.gameObject.name == "Bone020" || other.gameObject.name == "alice")
         {
             Destroy(gameObject);
         }

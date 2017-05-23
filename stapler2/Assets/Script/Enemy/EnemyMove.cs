@@ -11,9 +11,9 @@ public class EnemyMove : MonoBehaviour {
     // 変数宣言----------------------------------------------------------------------
 
     //移動スピード
-    public float speed = 2;
+    private float speed = 2;
     //オブジェクトの初期位置
-    public Vector3 vec;
+    private Vector3 vec;
     //タップしたかのフラグを受け取る変数
     bool NotTapFlag;
 
@@ -25,6 +25,7 @@ public class EnemyMove : MonoBehaviour {
     {
         anim = GetComponent<Animator>();
         NotTapFlag = false;
+        vec = gameObject.transform.position;
     }
 
     // Update is called once per frame

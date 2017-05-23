@@ -20,17 +20,16 @@ public class ufoMove : MonoBehaviour {
     private ufoState moveDir;
 
 
-    //このベクトルを加算か減算して左右に動かす
+    //このベクトルを加算して斜めに吹っ飛んでいくように見せる
     private Vector3 pos;
 
 
     //ホッチキスによって止められていないかのフラグ
     private bool MoveStopFlag;
-    //弾の発射制御のスクリプトへ変数を渡すための関数
-    public bool GetMoveFlag()
-    {
-        return MoveStopFlag;
-    }
+
+    //タップして止められている時に加算される変数
+    private float TapStopTime;
+
 
 
     //猫に当たって吹き飛ばされているかのフラグ
@@ -46,18 +45,23 @@ public class ufoMove : MonoBehaviour {
     //次の場所へと移動するまでの間の時間
     private float CoolTime = 1.0f;
 
-    //止まっている間に時間を加算してCoolTimeを超えたら移動するように
-    private float StopTime;
+    //移動してから止まっている間に時間を加算してCoolTimeを超えたら移動するように
+    public float StopTime;
 
     //弾の発射の為の変数
-    public float ShotTime;
+    private float ShotTime;
+
+    public float ChargeTime;
+
+    private bool ShotFlag = false;
 
     //移動先を決定するランダムの数値を受け取る変数
     private int MovePoint_RandomNum;
-    
+
     //UFOがランダムで移動する場所のオブジェクト
     //このオブジェクトの座標をUFOに代入して瞬間移動したように見せる
-    private GameObject[] ufoMovePoint = new GameObject[8];
+    public GameObject[] ufoMovePoint;
+
 
     //アリスがどのステージに達しているかのフラグ(ステージ2)
     //ステージの最初からと操作するために必要
@@ -69,6 +73,7 @@ public class ufoMove : MonoBehaviour {
         return AliceStage2Flag;
     }
 
+
     //Ray関係
     //ホッチキスの針を付けるために必要
     private RaycastHit hit;
@@ -77,12 +82,21 @@ public class ufoMove : MonoBehaviour {
     //敵やギミックに取り付けるホッチキスの針
     public GameObject Needle;
 
+
+
     //発射する弾を格納する変数
     public GameObject ufoThunder;
 
 
     //フロア2への移動が終了したかのフラグを持つオブジェクト
     public AliceMove_Stage2 Alice_MoveEnd;
+
+
+    //UFOのアニメーターを取得
+    private Animator ufoAnim;
+
+    private AnimatorStateInfo animInfo;
+
 
     void OnTriggerEnter(Collider other)
     {
@@ -100,8 +114,6 @@ public class ufoMove : MonoBehaviour {
         }
     }
 
-    private float time;
-
 
     // Use this for initialization
     void Start () {
@@ -110,27 +122,31 @@ public class ufoMove : MonoBehaviour {
         CatCollFlag = false;
         ShotTime = 0f;
 
-        MovePoint_RandomNum = Random.Range(0, 8);
+        ufoAnim = GetComponent<Animator>();
+        animInfo = ufoAnim.GetCurrentAnimatorStateInfo(0);
 
-        ufoMovePoint[0] = GameObject.Find("ufoMovePoint1");
-        ufoMovePoint[1] = GameObject.Find("ufoMovePoint2");
-        ufoMovePoint[2] = GameObject.Find("ufoMovePoint3");
-        ufoMovePoint[3] = GameObject.Find("ufoMovePoint4");
-        ufoMovePoint[4] = GameObject.Find("ufoMovePoint5");
-        ufoMovePoint[5] = GameObject.Find("ufoMovePoint6");
-        ufoMovePoint[6] = GameObject.Find("ufoMovePoint7");
-        ufoMovePoint[7] = GameObject.Find("ufoMovePoint8");
+        MovePoint_RandomNum = Random.Range(0, 8);
     }
 	
 	// Update is called once per frame
 	void Update () {
+        ufoUpdate();
+        ufoTapStop();
+    }
 
+
+    //UFOの行動
+    void ufoUpdate()
+    {
+        animInfo = ufoAnim.GetCurrentAnimatorStateInfo(0);
+
+        //アリスがフロア3に移動してきたというフラグがtrueになれば処理
         if (Alice_MoveEnd.GetFloar3MoveEndFlag() == true)
         {
             //UFOの進む方向を変更する
             switch (moveDir)
             {
-                case ufoState.MOVE://右方向へ移動
+                case ufoState.MOVE://瞬間移動のように移動
 
                     //タップされたかのフラグがfalse、動きが止まっている状態なら処理
                     if (MoveStopFlag == false)
@@ -143,19 +159,47 @@ public class ufoMove : MonoBehaviour {
                         }
                         else
                         {
+                            if (MovePoint_RandomNum < 5 && ShotTime <= 0)
+                            {
+                                ufoAnim.SetBool("Attack", true);                          
+                            }
+                            else if (MovePoint_RandomNum >= 5)
+                            {
+                                StopTime += Time.deltaTime;
+                            }
+
+                            if (animInfo.nameHash == Animator.StringToHash("Base Layer.Attack"))
+                            {
+                                ChargeTime += Time.deltaTime;
+                            }
+                        }
+
+
+                        if (ChargeTime >= 2f)
+                        {
+                            ufoAnim.SetBool("Attack", false);
                             ufoShot();
-                            //移動した後から時間を加算
+                            ChargeTime = 0;
+                            ShotFlag = true;
+                        }
+
+                        if (ShotFlag == true)
+                        {
                             StopTime += Time.deltaTime;
                         }
 
                         //移動してから設定しているクールタイムを超えたなら処理
                         if (StopTime >= CoolTime)
                         {
+                            ChargeTime = 0;
                             //StopTimeを初期化
                             StopTime = 0;
+
+                            AudioManager.Instance.PlaySE("syunnkann");
+
                             //再びランダムで数値を取得する
                             MovePoint_RandomNum = Random.Range(0, 8);
-
+                            ShotFlag = false;
                             ShotTime = 0;
                         }
                     }
@@ -172,6 +216,7 @@ public class ufoMove : MonoBehaviour {
                             ShotTime = 0;
                         }
                     }
+
 
                     break;
 
@@ -192,42 +237,8 @@ public class ufoMove : MonoBehaviour {
                     break;
             }
         }
+    }
 
-
-        //UFOがタップされたならフラグをfalseにしておいて移動を止める
-        if(TouchManager.SelectedGameObject==gameObject)
-        {
-            MoveStopFlag = true;
-            ShotTime = 0;
-
-            //Rayを飛ばして
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, 100f))
-            {
-                //針の位置をタップした位置へと移動させる。
-                Needle.transform.position = hit.point;
-                //gameObjectと親子関係に
-                Needle.transform.parent = gameObject.transform;
-            }
-        }
-
-        //移動が止まっていたらその時間を加算
-        if(MoveStopFlag==true)
-        {
-            time += Time.deltaTime;
-        }
-        
-        //一定時間動きが止まっていたら移動を再開
-        if (time >= 5f)
-        {
-            MoveStopFlag = false;
-            time = 0;
-            Needle.transform.position = new Vector3(-11.08f, 0.393f, -0.867f);
-        }
-
-        
-
-	}
 
     //UFOの弾発射の関数
     void ufoShot()
@@ -244,7 +255,42 @@ public class ufoMove : MonoBehaviour {
                 ShotTime = 5f;
             }
         }
+
     }
 
+
+    void ufoTapStop()
+    {
+        //UFOがタップされたならフラグをfalseにしておいて移動を止める
+        if (TouchManager.SelectedGameObject == gameObject)
+        {
+            MoveStopFlag = true;
+            ShotTime = 0;
+
+            //Rayを飛ばして
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, 100f))
+            {
+                //針の位置をタップした位置へと移動させる。
+                Needle.transform.position = hit.point;
+                //gameObjectと親子関係に
+                Needle.transform.parent = gameObject.transform;
+            }
+        }
+
+        //移動が止まっていたらその時間を加算
+        if (MoveStopFlag == true)
+        {
+            TapStopTime += Time.deltaTime;
+        }
+
+        //一定時間動きが止まっていたら移動を再開
+        if (TapStopTime >= 5f)
+        {
+            MoveStopFlag = false;
+            TapStopTime = 0;
+            Needle.transform.position = new Vector3(-11.08f, 0.393f, -0.867f);
+        }
+    }
   
 }
