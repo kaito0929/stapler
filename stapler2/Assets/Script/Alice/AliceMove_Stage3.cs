@@ -11,15 +11,15 @@ public class AliceMove_Stage3 : MonoBehaviour
     // 変数宣言----------------------------------------------------------------------
 
     //ギミックがクリアされたかのフラグを持つギミック
-    public GameObject Floar1Gimmick;
-    public GameObject Floar2Gimmick;
+    public GameObject Floor1Gimmick;
+    public GameObject Floor2Gimmick;
 
     //クリアされた時にアリスを動かす変数
     private Vector3 pos;
 
     //クリアしたかのフラグを受け取る変数
-    private bool GetFloar1ClearFlag;
-    private bool GetFloar2ClearFlag;
+    private bool GetFloor1ClearFlag;
+    private bool GetFloor2ClearFlag;
 
     //Animatorを取得
     private Animator AliceAnim;
@@ -38,11 +38,12 @@ public class AliceMove_Stage3 : MonoBehaviour
     //アリスがギミックに当たったかのフラグを受け取る変数
     private bool GetAliceCollFlag;
 
-    //フロア3に到達したかのフラグ
-    private bool Floar3_ReachingFlag;
-    public bool GetReachingFlag()
+    //移動が終了したかのフラグ
+    private bool Floor3MoveMentEndFlag;
+    //フロア3に到達した時のフラグを渡す関数
+    public bool GetFloor3MoveEndFlag()
     {
-        return Floar3_ReachingFlag;
+        return Floor3MoveMentEndFlag;
     }
 
     // Use this for initialization
@@ -51,36 +52,39 @@ public class AliceMove_Stage3 : MonoBehaviour
         AliceAnim = GetComponent<Animator>();
         AliceAnimInfo = AliceAnim.GetCurrentAnimatorStateInfo(0);
         GetAliceCollFlag = false;
-        Floar3_ReachingFlag = false;
+        Floor3MoveMentEndFlag = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         //木の根っこが指定した回数分タップされたかのフラグを受け取る
-        WoodAttack touch = Floar1Gimmick.GetComponent<WoodAttack>();
-        GetFloar1ClearFlag = touch.StopFlag();
+        WoodAttack touch = Floor1Gimmick.GetComponent<WoodAttack>();
+        GetFloor1ClearFlag = touch.StopFlag();
 
         //岩が壊されているかのフラグを受け取る
-        RockBreak touch2 = Floar2Gimmick.GetComponent<RockBreak>();
-        GetFloar2ClearFlag = touch2.GetClearFlag();
+        RockBreak touch2 = Floor2Gimmick.GetComponent<RockBreak>();
+        GetFloor2ClearFlag = touch2.GetClearFlag();
+
+        //アリスが敵か何かとぶつかった際のフラグを受け取る
+        AliceGameOver coll = gameObject.GetComponent<AliceGameOver>();
+        GetAliceCollFlag = coll.GetAliceCollFlag();
 
         //アリスが何かとぶつかっていなかったら処理を行う
         if (GetAliceCollFlag == false)
         {
             //フロア1をクリアした場合に処理
-            if (GetFloar1ClearFlag == true && GetFloar2ClearFlag == false)
+            if (GetFloor1ClearFlag == true && GetFloor2ClearFlag == false)
             {
                 floor = Floor.FLOOR2;
             }
             //フロア2をクリアした場合に処理
-            else if (GetFloar2ClearFlag == true)
+            else if (GetFloor2ClearFlag == true)
             {
                 floor = Floor.FLOOR3;
             }
             AliceMovePos();
         }
-
     }
 
     void AliceMovePos()
@@ -128,7 +132,7 @@ public class AliceMove_Stage3 : MonoBehaviour
                     //指定した位置まで移動したら待機モーションに切り替わる
                     AliceAnim.SetBool("Idle", true);
                     AliceAnim.SetBool("happy", false);
-                    Floar3_ReachingFlag = true;
+                    Floor3MoveMentEndFlag = true;
                 }
                 break;
         }

@@ -49,7 +49,7 @@ public class WitchShot : MonoBehaviour {
         if (dis >= 9f)
         {
             //3フロア目に到達していたら処理を行う
-            if (reaching.GetReachingFlag() == true)
+            if (reaching.GetFloor3MoveEndFlag() == true)
             {
                 ShotTime += Time.deltaTime;
 

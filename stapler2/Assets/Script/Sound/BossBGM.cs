@@ -23,7 +23,7 @@ public class BossBGM : MonoBehaviour {
 	void Update () {
         //魔女戦BGM再生のフラグを取得する
         AliceMove_Stage3 alice = Alice.GetComponent<AliceMove_Stage3>();
-        BossBGMPlayFlag = alice.GetReachingFlag();
+        BossBGMPlayFlag = alice.GetFloor3MoveEndFlag();
 
         //フラグがtrueならばBGMを切り替える
         if (BossBGMPlayFlag == true)

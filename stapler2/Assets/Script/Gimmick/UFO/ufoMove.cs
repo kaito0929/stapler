@@ -141,7 +141,7 @@ public class ufoMove : MonoBehaviour {
         animInfo = ufoAnim.GetCurrentAnimatorStateInfo(0);
 
         //アリスがフロア3に移動してきたというフラグがtrueになれば処理
-        if (Alice_MoveEnd.GetFloar3MoveEndFlag() == true)
+        if (Alice_MoveEnd.GetFloor3MoveEndFlag() == true)
         {
             //UFOの進む方向を変更する
             switch (moveDir)

@@ -44,7 +44,6 @@ public class TubeChange : MonoBehaviour {
                 //チューブを直すことで列車が動くので列車の動く音を再生
                 AudioManager.Instance.PlaySE("locomotive-pass1_01");
 
-
                 //Rayを飛ばして
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit, 100f))
