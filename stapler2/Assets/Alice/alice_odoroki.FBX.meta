@@ -1,96 +1,82 @@
 fileFormatVersion: 2
-guid: 288737dc6e90b0e4fb0c2addba818f8e
-timeCreated: 1495680250
+guid: f357bdc18566b344aa989134dd5447e8
+timeCreated: 1495676357
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Bone001
-    100002: Bone002
-    100004: Bone003
-    100006: Bone004
-    100008: Bone005
-    100010: Bone006
-    100012: Bone007
-    100014: Bone008
-    100016: Bone009
-    100018: Bone010
-    100020: Bone011
-    100022: Bone012
-    100024: Bone013
-    100026: Bone014
-    100028: Bone015
-    100030: Bone016
-    100032: Bone017
-    100034: Bone018
-    100036: Bone019
-    100038: Bone020
-    100040: Bone021
-    100042: Bone022
-    100044: Bone023
-    100046: Bone024
-    100048: Bone025
-    100050: Bone026
-    100052: Bone027
-    100054: Bone028
-    100056: Bone029
-    100058: Bone030
-    100060: //RootNode
-    100062: Plane001
-    100064: Plane002
-    100066: Plane003
-    100068: Plane004
-    100070: Plane005
-    100072: Plane006
-    100074: Plane007
-    100076: Plane008
-    100078: Plane009
-    100080: Plane010
-    100082: Plane011
-    100084: Plane012
-    400000: Bone001
-    400002: Bone002
-    400004: Bone003
-    400006: Bone004
-    400008: Bone005
-    400010: Bone006
-    400012: Bone007
-    400014: Bone008
-    400016: Bone009
-    400018: Bone010
-    400020: Bone011
-    400022: Bone012
-    400024: Bone013
-    400026: Bone014
-    400028: Bone015
-    400030: Bone016
-    400032: Bone017
-    400034: Bone018
-    400036: Bone019
-    400038: Bone020
-    400040: Bone021
-    400042: Bone022
-    400044: Bone023
-    400046: Bone024
-    400048: Bone025
-    400050: Bone026
-    400052: Bone027
-    400054: Bone028
-    400056: Bone029
-    400058: Bone030
-    400060: //RootNode
-    400062: Plane001
-    400064: Plane002
-    400066: Plane003
-    400068: Plane004
-    400070: Plane005
-    400072: Plane006
-    400074: Plane007
-    400076: Plane008
-    400078: Plane009
-    400080: Plane010
-    400082: Plane011
-    400084: Plane012
+    100000: //RootNode
+    100002: Bone001
+    100004: Bone002
+    100006: Bone003
+    100008: Bone004
+    100010: Bone005
+    100012: Bone006
+    100014: Bone007
+    100016: Bone008
+    100018: Bone012
+    100020: Bone013
+    100022: Bone014
+    100024: Bone015
+    100026: Bone016
+    100028: Bone017
+    100030: Bone018
+    100032: Bone019
+    100034: Bone020
+    100036: Bone021
+    100038: Bone025
+    100040: Bone026
+    100042: Bone027
+    100044: Bone028
+    100046: Plane001
+    100048: Plane002
+    100050: Plane003
+    100052: Plane004
+    100054: Plane005
+    100056: Plane006
+    100058: Plane007
+    100060: Plane008
+    100062: Plane009
+    100064: Plane010
+    100066: Plane011
+    100068: Plane012
+    100070: Plane013
+    400000: //RootNode
+    400002: Bone001
+    400004: Bone002
+    400006: Bone003
+    400008: Bone004
+    400010: Bone005
+    400012: Bone006
+    400014: Bone007
+    400016: Bone008
+    400018: Bone012
+    400020: Bone013
+    400022: Bone014
+    400024: Bone015
+    400026: Bone016
+    400028: Bone017
+    400030: Bone018
+    400032: Bone019
+    400034: Bone020
+    400036: Bone021
+    400038: Bone025
+    400040: Bone026
+    400042: Bone027
+    400044: Bone028
+    400046: Plane001
+    400048: Plane002
+    400050: Plane003
+    400052: Plane004
+    400054: Plane005
+    400056: Plane006
+    400058: Plane007
+    400060: Plane008
+    400062: Plane009
+    400064: Plane010
+    400066: Plane011
+    400068: Plane012
+    400070: Plane013
     4300000: Plane001
     4300002: Plane002
     4300004: Plane003
@@ -103,9 +89,9 @@ ModelImporter:
     4300018: Plane010
     4300020: Plane011
     4300022: Plane012
+    4300024: Plane013
     7400000: Take 001
     9500000: //RootNode
-    11100000: //RootNode
     13700000: Plane001
     13700002: Plane002
     13700004: Plane003
@@ -118,6 +104,7 @@ ModelImporter:
     13700018: Plane010
     13700020: Plane011
     13700022: Plane012
+    13700024: Plane013
   materials:
     importMaterials: 1
     materialName: 0
@@ -136,7 +123,7 @@ ModelImporter:
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
-    animationWrapMode: 2
+    animationWrapMode: 0
     extraExposedTransformPaths: []
     clipAnimations: []
     isReadable: 1
@@ -176,7 +163,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 1
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

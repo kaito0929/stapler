@@ -53,6 +53,7 @@ public class EnemyAction : MonoBehaviour {
     //敵やギミックに取り付けるホッチキスの針
     public GameObject Needle;
 
+    //岩が破壊されたかのフラグ
     public RockBreak breakFlag;
 
     // Use this for initialization
@@ -65,7 +66,7 @@ public class EnemyAction : MonoBehaviour {
         EnemyMoveFlag = true;
         BoneAnimFlag = false;
 
-        MaxStopTime = 8f;
+        MaxStopTime = 6f;
 	}
 	
 	// Update is called once per frame
@@ -186,8 +187,11 @@ public class EnemyAction : MonoBehaviour {
         }
     }
 
+
+    //敵が逃げ出すようにする
     void EnemyEscape()
     {
+        //岩がドラゴンによって壊されたら処理
         if(breakFlag.GetClearFlag()==true)
         {
             moveDir = EnemyMoveDir.ESCAPE;

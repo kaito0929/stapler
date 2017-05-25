@@ -25,6 +25,7 @@ public class AliceMove : MonoBehaviour {
     //AnimatorStateInfoを取得
     private AnimatorStateInfo AliceAnimInfo;
 
+
     //どのフロアにいるか判別するための変数
     private enum Floor
     {

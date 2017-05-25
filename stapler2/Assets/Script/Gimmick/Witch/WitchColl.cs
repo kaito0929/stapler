@@ -12,7 +12,8 @@ public class WitchColl : MonoBehaviour
 
     //魔女に火球を当てる回数(三回)
     private int WitchCollNorma;
-    //残りの火球を当てる回数
+    //変数を別のスクリプトに渡す関数
+    //魔女の色を変えるために使用する
     public int GetWitchCollNorma()
     {
         return WitchCollNorma;
@@ -36,26 +37,20 @@ public class WitchColl : MonoBehaviour
         return AliceStage3Flag;
     }
 
-    //移動スピード
-    private float speed = 1.0f;
-    //動かす変数
-    private float step = 0.0f;
 
-    private float dis;
+    private float Distance;
 
     private enum WitchMoveState
     {
-        MOVE_CIRCLE,//円運動
-        MOVE_EIGHT,//八の字移動
-        MOVE_STAR,//五芒星の軌道
-        MOVE_STANDBY,//待機状態
+        MOVE_CIRCLE,    //円運動
+        MOVE_EIGHT,     //八の字移動
+        MOVE_STAR,      //五芒星の軌道
+        MOVE_STANDBY,   //待機状態
     }
-
     private WitchMoveState witchMoveState;
 
+    //Animatorの取得
     private Animator WitchAnim;
-    //アニメーションのステートを取得する
-    private AnimatorStateInfo animInfo;
 
     // Use this for initialization
     void Start()
@@ -64,13 +59,14 @@ public class WitchColl : MonoBehaviour
         WitchDestroyFlag = false;
         WitchAnim = GetComponent<Animator>();
         witchMoveState = WitchMoveState.MOVE_CIRCLE;
+        Distance = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         WitchMove move = gameObject.GetComponent<WitchMove>();
-        dis = move.GetDis();
+        Distance = move.GetDistance();
 
         //攻撃が当たった場合に移動方法を変更
         switch (witchMoveState)
@@ -92,7 +88,7 @@ public class WitchColl : MonoBehaviour
                 break;
         }
 
-        if (dis <= 0)
+        if (Distance <= 0)
         {
             if (WitchCollNorma == 2)
             {
@@ -105,8 +101,8 @@ public class WitchColl : MonoBehaviour
         }
 
 
-        //魔女の消滅処理
-        WitchDestroy();
+        //魔女がやられる処理
+        WitchDown();
     }
 
     //魔女に火球が当たるたびに当てるノルマを減らしていく
@@ -128,14 +124,15 @@ public class WitchColl : MonoBehaviour
     }
 
 
-    void WitchDestroy()
+    void WitchDown()
     {
         //指定した回数分火球にぶつけることが出来たなら
-        //魔女をDestoryで消す
-        if (WitchCollNorma == 0)
+        //アニメーションを再生して倒したように見せる
+        if (WitchCollNorma <= 0)
         {
             //エンディング画面へ遷移するのでフラグをfalseに戻しておく
             AliceStage3Flag = false;
+            //吹き飛ばされるアニメーションを再生
             WitchAnim.SetTrigger("Finish");
             //魔女が倒されたことによってフラグがtrueになり
             //エンディング画面へと遷移する

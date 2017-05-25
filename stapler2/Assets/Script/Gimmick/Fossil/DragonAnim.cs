@@ -30,14 +30,15 @@ public class DragonAnim : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
+        //骨が指定の位置で止められてかのフラグを受け取る
         BoneStop bone1 = Bone[0].GetComponent<BoneStop>();
         BoneStopFlag[0] = bone1.GetBoneTapStopFlag();
 
         BoneStop bone2 = Bone[1].GetComponent<BoneStop>();
         BoneStopFlag[1] = bone2.GetBoneTapStopFlag();
 
-
+        //両方のフラグがtrueになっていたらドラゴンのアニメーションを再生
+        //岩を破壊する
         if (BoneStopFlag[0] == true && BoneStopFlag[1] == true)
         {
             dragonAnim.SetBool("Break", true);

@@ -105,7 +105,7 @@ public class BoneStop : MonoBehaviour {
                 }
             }
         }
-        else
+        else if(BoneTapStopFlag == false)
         {
             //アニメーションの再生は壁に当たっていない状態なら
             //行うようにしておく
