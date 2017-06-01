@@ -52,7 +52,6 @@ public class GimmickParent : MonoBehaviour {
         TapFlag = false;
         CollFlag = false;
 
-
         MoveNeedle[0] = GameObject.Find("RepelledNeedle1");
         MoveNeedle[1] = GameObject.Find("RepelledNeedle2");
         MoveNeedle[2] = GameObject.Find("RepelledNeedle3");

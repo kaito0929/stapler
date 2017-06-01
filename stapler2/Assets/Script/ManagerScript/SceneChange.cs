@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 public class SceneChange : MonoBehaviour {
 
     //世界観の説明画面とエンディングからの遷移条件
-    public StoryChange ChangeNum;
+    public int ChangeNum;
     //ステージ1からの遷移条件
-    public Stage1Clear stage1_Clear;
+    public Stage1_Clear_NextPage pageNum;
+
     //ステージ2からの遷移条件
     public ufoMove stage2_Clear;
     //ステージ3からの遷移条件
@@ -36,7 +37,7 @@ public class SceneChange : MonoBehaviour {
         //  AudioManager.Instance.PlayBGM("");
         // AudioManager.Instance.PlaySE("");
         //nextScene = null;
-
+        ChangeNum = 0;
     }
 	
 	// Update is called once per frame
@@ -58,8 +59,10 @@ public class SceneChange : MonoBehaviour {
                     break;
                 case "Story"://世界観の説明画面
 
+                    ChangeNum = PageTurn.GetNum();
+
                     //最後までページが進んだ状態でタップしたならば遷移開始
-                    if (ChangeNum.GetNum() == 5)
+                    if (ChangeNum == 5)
                     {
                         if (Input.GetMouseButton(0))
                         {
@@ -68,15 +71,15 @@ public class SceneChange : MonoBehaviour {
                     }
                     break;
                 case "stage1"://ステージ1
-                    
+
                     //ステージ1でクリア条件を達成したら遷移開始
-                    if (stage1_Clear.GetClear() == true)
+                    if (pageNum.GetTurnNum() == -1f)
                     {
                         ChangeScene();
                     }
                     //もしもゲームオーバー条件を満たしてしまった場合には
                     //ゲームオーバー画面への遷移を開始させる
-                    else if(aliceGameOver.GetGameOverFlag()==true)
+                    else if (aliceGameOver.GetGameOverFlag() == true)
                     {
                         ChangeScene();
                     }
@@ -112,8 +115,10 @@ public class SceneChange : MonoBehaviour {
                     break;
                 case "Ending"://エンディング画面
 
+                    ChangeNum = PageTurn.GetNum();
+
                     //エンディングの画像が最後まで進んだ状態でタップして遷移開始
-                    if (ChangeNum.GetNum() == 4)
+                    if (ChangeNum == 4)
                     {
                         if (Input.GetMouseButton(0))
                         {

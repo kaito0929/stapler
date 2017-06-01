@@ -16,14 +16,6 @@ public class Stage1Clear : MonoBehaviour {
     //タップされたかの判定を受け取る変数
     private bool[] TapFlag = new bool[2];
 
-    //二つのフラグを受けてクリアの判定をする変数
-    private bool OllTapFlag;
-    //クリアの判定を別のスクリプトへ渡す関数
-    //このフラグを渡すことによってステージ2へと画面遷移が行われる
-    public bool GetClear()
-    {
-        return OllTapFlag;
-    }
 
     //アリスがどのステージに達しているかのフラグ(ステージ1)
     //ステージの最初からと操作するために必要
@@ -35,11 +27,14 @@ public class Stage1Clear : MonoBehaviour {
         return AliceStage1Flag;
     }
 
+
+    public GameObject Stage1_Clear_Obj;
+    public GameObject black;
+
     // Use this for initialization
     void Start () {
         TapFlag[0] = false;
         TapFlag[1] = false;
-        OllTapFlag = false;
 	}
 
     // Update is called once per frame
@@ -60,8 +55,9 @@ public class Stage1Clear : MonoBehaviour {
             //アリスがステージ1にいるというフラグはfalseにする
             AliceStage1Flag = false;
 
-            //このフラグがステージ1をクリアしたかのフラグになっている
-            OllTapFlag = true;
+            //クリアした時にめくられるページを表示させる
+            Stage1_Clear_Obj.SetActive(true);
+            black.SetActive(true);
         }
 
     }

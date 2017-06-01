@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//==========================================================
+//魔女の火球がアリスに追尾するようにするスクリプト
+//==========================================================
+
 public class MoveFlame : MonoBehaviour {
 
-    //==========================================================
-    //魔女の火球がアリスに追尾するようにするスクリプト
-    //==========================================================
 
     // 変数宣言----------------------------------------------------------------------
     //火球が追尾するオブジェクト
     private GameObject alice;
     //火球のスピード
-    private float speed = 4.0f;
+    private float speed = 6.0f;
     //動かす変数
     private float step = 0.0f;
     //動いている状態かのフラグ
@@ -27,6 +28,18 @@ public class MoveFlame : MonoBehaviour {
 
     //敵やギミックに取り付けるホッチキスの針
     private GameObject Needle;
+
+
+    //アリスか魔女に当たった場合に火球を消しておく
+    void OnTriggerEnter(Collider other)
+    {
+        //針との親子関係を解除する
+        gameObject.transform.DetachChildren();
+        //針は画面外へ移動
+        Needle.transform.position = new Vector3(-11.08f, 0.393f, -0.867f);
+        //火球を消す
+        Destroy(this.gameObject);
+    }
 
     // Use this for initialization
     void Start () {
@@ -62,8 +75,14 @@ public class MoveFlame : MonoBehaviour {
             Destroy(this.gameObject);
         }
 
+        FleamStop();
+        
+    }
+
+    void FleamStop()
+    {
         //火球がタップされた場合フラグをfalseにして動きを止めるようにする
-        if(TouchManager.SelectedGameObject==gameObject)
+        if (TouchManager.SelectedGameObject == gameObject)
         {
             FlameMoveFlag = false;
 
@@ -79,14 +98,4 @@ public class MoveFlame : MonoBehaviour {
         }
     }
 
-    //アリスか魔女に当たった場合に火球を消しておく
-    void OnTriggerEnter(Collider other)
-    {
-        //針との親子関係を解除する
-        gameObject.transform.DetachChildren();
-        //針は画面外へ移動
-        Needle.transform.position = new Vector3(-11.08f, 0.393f, -0.867f);
-        //火球を消す
-        Destroy(this.gameObject);
-    }
 }

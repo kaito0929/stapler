@@ -17,15 +17,16 @@ public class PandaMove : MonoBehaviour {
     private bool AliceReachingFlag;
 
     //別のスクリプトのフラグを受け取る変数
-    bool GetFlag;
+    public bool GetFlag;
 
     // Use this for initialization
     void Start () {
 	
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
         //オブジェクトにひっついたかのフラグを取得
         GimmickParent touch = gameObject.GetComponent<GimmickParent>();
@@ -35,7 +36,7 @@ public class PandaMove : MonoBehaviour {
         AliceMove alice = Alice.GetComponent<AliceMove>();
         AliceReachingFlag = alice.GetReachingFlag();
 
-        //アリスがフロア2到達していたら処理
+
         if (AliceReachingFlag == true)
         {
             //パンダがタップされて時計に止められていなければ前進
@@ -46,12 +47,13 @@ public class PandaMove : MonoBehaviour {
                 pos.x -= 0.01f;
                 transform.position = pos;
             }
-            else
+            if (GetFlag == true)
             {
                 gameObject.GetComponent<BoxCollider>().enabled = false;
             }
-
         }
 
-	}
+
+
+    }
 }
