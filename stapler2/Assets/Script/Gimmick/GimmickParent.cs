@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//==========================================================
+//オブジェクト同士を親子関係にしてくっつけるスクリプト
+//ステージ2のフロア1の熊とぶつかっていた場合は
+//処理を行わないようにしておく
+//==========================================================
+
 public class GimmickParent : MonoBehaviour {
 
-    //==========================================================
-    //オブジェクト同士を親子関係にしてくっつけるスクリプト
-    //ステージ2のフロア1の熊とぶつかっていた場合は
-    //処理を行わないようにしておく
-    //==========================================================
 
     // 変数宣言----------------------------------------------------------------------
 
@@ -44,6 +45,9 @@ public class GimmickParent : MonoBehaviour {
     //再生する針の順番を決めるための変数を持つスクリプト
     public NeedleAnimPlayNum num;
 
+
+    //パーティクルの色を変化させるための変数
+    public Renderer rd;
 
     // Use this for initialization
     void Start()
@@ -100,6 +104,8 @@ public class GimmickParent : MonoBehaviour {
                 gameObject.transform.parent = other.transform;
 
                 TapFlag = true;
+
+                rd.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 0, 255));
 
                 //Rayを飛ばして
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);

@@ -12,17 +12,33 @@ public class CatAnim : MonoBehaviour {
     //再生するAnimatorを取得
     private Animator CatAnimator;
 
+    private AnimatorStateInfo animInfo;
+
+    public GameObject Stage2_Clear_Obj;
+    public GameObject black;
+
     // Use this for initialization
     void Start () {
         CatAnimator = GetComponent<Animator>();
+        animInfo = CatAnimator.GetCurrentAnimatorStateInfo(0);
     }
 	
 	// Update is called once per frame
 	void Update () {
-	
-        if(TouchManager.SelectedGameObject==gameObject)
+
+        animInfo = CatAnimator.GetCurrentAnimatorStateInfo(0);
+
+        if (TouchManager.SelectedGameObject==gameObject)
         {
             CatAnimator.SetTrigger("Tap");
+        }
+
+
+        if(animInfo.nameHash==Animator.StringToHash("Base Layer.StandUp"))
+        {
+            //クリアした時にめくられるページを表示させる
+            Stage2_Clear_Obj.SetActive(true);
+            black.SetActive(true);
         }
 
 	}

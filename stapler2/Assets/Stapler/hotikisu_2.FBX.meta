@@ -1,84 +1,23 @@
 fileFormatVersion: 2
-guid: 42d8aab808ad18f449f79f20f25509a1
-timeCreated: 1494916863
+guid: 5dc6f10c7debd684ba861c5a4771800a
+timeCreated: 1496370302
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: Bone001
     100002: Bone002
-    100004: Bone003
-    100006: Bone004
-    100008: Bone005
-    100010: Bone006
-    100012: Bone007
-    100014: Bone008
-    100016: Bone009
-    100018: Bone010
-    100020: Bone011
-    100022: Bone012
-    100024: Bone013
-    100026: Bone014
-    100028: Bone015
-    100030: Bone016
-    100032: Bone017
-    100034: Plane001
-    100036: Plane002
-    100038: Plane003
-    100040: Plane004
-    100042: Plane005
-    100044: Plane006
-    100046: Plane007
-    100048: Plane008
-    100050: Plane009
-    100052: //RootNode
+    100004: //RootNode
+    100006: Plane001
     400000: Bone001
     400002: Bone002
-    400004: Bone003
-    400006: Bone004
-    400008: Bone005
-    400010: Bone006
-    400012: Bone007
-    400014: Bone008
-    400016: Bone009
-    400018: Bone010
-    400020: Bone011
-    400022: Bone012
-    400024: Bone013
-    400026: Bone014
-    400028: Bone015
-    400030: Bone016
-    400032: Bone017
-    400034: Plane001
-    400036: Plane002
-    400038: Plane003
-    400040: Plane004
-    400042: Plane005
-    400044: Plane006
-    400046: Plane007
-    400048: Plane008
-    400050: Plane009
-    400052: //RootNode
+    400004: //RootNode
+    400006: Plane001
     4300000: Plane001
-    4300002: Plane002
-    4300004: Plane003
-    4300006: Plane004
-    4300008: Plane005
-    4300010: Plane006
-    4300012: Plane007
-    4300014: Plane008
-    4300016: Plane009
     7400000: Take 001
     9500000: //RootNode
+    11100000: //RootNode
     13700000: Plane001
-    13700002: Plane002
-    13700004: Plane003
-    13700006: Plane004
-    13700008: Plane005
-    13700010: Plane006
-    13700012: Plane007
-    13700014: Plane008
-    13700016: Plane009
   materials:
     importMaterials: 1
     materialName: 0
@@ -137,7 +76,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

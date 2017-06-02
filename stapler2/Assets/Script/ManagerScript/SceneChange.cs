@@ -7,12 +7,7 @@ public class SceneChange : MonoBehaviour {
     //世界観の説明画面とエンディングからの遷移条件
     public int ChangeNum;
     //ステージ1からの遷移条件
-    public Stage1_Clear_NextPage pageNum;
-
-    //ステージ2からの遷移条件
-    public ufoMove stage2_Clear;
-    //ステージ3からの遷移条件
-    public WitchColl stage3_Clear;
+    public Stage_Clear_NextPage pageNum;
 
     //アリスに攻撃が当たったフラグ
     //ゲームオーバー画面への遷移条件
@@ -88,7 +83,7 @@ public class SceneChange : MonoBehaviour {
                 case "stage2"://ステージ2
 
                     //ステージ2でのクリア条件を達成したら遷移開始
-                    if (stage2_Clear.GetClearFlag() == true)
+                    if (pageNum.GetTurnNum() == -1f)
                     {
                         ChangeScene();
                     }
@@ -102,7 +97,7 @@ public class SceneChange : MonoBehaviour {
                 case "stage3"://ステージ3
 
                     //ステージ3でのクリア条件を達成したら遷移開始
-                    if (stage3_Clear.GetWitchDestroy() == true)
+                    if (pageNum.GetTurnNum() == -1f)
                     {
                         ChangeScene();
                     }

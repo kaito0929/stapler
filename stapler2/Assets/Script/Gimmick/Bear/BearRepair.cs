@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BearRepair : MonoBehaviour {
+//============================================================================
+//熊をタップして修理するスクリプト
+//============================================================================
 
-    //============================================================================
-    //熊をタップして修理するスクリプト
-    //============================================================================
+public class BearRepair : MonoBehaviour {
 
     // 変数宣言----------------------------------------------------------------------
 
@@ -33,8 +33,11 @@ public class BearRepair : MonoBehaviour {
     private int NeedleMoveNum;
 
 
-	// Use this for initialization
-	void Start () {
+    //パーティクルの色を変化させるための変数
+    public Renderer rd;
+
+    // Use this for initialization
+    void Start () {
         BearChangeNum = 0;
         BearChangeNorma = 0;
         RepairFlag = false;
@@ -62,9 +65,10 @@ public class BearRepair : MonoBehaviour {
             {
                 //タップした回数分プラス
                 BearChangeNorma++;
+                rd.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 0, 255));
             }
 
-            if (NeedleMoveNum != 3)
+            if (BearChangeNorma < 3)
             {
                 NeedleMoveNum++;
             }

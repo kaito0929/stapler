@@ -37,6 +37,9 @@ public class RootsAnim : MonoBehaviour {
     //再生する針の順番を決めるための変数を持つスクリプト
     public NeedleAnimPlayNum num;
 
+    //パーティクルの色を変化させるための変数
+    public Renderer rd;
+
     // Use this for initialization
     void Start () {
         anim = GetComponent<Animation>();
@@ -57,6 +60,8 @@ public class RootsAnim : MonoBehaviour {
             {
                 AnimStopFlag = true;
 
+                rd.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 0, 255));
+
                 //Rayを飛ばして
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit, 100f))
@@ -67,6 +72,7 @@ public class RootsAnim : MonoBehaviour {
                     Needle.transform.parent = gameObject.transform;
                 }
             }
+
             anim.Stop();
         }
         else if (woodAttack.GetAttackFlag() == false && AnimStopFlag == false)

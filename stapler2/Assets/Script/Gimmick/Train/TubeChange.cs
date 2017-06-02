@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TubeChange : MonoBehaviour {
+//==============================================================
+//列車の動力チューブを直すスクリプト
+//==============================================================
 
-    //==============================================================
-    //列車の動力チューブを直すスクリプト
-    //==============================================================
+public class TubeChange : MonoBehaviour {
 
     // 変数宣言----------------------------------------------------------------------
 
@@ -25,6 +25,8 @@ public class TubeChange : MonoBehaviour {
     //敵やギミックに取り付けるホッチキスの針
     public GameObject Needle;
 
+    //パーティクルの色を変化させるための変数
+    public Renderer rd;
 
     // Use this for initialization
     void Start () {
@@ -40,6 +42,8 @@ public class TubeChange : MonoBehaviour {
             if (TouchManager.SelectedGameObject == gameObject)
             {
                 TubeRepairFlag = true;
+
+                rd.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 0, 255));
 
                 //チューブを直すことで列車が動くので列車の動く音を再生
                 AudioManager.Instance.PlaySE("locomotive-pass1_01");

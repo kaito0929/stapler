@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//=============================================================
+//魔女が火球に当たった時の処理を行うスクリプト
+//=============================================================
+
 public class WitchColl : MonoBehaviour
 {
-
-    //=============================================================
-    //魔女が火球に当たった時の処理を行うスクリプト
-    //=============================================================
-
     // 変数宣言----------------------------------------------------------------------
 
     //魔女に火球を当てる回数(三回)
@@ -19,13 +18,6 @@ public class WitchColl : MonoBehaviour
         return WitchCollNorma;
     }
 
-    //魔女が倒されたかどうかのフラグ
-    private bool WitchDestroyFlag;
-    //魔女を倒したフラグを他のスクリプトに渡す関数
-    public bool GetWitchDestroy()
-    {
-        return WitchDestroyFlag;
-    }
 
     //アリスがどのステージに達しているかのフラグ(ステージ3)
     //ステージの最初からと操作するために必要
@@ -37,7 +29,7 @@ public class WitchColl : MonoBehaviour
         return AliceStage3Flag;
     }
 
-
+    //対象との距離
     private float Distance;
 
     private enum WitchMoveState
@@ -51,41 +43,53 @@ public class WitchColl : MonoBehaviour
 
     //Animatorの取得
     private Animator WitchAnim;
+    private AnimatorStateInfo animInfo;
+
+
+    public AliceMove_Stage3 aliceMove;
+
+    public GameObject Stage3_Clear_Obj;
+    public GameObject black;
 
     // Use this for initialization
     void Start()
     {
         WitchCollNorma = 3;
-        WitchDestroyFlag = false;
         WitchAnim = GetComponent<Animator>();
         witchMoveState = WitchMoveState.MOVE_CIRCLE;
         Distance = 0;
+        animInfo = WitchAnim.GetCurrentAnimatorStateInfo(0);
     }
 
     // Update is called once per frame
     void Update()
     {
+        animInfo = WitchAnim.GetCurrentAnimatorStateInfo(0);
+
         WitchMove move = gameObject.GetComponent<WitchMove>();
         Distance = move.GetDistance();
 
-        //攻撃が当たった場合に移動方法を変更
-        switch (witchMoveState)
+        if (aliceMove.GetFloor3MoveEndFlag() == true)
         {
-            case WitchMoveState.MOVE_CIRCLE://円運動
-                move.MoveToCircle();
-                break;
+            //攻撃が当たった場合に移動方法を変更
+            switch (witchMoveState)
+            {
+                case WitchMoveState.MOVE_CIRCLE://円運動
+                    move.MoveToCircle();
+                    break;
 
-            case WitchMoveState.MOVE_EIGHT://八の字移動
-                move.MoveToFigureOfEight();
-                break;
+                case WitchMoveState.MOVE_EIGHT://八の字移動
+                    move.MoveToFigureOfEight();
+                    break;
 
-            case WitchMoveState.MOVE_STAR://五芒星の軌道
-                move.MoveToStar();
-                break;
+                case WitchMoveState.MOVE_STAR://五芒星の軌道
+                    move.MoveToStar();
+                    break;
 
-            case WitchMoveState.MOVE_STANDBY://待機状態
-                move.WitchStandby();
-                break;
+                case WitchMoveState.MOVE_STANDBY://待機状態
+                    move.WitchStandby();
+                    break;
+            }
         }
 
         if (Distance <= 0)
@@ -100,6 +104,12 @@ public class WitchColl : MonoBehaviour
             }
         }
 
+        if (animInfo.nameHash == Animator.StringToHash("Base Layer.FinishIdle"))
+        {
+            //クリアした時にめくられるページを表示させる
+            Stage3_Clear_Obj.SetActive(true);
+            black.SetActive(true);
+        }
 
         //魔女がやられる処理
         WitchDown();
@@ -134,9 +144,6 @@ public class WitchColl : MonoBehaviour
             AliceStage3Flag = false;
             //吹き飛ばされるアニメーションを再生
             WitchAnim.SetTrigger("Finish");
-            //魔女が倒されたことによってフラグがtrueになり
-            //エンディング画面へと遷移する
-            WitchDestroyFlag = true;
         }
     }
 

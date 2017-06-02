@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//====================================================
+//エフェクトの表示非表示を切り替えるスクリプト
+//====================================================
+
 public class TapEffect : MonoBehaviour {
 
-    //====================================================
-    //エフェクトの表示非表示を切り替えるスクリプト
-    //====================================================
+
+    // 変数宣言----------------------------------------------------------------------
 
     [SerializeField]
     ParticleSystem tapEffect;
@@ -29,6 +32,8 @@ public class TapEffect : MonoBehaviour {
     private RaycastHit hit;
     private Ray ray;
 
+    public Renderer rd;
+
 
     // Use this for initialization
     void Start() {
@@ -51,6 +56,7 @@ public class TapEffect : MonoBehaviour {
                 tapEffect.transform.position = pos;
             }
 
+
             effect.SetActive(true);
 
             //時間を加算するフラグをtrueに
@@ -68,7 +74,9 @@ public class TapEffect : MonoBehaviour {
         //加算した時間が設定した制限を超えたら処理
         if (time > DisplayTime)
         {
-            //エフェクトの表示を得kス
+            rd.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 255, 255));
+
+            //エフェクトの表示を消す
             effect.SetActive(false);
             //フラグをfalse
             CountFlag = false;

@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ElectricalConnect : MonoBehaviour {
+//=======================================================================
+//観覧車の電線を繋げて、観覧車のアニメーションを再生させるスクリプト
+//=======================================================================
 
-    //=======================================================================
-    //観覧車の電線を繋げて、観覧車のアニメーションを再生させるスクリプト
-    //=======================================================================
+public class ElectricalConnect : MonoBehaviour {
 
     // 変数宣言----------------------------------------------------------------------
 
@@ -28,7 +28,12 @@ public class ElectricalConnect : MonoBehaviour {
     //敵やギミックに取り付けるホッチキスの針
     public GameObject Needle;
 
+    //火花のエフェクト
     public GameObject Spark;
+
+
+    //パーティクルの色を変化させるための変数
+    public Renderer rd;
 
     // Use this for initialization
     void Start () {
@@ -48,6 +53,9 @@ public class ElectricalConnect : MonoBehaviour {
                 anim.Play();
                 ConnectFlag = true;
                 Spark.SetActive(false);
+
+                rd.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 0, 255));
+
                 //Rayを飛ばして
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit, 100f))

@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BoneStop : MonoBehaviour {
+//===============================================================
+//上方向へ投げられた骨を壁にくっつけるスクリプト
+//===============================================================
 
-    //===============================================================
-    //上方向へ投げられた骨を壁にくっつけるスクリプト
-    //===============================================================
+public class BoneStop : MonoBehaviour {
 
     // 変数宣言----------------------------------------------------------------------
 
@@ -51,6 +51,8 @@ public class BoneStop : MonoBehaviour {
     //敵やギミックに取り付けるホッチキスの針
     public GameObject Needle;
 
+    public Renderer rd;
+
     void OnTriggerEnter(Collider other)
     {
         //設置されたコライダーを持つオブジェクトに当たっている場合に処理
@@ -93,6 +95,8 @@ public class BoneStop : MonoBehaviour {
                 BoneTapStopFlag = true;
 
                 bone.transform.parent = StopWallColl.transform;
+
+                rd.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 0, 255));
 
                 //Rayを飛ばして
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);

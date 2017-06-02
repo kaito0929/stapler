@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ufoMove : MonoBehaviour {
+//=======================================================
+//UFOの行動を制御するスクリプト
+//=======================================================
 
-    //=======================================================
-    //UFOの行動を制御するスクリプト
-    //=======================================================
+public class ufoMove : MonoBehaviour {
 
     // 変数宣言----------------------------------------------------------------------
 
@@ -30,28 +30,16 @@ public class ufoMove : MonoBehaviour {
     //タップして止められている時に加算される変数
     private float TapStopTime;
 
-
-
-    //猫に当たって吹き飛ばされているかのフラグ
-    //クリアしているかの判断にもなる
-    private bool CatCollFlag;
-    //クリア判定を別のスクリプトに渡すための関数
-    public bool GetClearFlag()
-    {
-        return CatCollFlag;
-    }
-
-
     //次の場所へと移動するまでの間の時間
     private float CoolTime = 1.0f;
 
     //移動してから止まっている間に時間を加算してCoolTimeを超えたら移動するように
-    public float StopTime;
+    private float StopTime;
 
     //弾の発射の為の変数
     private float ShotTime;
 
-    public float ChargeTime;
+    private float ChargeTime;
 
     private bool ShotFlag = false;
 
@@ -83,7 +71,6 @@ public class ufoMove : MonoBehaviour {
     public GameObject Needle;
 
 
-
     //発射する弾を格納する変数
     public GameObject ufoThunder;
 
@@ -97,6 +84,9 @@ public class ufoMove : MonoBehaviour {
 
     private AnimatorStateInfo animInfo;
 
+    //パーティクルの色を変化させるための変数
+    public Renderer rd;
+
 
     void OnTriggerEnter(Collider other)
     {
@@ -109,17 +99,14 @@ public class ufoMove : MonoBehaviour {
             //アリスがステージ2に移動するので
             //アリスがステージ1にいるというフラグはfalseにする
             AliceStage2Flag = false;
-            //これがクリアしたかのフラグになっている
-            CatCollFlag = true;
         }
     }
 
-
+    
     // Use this for initialization
     void Start () {
         moveDir = ufoState.MOVE;
         MoveStopFlag = false;
-        CatCollFlag = false;
         ShotTime = 0f;
 
         ufoAnim = GetComponent<Animator>();
@@ -207,7 +194,7 @@ public class ufoMove : MonoBehaviour {
                     {
                         ShotTime += Time.deltaTime;
 
-                        if (ShotTime >= 3f)
+                        if (ShotTime >= 1f)
                         {
                             //弾をInstantiateで作って発射している風に見せる
                             Instantiate(ufoThunder, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
@@ -266,6 +253,8 @@ public class ufoMove : MonoBehaviour {
         {
             MoveStopFlag = true;
             ShotTime = 0;
+
+            rd.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 0, 255));
 
             //Rayを飛ばして
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);

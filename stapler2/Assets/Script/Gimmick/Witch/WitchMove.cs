@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WitchMove : MonoBehaviour {
+//===================================================
+//魔女の動きを制御するスクリプト
+//===================================================
 
-    //===================================================
-    //魔女の動きを制御するスクリプト
-    //===================================================
+public class WitchMove : MonoBehaviour {
 
     // 変数宣言----------------------------------------------------------------------
 
@@ -66,10 +66,7 @@ public class WitchMove : MonoBehaviour {
         transform.position = WitchMovePos;
 
 
-        //魔女の現在の場所と次の移動場所との距離を測る
-        Vector3 Apos = gameObject.transform.position;
-        Vector3 Bpos = WitchMovePoint[0].transform.position;
-        Distance = Vector3.Distance(Apos, Bpos);
+        MovePosDistance();
     }
 
     // ８の字移動-----------------------------------------------------------------------
@@ -84,10 +81,7 @@ public class WitchMove : MonoBehaviour {
         // オブジェクトに座標を代入
         transform.position = WitchMovePos;
 
-        //魔女の現在の場所と次の移動場所との距離を測る
-        Vector3 Apos = gameObject.transform.position;
-        Vector3 Bpos = WitchMovePoint[0].transform.position;
-        Distance = Vector3.Distance(Apos, Bpos);
+        MovePosDistance();
     }
 
     // 五芒星の軌道---------------------------------------------------------------------
@@ -124,10 +118,7 @@ public class WitchMove : MonoBehaviour {
     {
         WitchAnimInfo = WitchAnim.GetCurrentAnimatorStateInfo(0);
 
-        //魔女の現在の場所と次の移動場所との距離を測る
-        Vector3 Apos = gameObject.transform.position;
-        Vector3 Bpos = WitchMovePoint[0].transform.position;
-        Distance = Vector3.Distance(Apos, Bpos);
+        MovePosDistance();
 
         //動くスピード
         Step = Time.deltaTime * Speed;
@@ -141,6 +132,15 @@ public class WitchMove : MonoBehaviour {
             gameObject.transform.position = Vector3.MoveTowards
             (gameObject.transform.position, WitchMovePoint[0].transform.position, Step);
         }
+    }
+
+    //魔女と初期位置との距離
+    void MovePosDistance()
+    {
+        //魔女の現在の場所と次の移動場所との距離を測る
+        Vector3 Apos = gameObject.transform.position;
+        Vector3 Bpos = WitchMovePoint[0].transform.position;
+        Distance = Vector3.Distance(Apos, Bpos);
     }
 
 }
