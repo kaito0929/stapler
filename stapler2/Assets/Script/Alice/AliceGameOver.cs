@@ -42,6 +42,9 @@ public class AliceGameOver : MonoBehaviour {
     //ゲームオーバー画面への遷移が行える状態にする
     public GameObject NextStage_SceneChange;
 
+
+    public GameObject damageEffect;
+
     void OnTriggerEnter(Collider other)
     {
         //指定してあるオブジェクトに当たった場合に処理
@@ -52,6 +55,8 @@ public class AliceGameOver : MonoBehaviour {
             anim.SetBool("collision", true);
 
             AliceCollFlag = true;
+
+            damageEffect.SetActive(true);
         }
     }
 
@@ -70,18 +75,21 @@ public class AliceGameOver : MonoBehaviour {
 
         //アニメーションがcollStandbyになったら処理
         //CollFlagをtrueにして膝をついてから画面遷移
-        if (animInfo.nameHash == Animator.StringToHash("Base Layer.collStandby"))
+        if (animInfo.nameHash == Animator.StringToHash("Base Layer.coll"))
         {
-            //次のステージへの画面遷移を行うためのスクリプトを持ったオブジェクトの
-            //SetActiveをfalseにしておく
-            NextStage_SceneChange.SetActive(false);
+            if (animInfo.normalizedTime >= 0.9f)
+            {
+                //次のステージへの画面遷移を行うためのスクリプトを持ったオブジェクトの
+                //SetActiveをfalseにしておく
+                NextStage_SceneChange.SetActive(false);
 
-            //ゲームオーバー画面への遷移を行うオブジェクトの
-            //SetActiveをtrueにして画面遷移が出来るように
-            GameOver_SceneChange.SetActive(true);
+                //ゲームオーバー画面への遷移を行うオブジェクトの
+                //SetActiveをtrueにして画面遷移が出来るように
+                GameOver_SceneChange.SetActive(true);
 
-            //当たったかどうかのフラグを立ててゲームオーバーへと画面遷移
-            GameOverFlag = true;
+                //当たったかどうかのフラグを立ててゲームオーバーへと画面遷移
+                GameOverFlag = true;
+            }
         }
     }
 }

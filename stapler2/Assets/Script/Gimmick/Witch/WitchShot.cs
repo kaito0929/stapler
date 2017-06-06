@@ -15,7 +15,7 @@ public class WitchShot : MonoBehaviour {
     //弾の発射タイミング
     private float ShotTime;
     //攻撃が出現する場所
-    private Vector3 ShotPos;
+    private Vector3[] ShotPos=new Vector3[3];
     //攻撃を打ち出していいかのフラグ
     public AliceMove_Stage3 reaching;
 
@@ -40,8 +40,14 @@ public class WitchShot : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        ShotPos = gameObject.transform.position;
-        ShotPos.x -= 2f;
+        for (int i = 0; i < 3; i++)
+        {
+            ShotPos[i] = gameObject.transform.position;
+            ShotPos[i].x -= 2f;
+        }
+
+        ShotPos[0].y -= 3f;
+        ShotPos[2].y += 3f;
 
         Vector3 Apos = objA.transform.position;
         Vector3 Bpos = objB.transform.position;
@@ -59,8 +65,10 @@ public class WitchShot : MonoBehaviour {
                 if (ShotTime >= 2f)
                 {
                     WitchAttackAnim.SetTrigger("Attack");
+
                     //弾をInstantiateで作って発射している風に見せる
-                    Instantiate(WitchFlame[WitchShotChangeNum], ShotPos, Quaternion.identity);
+                    Instantiate(WitchFlame[1], ShotPos[1], Quaternion.identity);
+
                     //弾の発射音を再生
                     AudioManager.Instance.PlaySE("se_maoudamashii_magical12");
                     //timeを初期化する

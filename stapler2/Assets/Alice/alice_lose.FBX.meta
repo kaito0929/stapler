@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 548a9dba8d4a65e4d9e23dc977731a6d
-timeCreated: 1491615791
+guid: 18c201ec3c13d4b48a959a4175033288
+timeCreated: 1496640613
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -125,107 +125,7 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Take 001
-      takeName: Take 001
-      firstFrame: 0
-      lastFrame: 70
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Bone025
-        weight: 1
-      - path: Bone025/Bone001
-        weight: 1
-      - path: Bone025/Bone001/Bone002
-        weight: 1
-      - path: Bone025/Bone001/Bone002/Bone003
-        weight: 1
-      - path: Bone025/Bone001/Bone002/Bone003/Bone004
-        weight: 1
-      - path: Bone025/Bone005
-        weight: 1
-      - path: Bone025/Bone005/Bone006
-        weight: 1
-      - path: Bone025/Bone005/Bone006/Bone007
-        weight: 1
-      - path: Bone025/Bone005/Bone006/Bone007/Bone008
-        weight: 1
-      - path: Bone025/Bone026
-        weight: 1
-      - path: Bone025/Bone026/Bone027
-        weight: 1
-      - path: Bone025/Bone026/Bone027/Bone012
-        weight: 1
-      - path: Bone025/Bone026/Bone027/Bone012/Bone013
-        weight: 1
-      - path: Bone025/Bone026/Bone027/Bone012/Bone013/Bone014
-        weight: 1
-      - path: Bone025/Bone026/Bone027/Bone015
-        weight: 1
-      - path: Bone025/Bone026/Bone027/Bone015/Bone016
-        weight: 1
-      - path: Bone025/Bone026/Bone027/Bone015/Bone016/Bone017
-        weight: 1
-      - path: Bone025/Bone026/Bone027/Bone015/Bone016/Bone017/Bone018
-        weight: 1
-      - path: Bone025/Bone026/Bone027/Bone019
-        weight: 1
-      - path: Bone025/Bone026/Bone027/Bone019/Bone020
-        weight: 1
-      - path: Bone025/Bone026/Bone027/Bone019/Bone020/Bone021
-        weight: 1
-      - path: Bone025/Bone026/Bone027/Bone028
-        weight: 1
-      - path: Plane001
-        weight: 1
-      - path: Plane002
-        weight: 1
-      - path: Plane003
-        weight: 1
-      - path: Plane004
-        weight: 1
-      - path: Plane005
-        weight: 1
-      - path: Plane006
-        weight: 1
-      - path: Plane007
-        weight: 1
-      - path: Plane008
-        weight: 1
-      - path: Plane009
-        weight: 1
-      - path: Plane010
-        weight: 1
-      - path: Plane011
-        weight: 1
-      - path: Plane012
-        weight: 1
-      - path: Plane013
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []

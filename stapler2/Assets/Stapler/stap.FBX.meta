@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: ae023eb8eec794945b1c58254ddbdc7e
-timeCreated: 1496362501
+guid: 8355a8ca2e5deea458a33607c3b54205
+timeCreated: 1496637343
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -30,6 +30,7 @@ ModelImporter:
     4300004: Plane003
     7400000: Take 001
     9500000: //RootNode
+    11100000: //RootNode
     13700000: Plane001
     13700002: Plane002
     13700004: Plane003
@@ -51,7 +52,7 @@ ModelImporter:
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
-    animationWrapMode: 0
+    animationWrapMode: 2
     extraExposedTransformPaths: []
     clipAnimations: []
     isReadable: 1
@@ -91,7 +92,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

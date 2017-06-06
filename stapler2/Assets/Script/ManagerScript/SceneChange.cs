@@ -4,10 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class SceneChange : MonoBehaviour {
 
-    //世界観の説明画面とエンディングからの遷移条件
+    //世界観の説明画面からの遷移条件
     public int ChangeNum;
     //ステージ1からの遷移条件
     public Stage_Clear_NextPage pageNum;
+    //エンディング画面からの遷移条件
+    public MoveStapler moveStapler;
 
     //アリスに攻撃が当たったフラグ
     //ゲームオーバー画面への遷移条件
@@ -110,15 +112,9 @@ public class SceneChange : MonoBehaviour {
                     break;
                 case "Ending"://エンディング画面
 
-                    ChangeNum = PageTurn.GetNum();
-
-                    //エンディングの画像が最後まで進んだ状態でタップして遷移開始
-                    if (ChangeNum == 4)
+                   if(moveStapler.GetSceneChangeFlag()==true)
                     {
-                        if (Input.GetMouseButton(0))
-                        {
-                            ChangeScene();
-                        }
+                        ChangeScene();
                     }
                     break;
                 case "GameOver"://ゲームオーバー画面

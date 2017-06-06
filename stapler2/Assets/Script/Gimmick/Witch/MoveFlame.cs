@@ -27,24 +27,28 @@ public class MoveFlame : MonoBehaviour {
     private Ray ray;
 
     //敵やギミックに取り付けるホッチキスの針
-    private GameObject Needle;
+    public GameObject Needle;
+
+    private GameObject obj;
 
 
     //アリスか魔女に当たった場合に火球を消しておく
     void OnTriggerEnter(Collider other)
     {
-        //針との親子関係を解除する
-        gameObject.transform.DetachChildren();
-        //針は画面外へ移動
-        Needle.transform.position = new Vector3(-11.08f, 0.393f, -0.867f);
-        //火球を消す
-        Destroy(this.gameObject);
+        if (other.gameObject.tag == "Player")
+        {
+            //針との親子関係を解除する
+            gameObject.transform.DetachChildren();
+            //針は画面外へ移動
+            Destroy(obj);
+            //火球を消す
+            Destroy(this.gameObject);
+        }
     }
 
     // Use this for initialization
     void Start () {
         alice = GameObject.Find("alice");
-        Needle = GameObject.Find("StickNeedle1");
         FlameMoveFlag = true;
         FlameStopTime = 0f;
     }
@@ -70,7 +74,7 @@ public class MoveFlame : MonoBehaviour {
             //針との親子関係を解除する
             gameObject.transform.DetachChildren();
             //針は画面外へ移動
-            Needle.transform.position = new Vector3(-11.08f, 0.393f, -0.867f);
+            Destroy(obj);
             //火球を消す
             Destroy(this.gameObject);
         }
@@ -90,10 +94,7 @@ public class MoveFlame : MonoBehaviour {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, 100f))
             {
-                //針の位置をタップした位置へと移動させる。
-                Needle.transform.position = hit.point;
-                //gameObjectと親子関係に
-                Needle.transform.parent = gameObject.transform;
+                obj = (GameObject)Instantiate(Needle, hit.point, Quaternion.identity);
             }
         }
     }

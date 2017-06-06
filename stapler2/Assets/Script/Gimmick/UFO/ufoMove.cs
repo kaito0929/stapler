@@ -44,7 +44,7 @@ public class ufoMove : MonoBehaviour {
     private bool ShotFlag = false;
 
     //移動先を決定するランダムの数値を受け取る変数
-    private int MovePoint_RandomNum;
+    public int MovePoint_RandomNum;
 
     //UFOがランダムで移動する場所のオブジェクト
     //このオブジェクトの座標をUFOに代入して瞬間移動したように見せる
@@ -112,7 +112,7 @@ public class ufoMove : MonoBehaviour {
         ufoAnim = GetComponent<Animator>();
         animInfo = ufoAnim.GetCurrentAnimatorStateInfo(0);
 
-        MovePoint_RandomNum = Random.Range(0, 8);
+        MovePoint_RandomNum = Random.Range(0, 3);
     }
 	
 	// Update is called once per frame
@@ -146,11 +146,11 @@ public class ufoMove : MonoBehaviour {
                         }
                         else
                         {
-                            if (MovePoint_RandomNum < 5 && ShotTime <= 0)
+                            if (MovePoint_RandomNum < 2 && ShotTime <= 0)
                             {
                                 ufoAnim.SetBool("Attack", true);                          
                             }
-                            else if (MovePoint_RandomNum >= 5)
+                            else if (MovePoint_RandomNum == 2)
                             {
                                 StopTime += Time.deltaTime;
                             }
@@ -185,7 +185,7 @@ public class ufoMove : MonoBehaviour {
                             AudioManager.Instance.PlaySE("syunnkann");
 
                             //再びランダムで数値を取得する
-                            MovePoint_RandomNum = Random.Range(0, 8);
+                            MovePoint_RandomNum = Random.Range(0, 3);
                             ShotFlag = false;
                             ShotTime = 0;
                         }
@@ -232,7 +232,7 @@ public class ufoMove : MonoBehaviour {
     {
         if (MoveStopFlag == false)
         {
-            if (MovePoint_RandomNum < 5 && ShotTime <= 0)
+            if (MovePoint_RandomNum < 2 && ShotTime <= 0)
             {
                 //弾をInstantiateで作って発射している風に見せる
                 Instantiate(ufoThunder, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
