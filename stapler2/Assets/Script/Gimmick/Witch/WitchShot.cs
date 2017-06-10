@@ -11,13 +11,11 @@ public class WitchShot : MonoBehaviour {
 
     // 変数宣言----------------------------------------------------------------------
     //発射する弾のオブジェクトを格納する変数
-    public GameObject[] WitchFlame;
+    public GameObject[] WitchAttack;
     //弾の発射タイミング
     private float ShotTime;
     //攻撃が出現する場所
     private Vector3[] ShotPos=new Vector3[3];
-    //攻撃を打ち出していいかのフラグ
-    public AliceMove_Stage3 reaching;
 
     //このスクリプトを持つオブジェクト
     public GameObject objA;
@@ -27,14 +25,13 @@ public class WitchShot : MonoBehaviour {
     //アニメーションを取得
     private Animator WitchAttackAnim;
 
-    //魔女の発射する弾を切り替える
-    private int WitchShotChangeNum;
+    private float Distance;
 
     // Use this for initialization
     void Start () {
         ShotTime = 0f;
         WitchAttackAnim = GetComponent<Animator>();
-        WitchShotChangeNum = 0;
+        Distance = 0f;
     }
 	
 	// Update is called once per frame
@@ -46,43 +43,45 @@ public class WitchShot : MonoBehaviour {
             ShotPos[i].x -= 2f;
         }
 
-        ShotPos[0].y -= 3f;
-        ShotPos[2].y += 3f;
+        ShotPos[1].y -= 2f;
+        ShotPos[2].y += 2f;
+    }
 
+
+    //第一段階での魔女の攻撃関数
+    public void WitchShotCreate(int num, int max)
+    {
         Vector3 Apos = objA.transform.position;
         Vector3 Bpos = objB.transform.position;
-        float dis = Vector3.Distance(Apos, Bpos);
+        Distance = Vector3.Distance(Apos, Bpos);
 
         //アリスとの距離が9f以上離れていて
-        if (dis >= 9f)
+        if (Distance >= 8f)
         {
-            //3フロア目に到達していたら処理を行う
-            if (reaching.GetFloor3MoveEndFlag() == true)
+            ShotTime += Time.deltaTime;
+
+            //timeが2f以上になったら処理
+            if (ShotTime >= 2f)
             {
-                ShotTime += Time.deltaTime;
+                WitchAttackAnim.SetTrigger("Attack");
 
-                //timeが2f以上になったら処理
-                if (ShotTime >= 2f)
+                while (num < max)
                 {
-                    WitchAttackAnim.SetTrigger("Attack");
-
                     //弾をInstantiateで作って発射している風に見せる
-                    Instantiate(WitchFlame[1], ShotPos[1], Quaternion.identity);
-
-                    //弾の発射音を再生
-                    AudioManager.Instance.PlaySE("se_maoudamashii_magical12");
-                    //timeを初期化する
-                    ShotTime = 0f;
-
-                    WitchShotChangeNum++;
+                    Instantiate(WitchAttack[num], ShotPos[num], Quaternion.identity);
+                    num++;
                 }
+
+                //弾の発射音を再生
+                AudioManager.Instance.PlaySE("se_maoudamashii_magical12");
+                //timeを初期化する
+                ShotTime = 0f;
+
+                num = 0;
             }
         }
 
-        if (WitchShotChangeNum == 2)
-        {
-            WitchShotChangeNum = 0;
-        }
-
     }
+
+
 }

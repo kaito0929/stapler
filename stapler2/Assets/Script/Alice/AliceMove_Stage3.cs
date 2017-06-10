@@ -22,7 +22,6 @@ public class AliceMove_Stage3 : MonoBehaviour
 
     //Animatorを取得
     private Animator AliceAnim;
-
     private AnimatorStateInfo AliceAnimInfo;
 
     private enum Floor
@@ -44,6 +43,14 @@ public class AliceMove_Stage3 : MonoBehaviour
     {
         return Floor3MoveMentEndFlag;
     }
+
+    public WitchAction witchDown;
+
+
+    //クリアした時にページめくりの演出を行うオブジェクト
+    public GameObject Stage3_Clear_Obj;
+    public GameObject black;
+
 
     // Use this for initialization
     void Start()
@@ -84,6 +91,20 @@ public class AliceMove_Stage3 : MonoBehaviour
             }
             AliceMovePos();
         }
+
+        if(witchDown.GetWitchCollNorma()<=0)
+        {
+            AliceAnim.SetTrigger("happy");
+            AliceAnim.SetBool("clear", true);
+        }
+
+        if (AliceAnimInfo.nameHash == Animator.StringToHash("Base Layer.clear"))
+        {
+            //クリアした時にめくられるページを表示させる
+            Stage3_Clear_Obj.SetActive(true);
+            black.SetActive(true);
+        }
+
     }
 
     void AliceMovePos()
@@ -96,20 +117,20 @@ public class AliceMove_Stage3 : MonoBehaviour
                 if (pos.x < 8.1f)
                 {
                     //再生中ならばフラグをtrueにしておいて再生するように
-                    AliceAnim.SetBool("happy", true);
+                    AliceAnim.SetTrigger("happy");
                     //喜びモーションが再生されている時間
                     if (AliceAnimInfo.nameHash == Animator.StringToHash("Base Layer.Dash"))
                     {
                         pos = transform.position;
                         pos.x += 0.1f;
                         transform.position = pos;
+                        AliceAnim.ResetTrigger("happy");
                     }
                 }
                 else
                 {
                     //指定した位置まで移動したら待機モーションに切り替わる
                     AliceAnim.SetBool("Idle", true);
-                    AliceAnim.SetBool("happy", false);
                 }
                 break;
             case Floor.FLOOR3:
@@ -117,20 +138,20 @@ public class AliceMove_Stage3 : MonoBehaviour
                 {
                     AliceAnim.SetBool("Idle", false);
                     //再生中ならばフラグをtrueにしておいて再生するように
-                    AliceAnim.SetBool("happy", true);
+                    AliceAnim.SetTrigger("happy");
                     //喜びモーションが再生されている時間
                     if (AliceAnimInfo.nameHash == Animator.StringToHash("Base Layer.Dash"))
                     {
                         pos = transform.position;
                         pos.x += 0.1f;
                         transform.position = pos;
+                        AliceAnim.ResetTrigger("happy");
                     }
                 }
                 else
                 {
                     //指定した位置まで移動したら待機モーションに切り替わる
                     AliceAnim.SetBool("Idle", true);
-                    AliceAnim.SetBool("happy", false);
                     Floor3MoveMentEndFlag = true;
                 }
                 break;

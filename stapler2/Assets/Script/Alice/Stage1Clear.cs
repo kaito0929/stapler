@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Stage1Clear : MonoBehaviour {
+//===============================================================
+//ステージ1・フロア3でのクリア判定をとるスクリプト
+//===============================================================
 
-    //===============================================================
-    //ステージ1・フロア3でのクリア判定をとるスクリプト
-    //===============================================================
+public class Stage1Clear : MonoBehaviour {
 
     // 変数宣言----------------------------------------------------------------------
     
@@ -27,7 +27,15 @@ public class Stage1Clear : MonoBehaviour {
         return AliceStage1Flag;
     }
 
+    public GameObject alice;
 
+    //アリスのAnimatorを取得
+    private Animator AliceAnim;
+    //アリスのAnimatorStateInfoを取得
+    public AnimatorStateInfo AliceAnimInfo;
+
+
+    //ページめくりの演出を行うオブジェクト
     public GameObject Stage1_Clear_Obj;
     public GameObject black;
 
@@ -35,11 +43,17 @@ public class Stage1Clear : MonoBehaviour {
     void Start () {
         TapFlag[0] = false;
         TapFlag[1] = false;
-	}
+
+        AliceAnim = alice.GetComponent<Animator>();
+        AliceAnimInfo = AliceAnim.GetCurrentAnimatorStateInfo(0);
+    }
 
     // Update is called once per frame
     void Update()
     {
+        AliceAnimInfo = AliceAnim.GetCurrentAnimatorStateInfo(0);
+
+
         //フロア3に設置されている片方のエネミーのタップされたかのフラグを受け取る
         GimmickParent tap = Floar3Enemy1.GetComponent<GimmickParent>();
         TapFlag[0] = tap.GetTapFlag();
@@ -55,10 +69,20 @@ public class Stage1Clear : MonoBehaviour {
             //アリスがステージ1にいるというフラグはfalseにする
             AliceStage1Flag = false;
 
-            //クリアした時にめくられるページを表示させる
-            Stage1_Clear_Obj.SetActive(true);
-            black.SetActive(true);
+            AliceAnim.SetTrigger("happy");
+            AliceAnim.SetBool("clear",true);
+
+            if (AliceAnimInfo.nameHash == Animator.StringToHash("Base Layer.clear"))
+            {
+                //クリアした時にめくられるページを表示させる
+                Stage1_Clear_Obj.SetActive(true);
+                black.SetActive(true);
+            }
+
         }
+
+
+
 
     }
 }

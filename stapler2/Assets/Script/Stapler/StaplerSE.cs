@@ -22,7 +22,7 @@ public class StaplerSE : MonoBehaviour {
     //何も挟んでいないと判定を取る為のオブジェクト
     public GameObject NotInterposeObj;
 
-    public static int TapNum;
+    public static int TapNum=99999;
     public static int GetTapNum()
     {
         return TapNum;

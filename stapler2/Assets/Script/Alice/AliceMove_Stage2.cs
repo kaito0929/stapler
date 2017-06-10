@@ -38,8 +38,9 @@ public class AliceMove_Stage2 : MonoBehaviour {
 
     //Animatorを取得
     private Animator AliceAnim;
-
     private AnimatorStateInfo AliceAnimInfo;
+
+    public ufoMove clearFlag;
 
     private enum Floor
     {
@@ -52,6 +53,12 @@ public class AliceMove_Stage2 : MonoBehaviour {
 
     //アリスがギミックに当たったかのフラグを受け取る変数
     private bool GetAliceCollFlag;
+
+
+    //ページめくりの演出を行うオブジェクト
+    public GameObject Stage2_Clear_Obj;
+    public GameObject black;
+
 
     // Use this for initialization
     void Start () {
@@ -91,9 +98,23 @@ public class AliceMove_Stage2 : MonoBehaviour {
             {
                 floor = Floor.FLOOR3;
             }
+            AliceMovePos();
         }
 
-        AliceMovePos();
+        if(clearFlag.GetUfoCollFlag()==true)
+        {
+            AliceAnim.SetTrigger("happy");
+            AliceAnim.SetBool("clear", true);
+        }
+
+        if (AliceAnimInfo.nameHash == Animator.StringToHash("Base Layer.clear"))
+        {
+            //クリアした時にめくられるページを表示させる
+            Stage2_Clear_Obj.SetActive(true);
+            black.SetActive(true);
+        }
+
+        
     }
 
     void AliceMovePos()
@@ -106,20 +127,21 @@ public class AliceMove_Stage2 : MonoBehaviour {
                 if (pos.x < 8.1f)
                 {
                     //再生中ならばフラグをtrueにしておいて再生するように
-                    AliceAnim.SetBool("happy", true);
+                    AliceAnim.SetTrigger("happy");
+
                     //喜びモーションが再生されている時間
                     if (AliceAnimInfo.nameHash == Animator.StringToHash("Base Layer.Dash"))
                     {
                         pos = transform.position;
                         pos.x += 0.1f;
                         transform.position = pos;
+                        AliceAnim.ResetTrigger("happy");
                     }
                 }
                 else
                 {
                     //指定した位置まで移動したら待機モーションに切り替わる
                     AliceAnim.SetBool("Idle", true);
-                    AliceAnim.SetBool("happy", false);
                     //フロア2への移動が終了したのでフラグをtrueに
                     Floor2MoveMentEndFlag = true;
                 }
@@ -130,20 +152,21 @@ public class AliceMove_Stage2 : MonoBehaviour {
                 {
                     AliceAnim.SetBool("Idle", false);
                     //再生中ならばフラグをtrueにしておいて再生するように
-                    AliceAnim.SetBool("happy", true);
+                    AliceAnim.SetTrigger("happy");
+
                     //喜びモーションが再生されている時間
                     if (AliceAnimInfo.nameHash == Animator.StringToHash("Base Layer.Dash"))
                     {
                         pos = transform.position;
                         pos.x += 0.1f;
                         transform.position = pos;
+                        AliceAnim.ResetTrigger("happy");
                     }
                 }
                 else
                 {
                     //指定した位置まで移動したら待機モーションに切り替わる
                     AliceAnim.SetBool("Idle", true);
-                    AliceAnim.SetBool("happy", false);
                     //フロア3への移動が終了したのでフラグをtrueに
                     Floor3MoveMentEndFlag = true;
                 }

@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//======================================================================
+//進行途中のステージの最初に戻る為のスクリプト
+//ボタンを押して戻るようになっている
+//======================================================================
+
+
 public class Retry : MonoBehaviour {
 
-    //======================================================================
-    //進行途中のステージの最初に戻る為のスクリプト
-    //ボタンを押して戻るようになっている
-    //======================================================================
 
     // 変数宣言----------------------------------------------------------------------
 
@@ -62,7 +64,7 @@ public class Retry : MonoBehaviour {
         //それぞれのステージにあるスクリプトからフラグを受け取る
         EnrouteStageFlag[0] = Stage1Clear.GetAliceStage1Flag();
         EnrouteStageFlag[1] = ufoMove.GetAliceStage2Flag();
-        EnrouteStageFlag[2] = WitchColl.GetAliceStage3Flag();
+        EnrouteStageFlag[2] = WitchAction.GetAliceStage3Flag();
 
         //画面遷移を行うスクリプトを持ったオブジェクトは
         //最初にSetActiveをfalseにしておく

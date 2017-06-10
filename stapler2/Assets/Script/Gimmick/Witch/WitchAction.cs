@@ -5,7 +5,7 @@ using System.Collections;
 //魔女が火球に当たった時の処理を行うスクリプト
 //=============================================================
 
-public class WitchColl : MonoBehaviour
+public class WitchAction : MonoBehaviour
 {
     // 変数宣言----------------------------------------------------------------------
 
@@ -41,15 +41,19 @@ public class WitchColl : MonoBehaviour
     }
     private WitchMoveState witchMoveState;
 
+    private int WitchShotMax;
+    private int WitchShotNum;
+
+
     //Animatorの取得
     private Animator WitchAnim;
-    private AnimatorStateInfo animInfo;
 
 
+    //アリスがフロア3に到達したかのフラグを取得する
     public AliceMove_Stage3 aliceMove;
 
-    public GameObject Stage3_Clear_Obj;
-    public GameObject black;
+
+   
 
     // Use this for initialization
     void Start()
@@ -58,16 +62,19 @@ public class WitchColl : MonoBehaviour
         WitchAnim = GetComponent<Animator>();
         witchMoveState = WitchMoveState.MOVE_CIRCLE;
         Distance = 0;
-        animInfo = WitchAnim.GetCurrentAnimatorStateInfo(0);
+
+        WitchShotMax = 1;
+        WitchShotNum = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        animInfo = WitchAnim.GetCurrentAnimatorStateInfo(0);
 
         WitchMove move = gameObject.GetComponent<WitchMove>();
         Distance = move.GetDistance();
+
+        WitchShot shot = gameObject.GetComponent<WitchShot>();
 
         if (aliceMove.GetFloor3MoveEndFlag() == true)
         {
@@ -76,19 +83,27 @@ public class WitchColl : MonoBehaviour
             {
                 case WitchMoveState.MOVE_CIRCLE://円運動
                     move.MoveToCircle();
+                    WitchShotMax = 1;
                     break;
 
                 case WitchMoveState.MOVE_EIGHT://八の字移動
                     move.MoveToFigureOfEight();
+                    WitchShotMax = 2;
                     break;
 
                 case WitchMoveState.MOVE_STAR://五芒星の軌道
                     move.MoveToStar();
+                    WitchShotMax = 3;
                     break;
 
                 case WitchMoveState.MOVE_STANDBY://待機状態
                     move.WitchStandby();
                     break;
+            }
+
+            if (WitchCollNorma >= 0)
+            {
+                shot.WitchShotCreate(WitchShotNum, WitchShotMax);
             }
         }
 
@@ -104,12 +119,6 @@ public class WitchColl : MonoBehaviour
             }
         }
 
-        if (animInfo.nameHash == Animator.StringToHash("Base Layer.FinishIdle"))
-        {
-            //クリアした時にめくられるページを表示させる
-            Stage3_Clear_Obj.SetActive(true);
-            black.SetActive(true);
-        }
 
         //魔女がやられる処理
         WitchDown();

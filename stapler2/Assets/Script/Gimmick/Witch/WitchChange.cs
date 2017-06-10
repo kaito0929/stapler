@@ -14,7 +14,7 @@ public class WitchChange : MonoBehaviour {
     //表示するマテリアル
     public Material[] WitchMaterial;
 
-    public WitchColl WitchCangeNum;
+    public WitchAction WitchCangeNum;
 
     // Use this for initialization
     void Start () {

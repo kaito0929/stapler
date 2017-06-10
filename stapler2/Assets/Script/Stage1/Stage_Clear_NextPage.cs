@@ -38,7 +38,7 @@ public class Stage_Clear_NextPage : MonoBehaviour {
         }
         else
         {
-            PageTurnNum -= 0.01f;
+            PageTurnNum -= 0.05f;
         }
 
         //数値を渡してページがめくれているように

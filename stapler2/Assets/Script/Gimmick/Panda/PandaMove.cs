@@ -17,7 +17,8 @@ public class PandaMove : MonoBehaviour {
     private bool AliceReachingFlag;
 
     //別のスクリプトのフラグを受け取る変数
-    public bool GetFlag;
+    private bool GetFlag;
+    public GameObject rod;
 
     // Use this for initialization
     void Start () {
@@ -50,6 +51,7 @@ public class PandaMove : MonoBehaviour {
             if (GetFlag == true)
             {
                 gameObject.GetComponent<BoxCollider>().enabled = false;
+                rod.GetComponent<BoxCollider>().enabled = false;
             }
         }
 

@@ -39,12 +39,16 @@ public class ufoMove : MonoBehaviour {
     //弾の発射の為の変数
     private float ShotTime;
 
-    private float ChargeTime;
+    private bool ufoCollFlag;
+    public bool GetUfoCollFlag()
+    {
+        return ufoCollFlag;
+    }
 
     private bool ShotFlag = false;
 
     //移動先を決定するランダムの数値を受け取る変数
-    public int MovePoint_RandomNum;
+    private int MovePoint_RandomNum;
 
     //UFOがランダムで移動する場所のオブジェクト
     //このオブジェクトの座標をUFOに代入して瞬間移動したように見せる
@@ -99,6 +103,8 @@ public class ufoMove : MonoBehaviour {
             //アリスがステージ2に移動するので
             //アリスがステージ1にいるというフラグはfalseにする
             AliceStage2Flag = false;
+            ufoCollFlag = true;
+
         }
     }
 
@@ -108,6 +114,7 @@ public class ufoMove : MonoBehaviour {
         moveDir = ufoState.MOVE;
         MoveStopFlag = false;
         ShotTime = 0f;
+        ufoCollFlag = false;
 
         ufoAnim = GetComponent<Animator>();
         animInfo = ufoAnim.GetCurrentAnimatorStateInfo(0);
@@ -155,19 +162,17 @@ public class ufoMove : MonoBehaviour {
                                 StopTime += Time.deltaTime;
                             }
 
-                            if (animInfo.nameHash == Animator.StringToHash("Base Layer.Attack"))
-                            {
-                                ChargeTime += Time.deltaTime;
-                            }
                         }
 
 
-                        if (ChargeTime >= 2f)
+                        if (animInfo.nameHash == Animator.StringToHash("Base Layer.Attack"))
                         {
-                            ufoAnim.SetBool("Attack", false);
-                            ufoShot();
-                            ChargeTime = 0;
-                            ShotFlag = true;
+                            if (animInfo.normalizedTime >= 0.9f)
+                            {
+                                ufoAnim.SetBool("Attack", false);
+                                ufoShot();
+                                ShotFlag = true;
+                            }
                         }
 
                         if (ShotFlag == true)
@@ -178,7 +183,6 @@ public class ufoMove : MonoBehaviour {
                         //移動してから設定しているクールタイムを超えたなら処理
                         if (StopTime >= CoolTime)
                         {
-                            ChargeTime = 0;
                             //StopTimeを初期化
                             StopTime = 0;
 
@@ -194,7 +198,7 @@ public class ufoMove : MonoBehaviour {
                     {
                         ShotTime += Time.deltaTime;
 
-                        if (ShotTime >= 1f)
+                        if (ShotTime >= 1.5f)
                         {
                             //弾をInstantiateで作って発射している風に見せる
                             Instantiate(ufoThunder, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);

@@ -105,20 +105,21 @@ public class AliceMove : MonoBehaviour {
                 if (pos.x < 8.1f)
                 {
                     //再生中ならばフラグをtrueにしておいて再生するように
-                    AliceAnim.SetBool("happy", true);
-                    //喜びモーションが再生されている時間
+                    AliceAnim.SetTrigger("happy");
+
                     if (AliceAnimInfo.nameHash == Animator.StringToHash("Base Layer.Dash"))
                     {
                         pos = transform.position;
                         pos.x += 0.1f;
                         transform.position = pos;
+                        AliceAnim.ResetTrigger("happy");
+
                     }
                 }
                 else
                 {
                     //指定した位置まで移動したら待機モーションに切り替わる
                     AliceAnim.SetBool("Idle",true);
-                    AliceAnim.SetBool("happy", false);
                     Floar2_ReachingFlag = true;
                 }
                 break;
@@ -127,20 +128,20 @@ public class AliceMove : MonoBehaviour {
                 {
                     AliceAnim.SetBool("Idle", false);
                     //再生中ならばフラグをtrueにしておいて再生するように
-                    AliceAnim.SetBool("happy", true);
-                    //喜びモーションが再生されている時間
+                    AliceAnim.SetTrigger("happy");
+
                     if (AliceAnimInfo.nameHash == Animator.StringToHash("Base Layer.Dash"))
                     {
                         pos = transform.position;
                         pos.x += 0.1f;
                         transform.position = pos;
+                        AliceAnim.ResetTrigger("happy");
                     }
                 }
                 else
                 {
                     //指定した位置まで移動したら待機モーションに切り替わる
                     AliceAnim.SetBool("Idle", true);
-                    AliceAnim.SetBool("happy", false);
                 }
                 break;
         }
