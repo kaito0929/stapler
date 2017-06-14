@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Title : MonoBehaviour {
+//=======================================================
+//タイトル画面への遷移を行うスクリプト
+//=======================================================
 
-    //=======================================================
-    //タイトル画面への遷移を行うスクリプト
-    //=======================================================
+public class Title : MonoBehaviour {
 
     // 変数宣言----------------------------------------------------------------------
 
@@ -30,6 +30,10 @@ public class Title : MonoBehaviour {
         Title_SceneChange.SetActive(true);
         //フラグをtrueにして画面遷移が行われるように
         TitleButtonClickFlag = true;
+
+        Stage1Clear.AliceStage1Flag=false;
+        ufoAction.AliceStage2Flag=false;
+        AliceMove_Stage3.AliceStage3Flag=false;
     }
 
     // Use this for initialization

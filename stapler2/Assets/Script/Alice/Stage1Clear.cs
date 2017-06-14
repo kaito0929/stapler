@@ -52,6 +52,7 @@ public class Stage1Clear : MonoBehaviour {
 
         GimmickClearFlag = false;
         SoundFlag = false;
+        AliceStage1Flag = true;
 
         AliceAnim = alice.GetComponent<Animator>();
         AliceAnimInfo = AliceAnim.GetCurrentAnimatorStateInfo(0);
@@ -64,10 +65,10 @@ public class Stage1Clear : MonoBehaviour {
 
 
         //フロア3に設置されている片方のエネミーのタップされたかのフラグを受け取る
-        GimmickParent tap = Floar3Enemy1.GetComponent<GimmickParent>();
+        GimmickJoint tap = Floar3Enemy1.GetComponent<GimmickJoint>();
         TapFlag[0] = tap.GetTapFlag();
         //フロア3に設置されている片方のエネミーのタップされたかのフラグを受け取る
-        GimmickParent tap2 = Floar3Enemy2.GetComponent<GimmickParent>();
+        GimmickJoint tap2 = Floar3Enemy2.GetComponent<GimmickJoint>();
         TapFlag[1] = tap2.GetTapFlag();
 
         //両方のフラグがtrueになれば両方タップされたと判定がとられ
@@ -94,6 +95,7 @@ public class Stage1Clear : MonoBehaviour {
         }
 
 
+        //クリアした時にだけ正解音が再生する処理
         if(GimmickClearFlag==true)
         {
             if (SoundFlag == true)

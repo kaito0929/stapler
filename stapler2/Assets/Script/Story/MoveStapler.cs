@@ -15,14 +15,13 @@ public class MoveStapler : MonoBehaviour {
     //めくられているページ数
     private int pageNum;
 
-    //セリフの吹き出しのオブジェクト
-    public GameObject serif;
-
     private bool SceneChangeFlag;
     public bool GetSceneChangeFlag()
     {
         return SceneChangeFlag;
     }
+
+    public GameObject serif;
 
     // Use this for initialization
     void Start () {

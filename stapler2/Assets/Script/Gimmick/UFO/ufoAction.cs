@@ -106,7 +106,6 @@ public class ufoAction : MonoBehaviour {
             //アリスがステージ1にいるというフラグはfalseにする
             AliceStage2Flag = false;
             ufoCollFlag = true;
-
         }
     }
 
@@ -118,6 +117,7 @@ public class ufoAction : MonoBehaviour {
         ShotTime = 0f;
         ufoCollFlag = false;
         SoundFlag = false;
+        AliceStage2Flag = true;
 
         ufoAnim = GetComponent<Animator>();
         animInfo = ufoAnim.GetCurrentAnimatorStateInfo(0);

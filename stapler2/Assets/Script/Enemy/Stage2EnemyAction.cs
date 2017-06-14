@@ -4,10 +4,10 @@ using System.Collections;
 //====================================================================
 //ステージ2にいる敵をアリスへ接近させて、
 //近づいたら攻撃するように動かすスクリプト
-//フラグはGimmickParentのフラグを受け取る
+//フラグはGimmickJointのフラグを受け取る
 //====================================================================
 
-public class EnemyAttack : MonoBehaviour {
+public class Stage2EnemyAction : MonoBehaviour {
 
     // 変数宣言----------------------------------------------------------------------
 
@@ -33,15 +33,17 @@ public class EnemyAttack : MonoBehaviour {
     public GameObject Rod;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         EnemyAnim = GetComponent<Animator>();
 
         MoveStateFlag = false;
         MoveStopFlag = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         AliceAccess();
         EnemyAttackAnim();
     }
@@ -55,7 +57,7 @@ public class EnemyAttack : MonoBehaviour {
         Distance = Vector3.Distance(Apos, Bpos);
 
         //敵が無力化されたかのフラグを受け取る
-        GimmickParent gimmick = gameObject.GetComponent<GimmickParent>();
+        GimmickJoint gimmick = gameObject.GetComponent<GimmickJoint>();
         MoveStopFlag = gimmick.GetTapFlag();
 
         //アリスと敵の距離が11f以下になったらエネミーが動き出すように
@@ -88,7 +90,7 @@ public class EnemyAttack : MonoBehaviour {
     //アリスに一定距離近づいたら攻撃アニメーションを再生するように
     void EnemyAttackAnim()
     {
-        if(Distance<=2f)
+        if (Distance <= 2f)
         {
             EnemyAnim.SetTrigger("Attack");
         }

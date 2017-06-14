@@ -42,7 +42,6 @@ public class AliceGameOver : MonoBehaviour {
     //ゲームオーバー画面への遷移が行える状態にする
     public GameObject NextStage_SceneChange;
 
-
     public GameObject damageEffect;
 
     void OnTriggerEnter(Collider other)

@@ -3,8 +3,6 @@ using System.Collections;
 
 //==========================================================
 //オブジェクト同士を親子関係にしてくっつけるスクリプト
-//ステージ2のフロア1の熊とぶつかっていた場合は
-//処理を行わないようにしておく
 //==========================================================
 
 public class GimmickParent : MonoBehaviour {
@@ -19,20 +17,16 @@ public class GimmickParent : MonoBehaviour {
     {
         return TapFlag;
     }
-
-    //熊と敵がぶつかっていないかのフラグ
-    //ぶつかっているとtrueにして親子関係にする処理を行わないようにする
-    private bool BearCollFlag;
     
     //何かとぶつかっているかのフラグ
     private bool CollFlag;
-    
-    
+
+    //　針関係------------------------------------------------------------------------
+
     //Ray関係
     //ホッチキスの針を移動させるのに使う
     private RaycastHit hit;
     private Ray ray;
-
 
 
     //敵やギミックに取り付けるホッチキスの針
@@ -45,16 +39,26 @@ public class GimmickParent : MonoBehaviour {
     //再生する針の順番を決めるための変数を持つスクリプト
     public NeedleAnimPlayNum num;
 
+    //--------------------------------------------------------------------------------
+
+    //重なって止まるようになるオブジェクト
+    public GameObject CollObj;
 
     //パーティクルの色を変化させるための変数
     public Renderer rd;
 
+
+    //アニメーションを取得
+    private Animator anim;
+
+
     // Use this for initialization
     void Start()
     {
-        BearCollFlag = false;
         TapFlag = false;
         CollFlag = false;
+
+        anim = GetComponent<Animator>();
 
         MoveNeedle[0] = GameObject.Find("RepelledNeedle1");
         MoveNeedle[1] = GameObject.Find("RepelledNeedle2");
@@ -82,57 +86,52 @@ public class GimmickParent : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        //ギミックに止められたのならばじたばたアニメーションを再生させる
+        if (TapFlag == true)
+        {
+            anim.SetTrigger("Stop");
+        }
+
         NeedleAnimPlay();
     }
 
 
-    
+
     void OnTriggerStay(Collider other)
     {
-        //もしも熊とぶつかっていた場合に処理
-        if (other.gameObject.name == "kuma_b")
+        //タップしたものがgameObjectだった場合に処理
+        if (TouchManager.SelectedGameObject == gameObject && other.gameObject == CollObj)
         {
-            //フラグをtrueにして親子関係にならないように
-            BearCollFlag = true;
-        }
+            //ぶつかっている相手と親子関係になる
+            gameObject.transform.parent = other.transform;
 
-        if (BearCollFlag == false)
-        {
-            //タップしたものがgameObjectだった場合に処理
-            if (TouchManager.SelectedGameObject == gameObject)
+            if (TapFlag == false)
             {
-                //ぶつかっている相手と親子関係になる
-                gameObject.transform.parent = other.transform;
+                //パーティクルの色を変える
+                rd.GetComponent<Renderer>().material.color = new Color(255.0f / 255.0f, 143.0f / 255.0f, 247.0f / 255.0f);
 
-                if (TapFlag == false)
+                //Rayを飛ばして
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit, 100f))
                 {
-                    //パーティクルの色を変える
-                    rd.GetComponent<Renderer>().material.color = new Color(255.0f / 255.0f, 143.0f / 255.0f, 247.0f / 255.0f);
-
-                    //Rayを飛ばして
-                    ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    if (Physics.Raycast(ray, out hit, 100f))
-                    {
-                        //針の位置をタップした位置へと移動させる。
-                        Needle.transform.position = hit.point;
-                        //gameObjectと親子関係に
-                        Needle.transform.parent = gameObject.transform;
-                    }
-                }
-
-                TapFlag = true;
-
-
-            }
-            else if (TouchManager.SelectedGameObject != gameObject)
-            {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    //パーティクルの色を変える
-                    rd.GetComponent<Renderer>().material.color = new Color(255, 255, 255);
+                    //針の位置をタップした位置へと移動させる。
+                    Needle.transform.position = hit.point;
+                    //gameObjectと親子関係に
+                    Needle.transform.parent = gameObject.transform;
                 }
             }
+
+            TapFlag = true;
         }
+        else if (TouchManager.SelectedGameObject != gameObject)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                //パーティクルの色を変える
+                rd.GetComponent<Renderer>().material.color = new Color(255, 255, 255);
+            }
+        }
+
 
         CollFlag = true;
     }
@@ -142,12 +141,6 @@ public class GimmickParent : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.name == "kuma_b")
-        {
-            //壁のコライダーと離れている間はフラグをfalseになるように
-            BearCollFlag = false;
-        }
-
         CollFlag = false;
     }
 

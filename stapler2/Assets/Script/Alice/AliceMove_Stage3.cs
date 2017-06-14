@@ -47,6 +47,7 @@ public class AliceMove_Stage3 : MonoBehaviour
     {
         AliceAnim = GetComponent<Animator>();
         AliceAnimInfo = AliceAnim.GetCurrentAnimatorStateInfo(0);
+        AliceStage3Flag = true;
 
         GetFloor1ClearFlag = false;
         GetFloor2ClearFlag = false;
