@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//==============================================================
+//メリーゴーランドの動きを制御するスクリプト
+//==============================================================
+
 public class MerryMove : MonoBehaviour {
 
-    //==============================================================
-    //メリーゴーランドの動きを制御するスクリプト
-    //==============================================================
 
     // 変数宣言----------------------------------------------------------------------
 
@@ -25,8 +26,12 @@ public class MerryMove : MonoBehaviour {
     //ホッチキスによって止められていないかのフラグ
     private bool MoveStopFlag;
 
+    //四角い点線のオブジェクト
+    public GameObject CollPoint;
 
-    public GameObject obj;
+    //正解した時の音を再生するためのフラグ
+    private bool SoundFlag;
+
 
     // Use this for initialization
     void Start()
@@ -80,7 +85,20 @@ public class MerryMove : MonoBehaviour {
         }
         else
         {
-            obj.SetActive(false);
+            CollPoint.SetActive(false);
+        }
+
+        if(MoveStopFlag==true)
+        {
+            if (SoundFlag == true)
+            {
+                AudioManager.Instance.PlaySE("correct1_01");
+                SoundFlag = false;
+            }
+        }
+        else
+        {
+            SoundFlag = true;
         }
 
         gameObject.transform.position = pos;

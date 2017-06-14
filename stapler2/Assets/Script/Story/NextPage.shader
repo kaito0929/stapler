@@ -5,7 +5,7 @@
 		_MainTex("Texture", 2D) = "white" {}
 		_PageTex("PageTexture", 2D) = "white" {}
 		_AlphaMask("AlphaMask", Range(0, 1)) = 0.1
-		_Flip("Flip",Float) = 0
+		_Flip("Flip",Float) = 1
 	}
 		SubShader
 	{
@@ -85,8 +85,8 @@
 			content_col = float4(0.5, 0.5, 0.5, 1);
 
 		////ページ内容のうち一定の値より透明なものはページの色にすり替える
-		/*if (content_col.a < _AlphaMask)
-			return page_col;*/
+		if (content_col.a < _AlphaMask)
+			return page_col;
 
 		return content_col * page_col;
 	}

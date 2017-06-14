@@ -28,6 +28,10 @@ public class TubeChange : MonoBehaviour {
     //パーティクルの色を変化させるための変数
     public Renderer rd;
 
+    //正解した時の音を再生するためのフラグ
+    private bool SoundFlag;
+
+
     // Use this for initialization
     void Start () {
 
@@ -43,7 +47,7 @@ public class TubeChange : MonoBehaviour {
             {
                 TubeRepairFlag = true;
 
-                rd.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 0, 255));
+                rd.GetComponent<Renderer>().material.color = new Color(255.0f / 255.0f, 143.0f / 255.0f, 247.0f / 255.0f);
 
                 //チューブを直すことで列車が動くので列車の動く音を再生
                 AudioManager.Instance.PlaySE("locomotive-pass1_01");
@@ -58,6 +62,25 @@ public class TubeChange : MonoBehaviour {
                     Needle.transform.parent = gameObject.transform;
                 }
             }
+
         }
-	}
+
+
+        if(TubeRepairFlag==true)
+        {
+            if (SoundFlag == true)
+            {
+                AudioManager.Instance.PlaySE("correct1_01");
+                SoundFlag = false;
+            }
+        }
+        else
+        {
+            SoundFlag = true;
+        }
+
+
+    }
+
+
 }

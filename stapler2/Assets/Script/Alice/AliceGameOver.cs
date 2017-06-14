@@ -54,6 +54,11 @@ public class AliceGameOver : MonoBehaviour {
             //やられた時のアニメーションを再生
             anim.SetBool("collision", true);
 
+            if (AliceCollFlag == false)
+            {
+                AudioManager.Instance.PlaySE("Poko1_01");
+            }
+
             AliceCollFlag = true;
 
             damageEffect.SetActive(true);

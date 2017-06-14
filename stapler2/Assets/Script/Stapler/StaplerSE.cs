@@ -22,12 +22,11 @@ public class StaplerSE : MonoBehaviour {
     //何も挟んでいないと判定を取る為のオブジェクト
     public GameObject NotInterposeObj;
 
-    public static int TapNum=99999;
+    public static int TapNum=0;
     public static int GetTapNum()
     {
         return TapNum;
     }
-    public int num;
 
     // Use this for initialization
     void Start () {
@@ -41,7 +40,6 @@ public class StaplerSE : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        num = TapNum;
         //タップした先のオブジェクトがTapHitならば何も挟んでいない音を再生
         //別のオブジェクトならば複数挟んでいる重い音を再生
         if (TouchManager.SelectedGameObject == NotInterposeObj)

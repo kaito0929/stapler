@@ -9,16 +9,8 @@ public class AliceMove : MonoBehaviour {
 
     // 変数宣言----------------------------------------------------------------------
 
-    //ギミックがクリアされたかのフラグを持つギミック
-    public GameObject Floor1Gimmick;
-    public GameObject Floor2Gimmick;
-
     //クリアされた時にアリスを動かす変数
     private Vector3 pos;
-
-    //クリアしたかのフラグを受け取る変数
-    private bool GetFloar1ClearFlag;
-    private bool GetFloar2ClearFlag;
 
     //Animatorを取得
     private Animator AliceAnim;
@@ -26,26 +18,24 @@ public class AliceMove : MonoBehaviour {
     private AnimatorStateInfo AliceAnimInfo;
 
 
-    //どのフロアにいるか判別するための変数
-    private enum Floor
-    {
-        FLOOR1,
-        FLOOR2,
-        FLOOR3,
-    }
-    private Floor floor;
-
-
     //アリスがギミックに当たったかのフラグを受け取る変数
     private bool GetAliceCollFlag;
 
-    //ステージ1のフロア2に到達したかのフラグ
-    //パンダの動き出すタイミングになっている
-    private bool Floar2_ReachingFlag;
+    //フロア2に移動完了したかのフラグ
+    private bool Floor2MoveEndFlag;
     //そのフラグをパンダを動かすスクリプトに渡す関数
-    public bool GetReachingFlag()
+    public bool GetFloor2MoveEndFlag()
     {
-        return Floar2_ReachingFlag;
+        return Floor2MoveEndFlag;
+    }
+
+
+    //移動が終了したかのフラグ
+    private bool Floor3MoveEndFlag;
+    //フロア3に到達した時のフラグを渡す関数
+    public bool GetFloor3MoveEndFlag()
+    {
+        return Floor3MoveEndFlag;
     }
 
 
@@ -54,54 +44,32 @@ public class AliceMove : MonoBehaviour {
         AliceAnim = GetComponent<Animator>();
         AliceAnimInfo = AliceAnim.GetCurrentAnimatorStateInfo(0);
         GetAliceCollFlag = false;
-        Floar2_ReachingFlag = false;
-        floor = Floor.FLOOR1;
+
+        Floor2MoveEndFlag = false;
+        Floor3MoveEndFlag = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        //エネミーがタップされてフリーフォールと親子関係になったかのフラグを受け取る
-        Floor1Clear touch = Floor1Gimmick.GetComponent<Floor1Clear>();
-        GetFloar1ClearFlag = touch.GetClear();
-
-        //馬とメリーゴーランドが親子関係になったかのフラグを受け取る
-        GimmickParent touch2 = Floor2Gimmick.GetComponent<GimmickParent>();
-        GetFloar2ClearFlag = touch2.GetTapFlag();
-
-        //アリスが敵か何かとぶつかった際のフラグを受け取る
-        AliceGameOver coll = gameObject.GetComponent<AliceGameOver>();
-        GetAliceCollFlag = coll.GetAliceCollFlag();
-
-        //アリスが何かとぶつかっていなかったら処理を行う
-        if (GetAliceCollFlag == false)
-        {
-            //フロア1をクリアした場合に処理
-            if (GetFloar1ClearFlag == true && GetFloar2ClearFlag == false)
-            {
-                floor = Floor.FLOOR2;
-            }
-            //フロア2にをクリアした場合に処理
-            else if (GetFloar2ClearFlag == true)
-            {
-                floor = Floor.FLOOR3;
-            }
-
-            AliceMovePos();
-        }
-        
-        
     }
 
 
     //アリスのアニメーションを制御して、移動させるための関数
-    void AliceMovePos()
+    public void AliceMovePos(bool floor1Flag, bool floor2Flag)
     {
+        //アリスが敵か何かとぶつかった際のフラグを受け取る
+        AliceGameOver coll = gameObject.GetComponent<AliceGameOver>();
+        GetAliceCollFlag = coll.GetAliceCollFlag();
+
+
         AliceAnimInfo = AliceAnim.GetCurrentAnimatorStateInfo(0);
 
-        switch (floor)
+        //アリスが何かとぶつかっていなかったら処理を行う
+        if (GetAliceCollFlag == false)
         {
-            case Floor.FLOOR2:
+            if (floor1Flag == true && floor2Flag == false)
+            {
                 if (pos.x < 8.1f)
                 {
                     //再生中ならばフラグをtrueにしておいて再生するように
@@ -119,11 +87,13 @@ public class AliceMove : MonoBehaviour {
                 else
                 {
                     //指定した位置まで移動したら待機モーションに切り替わる
-                    AliceAnim.SetBool("Idle",true);
-                    Floar2_ReachingFlag = true;
+                    AliceAnim.SetBool("Idle", true);
+                    Floor2MoveEndFlag = true;
                 }
-                break;
-            case Floor.FLOOR3:
+
+            }
+            else if (floor2Flag == true)
+            {
                 if (pos.x < 21.35f)
                 {
                     AliceAnim.SetBool("Idle", false);
@@ -142,9 +112,14 @@ public class AliceMove : MonoBehaviour {
                 {
                     //指定した位置まで移動したら待機モーションに切り替わる
                     AliceAnim.SetBool("Idle", true);
+                    //フロア3への移動が終了したのでフラグをtrueに
+                    Floor3MoveEndFlag = true;
                 }
-                break;
+            }
         }
+
+
+
     }
 
 

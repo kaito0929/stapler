@@ -36,6 +36,9 @@ public class WoodAttack : MonoBehaviour
     }
 
     public RootsAnim[] rootsAnim;
+
+
+    private bool SoundFlag;
     
     // Use this for initialization
     void Start()
@@ -44,7 +47,7 @@ public class WoodAttack : MonoBehaviour
         WoodAnim = GetComponent<Animator>();
         WoodStopFlag = false;
         WoodAttackFlag = false;
-
+        SoundFlag = false;
     }
 
     // Update is called once per frame
@@ -52,6 +55,21 @@ public class WoodAttack : MonoBehaviour
     {
         WoodAttackAnim();
         WoodStop();
+
+
+        if(WoodStopFlag==true)
+        {
+            if (SoundFlag == true)
+            {
+                AudioManager.Instance.PlaySE("correct1_01");
+                SoundFlag = false;
+            }
+        }
+        else
+        {
+            SoundFlag = true;
+        }
+
     }
     
 

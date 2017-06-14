@@ -13,8 +13,6 @@ public class AliceMove_Stage3 : MonoBehaviour
     public GameObject Floor1Gimmick;
     public GameObject Floor2Gimmick;
 
-    //クリアされた時にアリスを動かす変数
-    private Vector3 pos;
 
     //クリアしたかのフラグを受け取る変数
     private bool GetFloor1ClearFlag;
@@ -24,26 +22,6 @@ public class AliceMove_Stage3 : MonoBehaviour
     private Animator AliceAnim;
     private AnimatorStateInfo AliceAnimInfo;
 
-    private enum Floor
-    {
-        FLOOR1,
-        FLOOR2,
-        FLOOR3,
-    }
-    private Floor floor;
-
-
-    //アリスがギミックに当たったかのフラグを受け取る変数
-    private bool GetAliceCollFlag;
-
-    //移動が終了したかのフラグ
-    private bool Floor3MoveMentEndFlag;
-    //フロア3に到達した時のフラグを渡す関数
-    public bool GetFloor3MoveEndFlag()
-    {
-        return Floor3MoveMentEndFlag;
-    }
-
     public WitchAction witchDown;
 
 
@@ -52,13 +30,26 @@ public class AliceMove_Stage3 : MonoBehaviour
     public GameObject black;
 
 
+    //アリスがどのステージに達しているかのフラグ(ステージ3)
+    //ステージの最初からと操作するために必要
+    public static bool AliceStage3Flag = true;
+    //そのフラグを渡すための関数
+    //SceneChangeスクリプトに渡す
+    public static bool GetAliceStage3Flag()
+    {
+        return AliceStage3Flag;
+    }
+
+    public AliceMove aliceMove;
+
     // Use this for initialization
     void Start()
     {
         AliceAnim = GetComponent<Animator>();
         AliceAnimInfo = AliceAnim.GetCurrentAnimatorStateInfo(0);
-        GetAliceCollFlag = false;
-        Floor3MoveMentEndFlag = false;
+
+        GetFloor1ClearFlag = false;
+        GetFloor2ClearFlag = false;
     }
 
     // Update is called once per frame
@@ -72,90 +63,37 @@ public class AliceMove_Stage3 : MonoBehaviour
         RockBreak touch2 = Floor2Gimmick.GetComponent<RockBreak>();
         GetFloor2ClearFlag = touch2.GetClearFlag();
 
-        //アリスが敵か何かとぶつかった際のフラグを受け取る
-        AliceGameOver coll = gameObject.GetComponent<AliceGameOver>();
-        GetAliceCollFlag = coll.GetAliceCollFlag();
+        aliceMove.AliceMovePos(GetFloor1ClearFlag, GetFloor2ClearFlag);
 
-        //アリスが何かとぶつかっていなかったら処理を行う
-        if (GetAliceCollFlag == false)
-        {
-            //フロア1をクリアした場合に処理
-            if (GetFloor1ClearFlag == true && GetFloor2ClearFlag == false)
-            {
-                floor = Floor.FLOOR2;
-            }
-            //フロア2をクリアした場合に処理
-            else if (GetFloor2ClearFlag == true)
-            {
-                floor = Floor.FLOOR3;
-            }
-            AliceMovePos();
-        }
+        Stage3Clear();
+    }
 
-        if(witchDown.GetWitchCollNorma()<=0)
+    //ステージ3をクリアした時にページめくりが行われるようにする
+    void Stage3Clear()
+    {
+        AliceAnimInfo = AliceAnim.GetCurrentAnimatorStateInfo(0);
+
+        //フロア3をクリアしたフラグを受け取って
+        //アリスのアニメーションを再生する
+        if (witchDown.GetWitchCollNorma() <= 0)
         {
             AliceAnim.SetTrigger("happy");
             AliceAnim.SetBool("clear", true);
         }
 
+
+        //アニメーションがclearに遷移するとページめくりのオブジェクトを表示
         if (AliceAnimInfo.nameHash == Animator.StringToHash("Base Layer.clear"))
         {
             //クリアした時にめくられるページを表示させる
             Stage3_Clear_Obj.SetActive(true);
             black.SetActive(true);
+
+            //エンディング画面へ遷移するのでフラグをfalseに戻しておく
+            AliceStage3Flag = false;
         }
 
     }
 
-    void AliceMovePos()
-    {
-        AliceAnimInfo = AliceAnim.GetCurrentAnimatorStateInfo(0);
-
-        switch (floor)
-        {
-            case Floor.FLOOR2:
-                if (pos.x < 8.1f)
-                {
-                    //再生中ならばフラグをtrueにしておいて再生するように
-                    AliceAnim.SetTrigger("happy");
-                    //喜びモーションが再生されている時間
-                    if (AliceAnimInfo.nameHash == Animator.StringToHash("Base Layer.Dash"))
-                    {
-                        pos = transform.position;
-                        pos.x += 0.1f;
-                        transform.position = pos;
-                        AliceAnim.ResetTrigger("happy");
-                    }
-                }
-                else
-                {
-                    //指定した位置まで移動したら待機モーションに切り替わる
-                    AliceAnim.SetBool("Idle", true);
-                }
-                break;
-            case Floor.FLOOR3:
-                if (pos.x < 21.35f)
-                {
-                    AliceAnim.SetBool("Idle", false);
-                    //再生中ならばフラグをtrueにしておいて再生するように
-                    AliceAnim.SetTrigger("happy");
-                    //喜びモーションが再生されている時間
-                    if (AliceAnimInfo.nameHash == Animator.StringToHash("Base Layer.Dash"))
-                    {
-                        pos = transform.position;
-                        pos.x += 0.1f;
-                        transform.position = pos;
-                        AliceAnim.ResetTrigger("happy");
-                    }
-                }
-                else
-                {
-                    //指定した位置まで移動したら待機モーションに切り替わる
-                    AliceAnim.SetBool("Idle", true);
-                    Floor3MoveMentEndFlag = true;
-                }
-                break;
-        }
-    }
 
 }

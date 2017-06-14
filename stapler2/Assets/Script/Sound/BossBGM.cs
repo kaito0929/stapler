@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BossBGM : MonoBehaviour {
+//===================================================================
+//ステージ3のフロア3に到達した際にBGMを切り替えるスクリプト
+//===================================================================
 
-    //===================================================================
-    //ステージ3のフロア3に到達した際にBGMを切り替えるスクリプト
-    //===================================================================
+public class BossBGM : MonoBehaviour {
 
     // 変数宣言----------------------------------------------------------------------
 
@@ -22,7 +22,7 @@ public class BossBGM : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //魔女戦BGM再生のフラグを取得する
-        AliceMove_Stage3 alice = Alice.GetComponent<AliceMove_Stage3>();
+        AliceMove alice = Alice.GetComponent<AliceMove>();
         BossBGMPlayFlag = alice.GetFloor3MoveEndFlag();
 
         //フラグがtrueならばBGMを切り替える

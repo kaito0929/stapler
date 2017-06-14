@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NeedleAnimPlayNum : MonoBehaviour {
+//============================================================
+//弾かれる針のアニメーションを再生する順番を決めるスクリプト
+//============================================================
 
-    //============================================================
-    //弾かれる針のアニメーションを再生する順番を決めるスクリプト
-    //============================================================
+public class NeedleAnimPlayNum : MonoBehaviour {
 
     // 変数宣言----------------------------------------------------------------------
 
     //アニメーションを再生する順番の変数
-    private int AnimPlayNum;
+    public int AnimPlayNum;
 
     public int GetAnimPlayNum()
     {
@@ -21,6 +21,7 @@ public class NeedleAnimPlayNum : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        AnimPlayNum = 0;
         MaxPlayNum = 15;
 	}
 	
@@ -31,7 +32,7 @@ public class NeedleAnimPlayNum : MonoBehaviour {
             AnimPlayNum++;
         }
 
-        //9になると一巡したことになるので数字を0に戻す
+        //15になると一巡したことになるので数字を0に戻す
         if (AnimPlayNum == MaxPlayNum)
         {
             AnimPlayNum = 0;

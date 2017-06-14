@@ -44,6 +44,8 @@ public class BoneStop : MonoBehaviour {
     public GameObject StopWallColl;
 
 
+    private float time;
+
     //Ray関係
     private RaycastHit hit;
     private Ray ray;
@@ -73,6 +75,7 @@ public class BoneStop : MonoBehaviour {
         WallCollFlag = false;
         BoneTapStopFlag = false;
         BoneAnim = bone.GetComponent<Animation>();
+        time = 0;
     }
 	
 	// Update is called once per frame
@@ -91,22 +94,27 @@ public class BoneStop : MonoBehaviour {
                 //アニメーションをストップさせてそこに止められたように見せる
                 BoneAnim.Stop();
 
+                bone.transform.parent = StopWallColl.transform;
+
+                if (BoneTapStopFlag == false)
+                {
+                    rd.GetComponent<Renderer>().material.color = new Color(255.0f / 255.0f, 143.0f / 255.0f, 247.0f / 255.0f);
+
+                    //Rayを飛ばして
+                    ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    if (Physics.Raycast(ray, out hit, 100f))
+                    {
+                        //針の位置をタップした位置へと移動させる。
+                        Needle.transform.position = hit.point;
+                        //gameObjectと親子関係に
+                        Needle.transform.parent = gameObject.transform;
+                    }
+                }
+
                 //止められたのでフラグをtrueにする
                 BoneTapStopFlag = true;
 
-                bone.transform.parent = StopWallColl.transform;
 
-                rd.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 0, 255));
-
-                //Rayを飛ばして
-                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit, 100f))
-                {
-                    //針の位置をタップした位置へと移動させる。
-                    Needle.transform.position = hit.point;
-                    //gameObjectと親子関係に
-                    Needle.transform.parent = gameObject.transform;
-                }
             }
         }
         else if(BoneTapStopFlag == false)
@@ -118,8 +126,27 @@ public class BoneStop : MonoBehaviour {
                 BoneAnim.Play();
             }
         }
-        
-        if(BoneAnim.isPlaying)
+
+        //骨をタップして止めた場合に時間をtimeに加算
+        if(BoneTapStopFlag==true)
+        {
+            if (time >= 0)
+            {
+                time += Time.deltaTime;
+            }
+        }
+
+        //timeが1fを超えたならパーティクルの色を白に戻す
+        //その際にtimeを-1fに変えておいて変数に加算させないようにする
+        if (time > 1f)
+        {
+            //パーティクルの色を変える
+            rd.GetComponent<Renderer>().material.color = new Color(255, 255, 255);
+            time = -1f;
+        }
+
+
+        if (BoneAnim.isPlaying)
         {
             BoneAnimPlayFlag = true;
         }

@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BearClear : MonoBehaviour {
+//=========================================================================
+//熊の腕と体が直ったフラグを受け取るスクリプト
+//その二つのフラグを受け取ると熊の顔のマテリアルを切り替える
+//=========================================================================
 
-    //=========================================================================
-    //熊の腕と体が直ったフラグを受け取るスクリプト
-    //その二つのフラグを受け取ると熊の顔のマテリアルを切り替える
-    //=========================================================================
+public class BearClear : MonoBehaviour {
 
     // 変数宣言----------------------------------------------------------------------
 
@@ -16,9 +16,7 @@ public class BearClear : MonoBehaviour {
     public GameObject BearHand;
 
     //体が直ったフラグを受け取る変数
-    private bool GetRepairFlagBody;
-    //腕が直ったフラグを受け取る変数
-    private bool GetRepairFlagHand;
+    private bool[] GetRepairFlag=new bool[2];
 
     //表示するマテリアルを格納する変数
     //これには頭のマテリアルを格納する
@@ -34,10 +32,14 @@ public class BearClear : MonoBehaviour {
         return ClearFlag;
     }
 
+    //正解した時の音を再生するためのフラグ
+    private bool SoundFlag;
+
+
     // Use this for initialization
     void Start () {
-        GetRepairFlagBody = false;
-        GetRepairFlagHand = false;
+        GetRepairFlag[0] = false;
+        GetRepairFlag[1] = false;
         BearHeadChange = 0;
         ClearFlag = false;
 	}
@@ -47,14 +49,14 @@ public class BearClear : MonoBehaviour {
 
         //体の修理したかのフラグを受け取る
         BearRepair body = BearBody.GetComponent<BearRepair>();
-        GetRepairFlagBody = body.GetRepairFlag();
+        GetRepairFlag[0] = body.GetRepairFlag();
 
         //腕の修理したかのフラグを受け取る
         BearRepair hand = BearHand.GetComponent<BearRepair>();
-        GetRepairFlagHand = hand.GetRepairFlag();
+        GetRepairFlag[1] = hand.GetRepairFlag();
 
         //二つとも直ってフラグがtrueになれば顔を笑顔にしてクリア
-        if (GetRepairFlagBody == true && GetRepairFlagHand == true)
+        if (GetRepairFlag[0] == true && GetRepairFlag[1] == true)
         {
             BearHeadChange = 1;
             ClearFlag = true;
@@ -62,6 +64,20 @@ public class BearClear : MonoBehaviour {
 
         //実際に表示するマテリアル
         this.GetComponent<Renderer>().material = material[BearHeadChange];
+
+
+        if(ClearFlag==true)
+        {
+            if(SoundFlag==true)
+            {
+                AudioManager.Instance.PlaySE("correct1_01");
+                SoundFlag = false;
+            }
+        }
+        else
+        {
+            SoundFlag = true;
+        }
 
     }
 }

@@ -65,7 +65,12 @@ public class BearRepair : MonoBehaviour {
             {
                 //タップした回数分プラス
                 BearChangeNorma++;
-                rd.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 0, 255));
+                rd.GetComponent<Renderer>().material.color = new Color(255.0f / 255.0f, 143.0f / 255.0f, 247.0f / 255.0f);
+            }
+            else
+            {
+                //パーティクルの色を変える
+                rd.GetComponent<Renderer>().material.color = new Color(255, 255, 255);
             }
 
             if (BearChangeNorma < 3)
@@ -73,6 +78,8 @@ public class BearRepair : MonoBehaviour {
                 NeedleMoveNum++;
             }
         }
+
+
 
         //三回タップしたならば熊は直ったことに
         if (BearChangeNorma == 3)

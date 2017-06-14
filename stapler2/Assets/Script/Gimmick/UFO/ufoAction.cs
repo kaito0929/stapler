@@ -5,7 +5,7 @@ using System.Collections;
 //UFOの行動を制御するスクリプト
 //=======================================================
 
-public class ufoMove : MonoBehaviour {
+public class ufoAction : MonoBehaviour {
 
     // 変数宣言----------------------------------------------------------------------
 
@@ -80,16 +80,18 @@ public class ufoMove : MonoBehaviour {
 
 
     //フロア2への移動が終了したかのフラグを持つオブジェクト
-    public AliceMove_Stage2 Alice_MoveEnd;
+    public AliceMove aliceMove;
 
 
     //UFOのアニメーターを取得
     private Animator ufoAnim;
-
     private AnimatorStateInfo animInfo;
 
     //パーティクルの色を変化させるための変数
     public Renderer rd;
+
+    //正解した時の音を再生するためのフラグ
+    private bool SoundFlag;
 
 
     void OnTriggerEnter(Collider other)
@@ -115,6 +117,7 @@ public class ufoMove : MonoBehaviour {
         MoveStopFlag = false;
         ShotTime = 0f;
         ufoCollFlag = false;
+        SoundFlag = false;
 
         ufoAnim = GetComponent<Animator>();
         animInfo = ufoAnim.GetCurrentAnimatorStateInfo(0);
@@ -126,6 +129,21 @@ public class ufoMove : MonoBehaviour {
 	void Update () {
         ufoUpdate();
         ufoTapStop();
+
+
+        if(ufoCollFlag==true)
+        {
+            if (SoundFlag == true)
+            {
+                AudioManager.Instance.PlaySE("correct1_01");
+                SoundFlag = false;
+            }
+        }
+        else
+        {
+            SoundFlag = true;
+        }
+
     }
 
 
@@ -135,7 +153,7 @@ public class ufoMove : MonoBehaviour {
         animInfo = ufoAnim.GetCurrentAnimatorStateInfo(0);
 
         //アリスがフロア3に移動してきたというフラグがtrueになれば処理
-        if (Alice_MoveEnd.GetFloor3MoveEndFlag() == true)
+        if (aliceMove.GetFloor3MoveEndFlag() == true)
         {
             //UFOの進む方向を変更する
             switch (moveDir)
@@ -258,7 +276,7 @@ public class ufoMove : MonoBehaviour {
             MoveStopFlag = true;
             ShotTime = 0;
 
-            rd.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 0, 255));
+            rd.GetComponent<Renderer>().material.color = new Color(255.0f / 255.0f, 143.0f / 255.0f, 247.0f / 255.0f);
 
             //Rayを飛ばして
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);

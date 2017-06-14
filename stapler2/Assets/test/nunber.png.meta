@@ -1,0 +1,1088 @@
+fileFormatVersion: 2
+guid: dc0fd74d1cadea14795503b096435e1a
+timeCreated: 1497408540
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: nunber_0
+    21300002: nunber_1
+    21300004: nunber_2
+    21300006: nunber_3
+    21300008: nunber_4
+    21300010: nunber_5
+    21300012: nunber_6
+    21300014: nunber_7
+    21300016: nunber_8
+    21300018: nunber_9
+    21300020: nunber_10
+    21300022: nunber_11
+    21300024: nunber_12
+    21300026: nunber_13
+    21300028: nunber_14
+    21300030: nunber_15
+    21300032: nunber_16
+    21300034: nunber_17
+    21300036: nunber_18
+    21300038: nunber_19
+    21300040: nunber_20
+    21300042: nunber_21
+    21300044: nunber_22
+    21300046: nunber_23
+    21300048: nunber_24
+    21300050: nunber_25
+    21300052: nunber_26
+    21300054: nunber_27
+    21300056: nunber_28
+    21300058: nunber_29
+    21300060: nunber_30
+    21300062: nunber_31
+    21300064: nunber_32
+    21300066: nunber_33
+    21300068: nunber_34
+    21300070: nunber_35
+    21300072: nunber_36
+    21300074: nunber_37
+    21300076: nunber_38
+    21300078: nunber_39
+    21300080: nunber_40
+    21300082: nunber_41
+    21300084: nunber_42
+    21300086: nunber_43
+    21300088: nunber_44
+    21300090: nunber_45
+    21300092: nunber_46
+    21300094: nunber_47
+    21300096: nunber_48
+    21300098: nunber_49
+    21300100: nunber_50
+    21300102: nunber_51
+    21300104: nunber_52
+    21300106: nunber_53
+    21300108: nunber_54
+    21300110: nunber_55
+    21300112: nunber_56
+    21300114: nunber_57
+    21300116: nunber_58
+    21300118: nunber_59
+    21300120: nunber_60
+    21300122: nunber_61
+    21300124: nunber_62
+    21300126: nunber_63
+    21300128: nunber_64
+    21300130: nunber_65
+    21300132: nunber_66
+    21300134: nunber_67
+    21300136: nunber_68
+    21300138: nunber_69
+    21300140: nunber_70
+    21300142: nunber_71
+    21300144: nunber_72
+    21300146: nunber_73
+    21300148: nunber_74
+    21300150: nunber_75
+    21300152: nunber_76
+    21300154: nunber_77
+    21300156: nunber_78
+    21300158: nunber_79
+    21300160: nunber_80
+    21300162: nunber_81
+    21300164: nunber_82
+    21300166: nunber_83
+    21300168: nunber_84
+    21300170: nunber_85
+    21300172: nunber_86
+    21300174: nunber_87
+    21300176: nunber_88
+    21300178: nunber_89
+    21300180: nunber_90
+    21300182: nunber_91
+    21300184: nunber_92
+    21300186: nunber_93
+    21300188: nunber_94
+    21300190: nunber_95
+    21300192: nunber_96
+    21300194: nunber_97
+    21300196: nunber_98
+    21300198: nunber_99
+    21300200: nunber_100
+    21300202: nunber_101
+    21300204: nunber_102
+    21300206: nunber_103
+    21300208: nunber_104
+    21300210: nunber_105
+    21300212: nunber_106
+    21300214: nunber_107
+    21300216: nunber_108
+    21300218: nunber_109
+    21300220: nunber_110
+    21300222: nunber_111
+    21300224: nunber_112
+    21300226: nunber_113
+    21300228: nunber_114
+    21300230: nunber_115
+    21300232: nunber_116
+    21300234: nunber_117
+    21300236: nunber_118
+    21300238: nunber_119
+    21300240: nunber_120
+    21300242: nunber_121
+    21300244: nunber_122
+    21300246: nunber_123
+    21300248: nunber_124
+    21300250: nunber_125
+    21300252: nunber_126
+    21300254: nunber_127
+    21300256: nunber_128
+    21300258: nunber_129
+    21300260: nunber_130
+    21300262: nunber_131
+    21300264: nunber_132
+    21300266: nunber_133
+    21300268: nunber_134
+    21300270: nunber_135
+    21300272: nunber_136
+    21300274: nunber_137
+    21300276: nunber_138
+    21300278: nunber_139
+    21300280: nunber_140
+    21300282: nunber_141
+    21300284: nunber_142
+    21300286: nunber_143
+    21300288: nunber_144
+    21300290: nunber_145
+    21300292: nunber_146
+    21300294: nunber_147
+    21300296: nunber_148
+    21300298: nunber_149
+    21300300: nunber_150
+    21300302: nunber_151
+    21300304: nunber_152
+    21300306: nunber_153
+    21300308: nunber_154
+    21300310: nunber_155
+    21300312: nunber_156
+    21300314: nunber_157
+    21300316: nunber_158
+    21300318: nunber_159
+    21300320: nunber_160
+    21300322: nunber_161
+    21300324: nunber_162
+    21300326: nunber_163
+    21300328: nunber_164
+    21300330: nunber_165
+    21300332: nunber_166
+    21300334: nunber_167
+    21300336: nunber_168
+    21300338: nunber_169
+    21300340: nunber_170
+    21300342: nunber_171
+    21300344: nunber_172
+    21300346: nunber_173
+    21300348: nunber_174
+    21300350: nunber_175
+    21300352: nunber_176
+    21300354: nunber_177
+    21300356: nunber_178
+    21300358: nunber_179
+    21300360: nunber_180
+    21300362: nunber_181
+    21300364: nunber_182
+    21300366: nunber_183
+    21300368: nunber_184
+    21300370: nunber_185
+    21300372: nunber_186
+    21300374: nunber_187
+    21300376: nunber_188
+    21300378: nunber_189
+    21300380: nunber_190
+    21300382: nunber_191
+    21300384: nunber_192
+    21300386: nunber_193
+    21300388: nunber_194
+    21300390: nunber_195
+    21300392: nunber_196
+    21300394: nunber_197
+    21300396: nunber_198
+    21300398: nunber_199
+    21300400: nunber_200
+    21300402: nunber_201
+    21300404: nunber_202
+    21300406: nunber_203
+    21300408: nunber_204
+    21300410: nunber_205
+    21300412: nunber_206
+    21300414: nunber_207
+    21300416: nunber_208
+    21300418: nunber_209
+    21300420: nunber_210
+    21300422: nunber_211
+    21300424: nunber_212
+    21300426: nunber_213
+    21300428: nunber_214
+    21300430: nunber_215
+    21300432: nunber_216
+    21300434: nunber_217
+    21300436: nunber_218
+    21300438: nunber_219
+    21300440: nunber_220
+    21300442: nunber_221
+    21300444: nunber_222
+    21300446: nunber_223
+    21300448: nunber_224
+    21300450: nunber_225
+    21300452: nunber_226
+    21300454: nunber_227
+    21300456: nunber_228
+    21300458: nunber_229
+    21300460: nunber_230
+    21300462: nunber_231
+    21300464: nunber_232
+    21300466: nunber_233
+    21300468: nunber_234
+    21300470: nunber_235
+    21300472: nunber_236
+    21300474: nunber_237
+    21300476: nunber_238
+    21300478: nunber_239
+    21300480: nunber_240
+    21300482: nunber_241
+    21300484: nunber_242
+    21300486: nunber_243
+    21300488: nunber_244
+    21300490: nunber_245
+    21300492: nunber_246
+    21300494: nunber_247
+    21300496: nunber_248
+    21300498: nunber_249
+    21300500: nunber_250
+    21300502: nunber_251
+    21300504: nunber_252
+    21300506: nunber_253
+    21300508: nunber_254
+    21300510: nunber_255
+    21300512: nunber_256
+    21300514: nunber_257
+    21300516: nunber_258
+    21300518: nunber_259
+    21300520: nunber_260
+    21300522: nunber_261
+    21300524: nunber_262
+    21300526: nunber_263
+    21300528: nunber_264
+    21300530: nunber_265
+    21300532: nunber_266
+    21300534: nunber_267
+    21300536: nunber_268
+    21300538: nunber_269
+    21300540: nunber_270
+    21300542: nunber_271
+    21300544: nunber_272
+    21300546: nunber_273
+    21300548: nunber_274
+    21300550: nunber_275
+    21300552: nunber_276
+    21300554: nunber_277
+    21300556: nunber_278
+    21300558: nunber_279
+    21300560: nunber_280
+    21300562: nunber_281
+    21300564: nunber_282
+    21300566: nunber_283
+    21300568: nunber_284
+    21300570: nunber_285
+    21300572: nunber_286
+    21300574: nunber_287
+    21300576: nunber_288
+    21300578: nunber_289
+    21300580: nunber_290
+    21300582: nunber_291
+    21300584: nunber_292
+    21300586: nunber_293
+    21300588: nunber_294
+    21300590: nunber_295
+    21300592: nunber_296
+    21300594: nunber_297
+    21300596: nunber_298
+    21300598: nunber_299
+    21300600: nunber_300
+    21300602: nunber_301
+    21300604: nunber_302
+    21300606: nunber_303
+    21300608: nunber_304
+    21300610: nunber_305
+    21300612: nunber_306
+    21300614: nunber_307
+    21300616: nunber_308
+    21300618: nunber_309
+    21300620: nunber_310
+    21300622: nunber_311
+    21300624: nunber_312
+    21300626: nunber_313
+    21300628: nunber_314
+    21300630: nunber_315
+    21300632: nunber_316
+    21300634: nunber_317
+    21300636: nunber_318
+    21300638: nunber_319
+    21300640: nunber_320
+    21300642: nunber_321
+    21300644: nunber_322
+    21300646: nunber_323
+    21300648: nunber_324
+    21300650: nunber_325
+    21300652: nunber_326
+    21300654: nunber_327
+    21300656: nunber_328
+    21300658: nunber_329
+    21300660: nunber_330
+    21300662: nunber_331
+    21300664: nunber_332
+    21300666: nunber_333
+    21300668: nunber_334
+    21300670: nunber_335
+    21300672: nunber_336
+    21300674: nunber_337
+    21300676: nunber_338
+    21300678: nunber_339
+    21300680: nunber_340
+    21300682: nunber_341
+    21300684: nunber_342
+    21300686: nunber_343
+    21300688: nunber_344
+    21300690: nunber_345
+    21300692: nunber_346
+    21300694: nunber_347
+    21300696: nunber_348
+    21300698: nunber_349
+    21300700: nunber_350
+    21300702: nunber_351
+    21300704: nunber_352
+    21300706: nunber_353
+    21300708: nunber_354
+    21300710: nunber_355
+    21300712: nunber_356
+    21300714: nunber_357
+    21300716: nunber_358
+    21300718: nunber_359
+    21300720: nunber_360
+    21300722: nunber_361
+    21300724: nunber_362
+    21300726: nunber_363
+    21300728: nunber_364
+    21300730: nunber_365
+    21300732: nunber_366
+    21300734: nunber_367
+    21300736: nunber_368
+    21300738: nunber_369
+    21300740: nunber_370
+    21300742: nunber_371
+    21300744: nunber_372
+    21300746: nunber_373
+    21300748: nunber_374
+    21300750: nunber_375
+    21300752: nunber_376
+    21300754: nunber_377
+    21300756: nunber_378
+    21300758: nunber_379
+    21300760: nunber_380
+    21300762: nunber_381
+    21300764: nunber_382
+    21300766: nunber_383
+    21300768: nunber_384
+    21300770: nunber_385
+    21300772: nunber_386
+    21300774: nunber_387
+    21300776: nunber_388
+    21300778: nunber_389
+    21300780: nunber_390
+    21300782: nunber_391
+    21300784: nunber_392
+    21300786: nunber_393
+    21300788: nunber_394
+    21300790: nunber_395
+    21300792: nunber_396
+    21300794: nunber_397
+    21300796: nunber_398
+    21300798: nunber_399
+    21300800: nunber_400
+    21300802: nunber_401
+    21300804: nunber_402
+    21300806: nunber_403
+    21300808: nunber_404
+    21300810: nunber_405
+    21300812: nunber_406
+    21300814: nunber_407
+    21300816: nunber_408
+    21300818: nunber_409
+    21300820: nunber_410
+    21300822: nunber_411
+    21300824: nunber_412
+    21300826: nunber_413
+    21300828: nunber_414
+    21300830: nunber_415
+    21300832: nunber_416
+    21300834: nunber_417
+    21300836: nunber_418
+    21300838: nunber_419
+    21300840: nunber_420
+    21300842: nunber_421
+    21300844: nunber_422
+    21300846: nunber_423
+    21300848: nunber_424
+    21300850: nunber_425
+    21300852: nunber_426
+    21300854: nunber_427
+    21300856: nunber_428
+    21300858: nunber_429
+    21300860: nunber_430
+    21300862: nunber_431
+    21300864: nunber_432
+    21300866: nunber_433
+    21300868: nunber_434
+    21300870: nunber_435
+    21300872: nunber_436
+    21300874: nunber_437
+    21300876: nunber_438
+    21300878: nunber_439
+    21300880: nunber_440
+    21300882: nunber_441
+    21300884: nunber_442
+    21300886: nunber_443
+    21300888: nunber_444
+    21300890: nunber_445
+    21300892: nunber_446
+    21300894: nunber_447
+    21300896: nunber_448
+    21300898: nunber_449
+    21300900: nunber_450
+    21300902: nunber_451
+    21300904: nunber_452
+    21300906: nunber_453
+    21300908: nunber_454
+    21300910: nunber_455
+    21300912: nunber_456
+    21300914: nunber_457
+    21300916: nunber_458
+    21300918: nunber_459
+    21300920: nunber_460
+    21300922: nunber_461
+    21300924: nunber_462
+    21300926: nunber_463
+    21300928: nunber_464
+    21300930: nunber_465
+    21300932: nunber_466
+    21300934: nunber_467
+    21300936: nunber_468
+    21300938: nunber_469
+    21300940: nunber_470
+    21300942: nunber_471
+    21300944: nunber_472
+    21300946: nunber_473
+    21300948: nunber_474
+    21300950: nunber_475
+    21300952: nunber_476
+    21300954: nunber_477
+    21300956: nunber_478
+    21300958: nunber_479
+    21300960: nunber_480
+    21300962: nunber_481
+    21300964: nunber_482
+    21300966: nunber_483
+    21300968: nunber_484
+    21300970: nunber_485
+    21300972: nunber_486
+    21300974: nunber_487
+    21300976: nunber_488
+    21300978: nunber_489
+    21300980: nunber_490
+    21300982: nunber_491
+    21300984: nunber_492
+    21300986: nunber_493
+    21300988: nunber_494
+    21300990: nunber_495
+    21300992: nunber_496
+    21300994: nunber_497
+    21300996: nunber_498
+    21300998: nunber_499
+    21301000: nunber_500
+    21301002: nunber_501
+    21301004: nunber_502
+    21301006: nunber_503
+    21301008: nunber_504
+    21301010: nunber_505
+    21301012: nunber_506
+    21301014: nunber_507
+    21301016: nunber_508
+    21301018: nunber_509
+    21301020: nunber_510
+    21301022: nunber_511
+    21301024: nunber_512
+    21301026: nunber_513
+    21301028: nunber_514
+    21301030: nunber_515
+    21301032: nunber_516
+    21301034: nunber_517
+    21301036: nunber_518
+    21301038: nunber_519
+    21301040: nunber_520
+    21301042: nunber_521
+    21301044: nunber_522
+    21301046: nunber_523
+    21301048: nunber_524
+    21301050: nunber_525
+    21301052: nunber_526
+    21301054: nunber_527
+    21301056: nunber_528
+    21301058: nunber_529
+    21301060: nunber_530
+    21301062: nunber_531
+    21301064: nunber_532
+    21301066: nunber_533
+    21301068: nunber_534
+    21301070: nunber_535
+    21301072: nunber_536
+    21301074: nunber_537
+    21301076: nunber_538
+    21301078: nunber_539
+    21301080: nunber_540
+    21301082: nunber_541
+    21301084: nunber_542
+    21301086: nunber_543
+    21301088: nunber_544
+    21301090: nunber_545
+    21301092: nunber_546
+    21301094: nunber_547
+    21301096: nunber_548
+    21301098: nunber_549
+    21301100: nunber_550
+    21301102: nunber_551
+    21301104: nunber_552
+    21301106: nunber_553
+    21301108: nunber_554
+    21301110: nunber_555
+    21301112: nunber_556
+    21301114: nunber_557
+    21301116: nunber_558
+    21301118: nunber_559
+    21301120: nunber_560
+    21301122: nunber_561
+    21301124: nunber_562
+    21301126: nunber_563
+    21301128: nunber_564
+    21301130: nunber_565
+    21301132: nunber_566
+    21301134: nunber_567
+    21301136: nunber_568
+    21301138: nunber_569
+    21301140: nunber_570
+    21301142: nunber_571
+    21301144: nunber_572
+    21301146: nunber_573
+    21301148: nunber_574
+    21301150: nunber_575
+    21301152: nunber_576
+    21301154: nunber_577
+    21301156: nunber_578
+    21301158: nunber_579
+    21301160: nunber_580
+    21301162: nunber_581
+    21301164: nunber_582
+    21301166: nunber_583
+    21301168: nunber_584
+    21301170: nunber_585
+    21301172: nunber_586
+    21301174: nunber_587
+    21301176: nunber_588
+    21301178: nunber_589
+    21301180: nunber_590
+    21301182: nunber_591
+    21301184: nunber_592
+    21301186: nunber_593
+    21301188: nunber_594
+    21301190: nunber_595
+    21301192: nunber_596
+    21301194: nunber_597
+    21301196: nunber_598
+    21301198: nunber_599
+    21301200: nunber_600
+    21301202: nunber_601
+    21301204: nunber_602
+    21301206: nunber_603
+    21301208: nunber_604
+    21301210: nunber_605
+    21301212: nunber_606
+    21301214: nunber_607
+    21301216: nunber_608
+    21301218: nunber_609
+    21301220: nunber_610
+    21301222: nunber_611
+    21301224: nunber_612
+    21301226: nunber_613
+    21301228: nunber_614
+    21301230: nunber_615
+    21301232: nunber_616
+    21301234: nunber_617
+    21301236: nunber_618
+    21301238: nunber_619
+    21301240: nunber_620
+    21301242: nunber_621
+    21301244: nunber_622
+    21301246: nunber_623
+    21301248: nunber_624
+    21301250: nunber_625
+    21301252: nunber_626
+    21301254: nunber_627
+    21301256: nunber_628
+    21301258: nunber_629
+    21301260: nunber_630
+    21301262: nunber_631
+    21301264: nunber_632
+    21301266: nunber_633
+    21301268: nunber_634
+    21301270: nunber_635
+    21301272: nunber_636
+    21301274: nunber_637
+    21301276: nunber_638
+    21301278: nunber_639
+    21301280: nunber_640
+    21301282: nunber_641
+    21301284: nunber_642
+    21301286: nunber_643
+    21301288: nunber_644
+    21301290: nunber_645
+    21301292: nunber_646
+    21301294: nunber_647
+    21301296: nunber_648
+    21301298: nunber_649
+    21301300: nunber_650
+    21301302: nunber_651
+    21301304: nunber_652
+    21301306: nunber_653
+    21301308: nunber_654
+    21301310: nunber_655
+    21301312: nunber_656
+    21301314: nunber_657
+    21301316: nunber_658
+    21301318: nunber_659
+    21301320: nunber_660
+    21301322: nunber_661
+    21301324: nunber_662
+    21301326: nunber_663
+    21301328: nunber_664
+    21301330: nunber_665
+    21301332: nunber_666
+    21301334: nunber_667
+    21301336: nunber_668
+    21301338: nunber_669
+    21301340: nunber_670
+    21301342: nunber_671
+    21301344: nunber_672
+    21301346: nunber_673
+    21301348: nunber_674
+    21301350: nunber_675
+    21301352: nunber_676
+    21301354: nunber_677
+    21301356: nunber_678
+    21301358: nunber_679
+    21301360: nunber_680
+    21301362: nunber_681
+    21301364: nunber_682
+    21301366: nunber_683
+    21301368: nunber_684
+    21301370: nunber_685
+    21301372: nunber_686
+    21301374: nunber_687
+    21301376: nunber_688
+    21301378: nunber_689
+    21301380: nunber_690
+    21301382: nunber_691
+    21301384: nunber_692
+    21301386: nunber_693
+    21301388: nunber_694
+    21301390: nunber_695
+    21301392: nunber_696
+    21301394: nunber_697
+    21301396: nunber_698
+    21301398: nunber_699
+    21301400: nunber_700
+    21301402: nunber_701
+    21301404: nunber_702
+    21301406: nunber_703
+    21301408: nunber_704
+    21301410: nunber_705
+    21301412: nunber_706
+    21301414: nunber_707
+    21301416: nunber_708
+    21301418: nunber_709
+    21301420: nunber_710
+    21301422: nunber_711
+    21301424: nunber_712
+    21301426: nunber_713
+    21301428: nunber_714
+    21301430: nunber_715
+    21301432: nunber_716
+    21301434: nunber_717
+    21301436: nunber_718
+    21301438: nunber_719
+    21301440: nunber_720
+    21301442: nunber_721
+    21301444: nunber_722
+    21301446: nunber_723
+    21301448: nunber_724
+    21301450: nunber_725
+    21301452: nunber_726
+    21301454: nunber_727
+    21301456: nunber_728
+    21301458: nunber_729
+    21301460: nunber_730
+    21301462: nunber_731
+    21301464: nunber_732
+    21301466: nunber_733
+    21301468: nunber_734
+    21301470: nunber_735
+    21301472: nunber_736
+    21301474: nunber_737
+    21301476: nunber_738
+    21301478: nunber_739
+    21301480: nunber_740
+    21301482: nunber_741
+    21301484: nunber_742
+    21301486: nunber_743
+    21301488: nunber_744
+    21301490: nunber_745
+    21301492: nunber_746
+    21301494: nunber_747
+    21301496: nunber_748
+    21301498: nunber_749
+    21301500: nunber_750
+    21301502: nunber_751
+    21301504: nunber_752
+    21301506: nunber_753
+    21301508: nunber_754
+    21301510: nunber_755
+    21301512: nunber_756
+    21301514: nunber_757
+    21301516: nunber_758
+    21301518: nunber_759
+    21301520: nunber_760
+    21301522: nunber_761
+    21301524: nunber_762
+    21301526: nunber_763
+    21301528: nunber_764
+    21301530: nunber_765
+    21301532: nunber_766
+    21301534: nunber_767
+    21301536: nunber_768
+    21301538: nunber_769
+    21301540: nunber_770
+    21301542: nunber_771
+    21301544: nunber_772
+    21301546: nunber_773
+    21301548: nunber_774
+    21301550: nunber_775
+    21301552: nunber_776
+    21301554: nunber_777
+    21301556: nunber_778
+    21301558: nunber_779
+    21301560: nunber_780
+    21301562: nunber_781
+    21301564: nunber_782
+    21301566: nunber_783
+    21301568: nunber_784
+    21301570: nunber_785
+    21301572: nunber_786
+    21301574: nunber_787
+    21301576: nunber_788
+    21301578: nunber_789
+    21301580: nunber_790
+    21301582: nunber_791
+    21301584: nunber_792
+    21301586: nunber_793
+    21301588: nunber_794
+    21301590: nunber_795
+    21301592: nunber_796
+    21301594: nunber_797
+    21301596: nunber_798
+    21301598: nunber_799
+    21301600: nunber_800
+    21301602: nunber_801
+    21301604: nunber_802
+    21301606: nunber_803
+    21301608: nunber_804
+    21301610: nunber_805
+    21301612: nunber_806
+    21301614: nunber_807
+    21301616: nunber_808
+    21301618: nunber_809
+    21301620: nunber_810
+    21301622: nunber_811
+    21301624: nunber_812
+    21301626: nunber_813
+    21301628: nunber_814
+    21301630: nunber_815
+    21301632: nunber_816
+    21301634: nunber_817
+    21301636: nunber_818
+    21301638: nunber_819
+    21301640: nunber_820
+    21301642: nunber_821
+    21301644: nunber_822
+    21301646: nunber_823
+    21301648: nunber_824
+    21301650: nunber_825
+    21301652: nunber_826
+    21301654: nunber_827
+    21301656: nunber_828
+    21301658: nunber_829
+    21301660: nunber_830
+    21301662: nunber_831
+    21301664: nunber_832
+    21301666: nunber_833
+    21301668: nunber_834
+    21301670: nunber_835
+    21301672: nunber_836
+    21301674: nunber_837
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: nunber_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 160
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -34, y: 57}
+        - {x: -39, y: 34}
+        - {x: -39, y: -71}
+        - {x: 14, y: -71}
+        - {x: 30, y: -66}
+        - {x: 39, y: -30}
+        - {x: 39, y: 38}
+        - {x: 30, y: 57}
+    - name: nunber_1
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 160
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 29, y: 57}
+        - {x: 22, y: 59}
+        - {x: -12, y: 59}
+        - {x: -27, y: 40}
+        - {x: -27, y: -60}
+        - {x: -19, y: -71}
+        - {x: -11, y: -72}
+        - {x: 6, y: -72}
+        - {x: 11, y: -65}
+        - {x: 16, y: -49}
+        - {x: 29, y: 21}
+    - name: nunber_2
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 160
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -27, y: 57}
+        - {x: -37, y: 11}
+        - {x: -37, y: -70}
+        - {x: 43, y: -70}
+        - {x: 43, y: 57}
+    - name: nunber_3
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 160
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -12, y: 58}
+        - {x: -15, y: 57}
+        - {x: -35, y: 54}
+        - {x: -35, y: -72}
+        - {x: 33, y: -72}
+        - {x: 44, y: -31}
+        - {x: 44, y: 52}
+        - {x: 39, y: 58}
+    - name: nunber_4
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 160
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 35, y: 56}
+        - {x: 32, y: 62}
+        - {x: 10, y: 62}
+        - {x: -6, y: 56}
+        - {x: -27, y: 17}
+        - {x: -33, y: -16}
+        - {x: -33, y: -47}
+        - {x: -1, y: -73}
+        - {x: 21, y: -73}
+        - {x: 25, y: -72}
+        - {x: 44, y: -39}
+        - {x: 44, y: 0}
+        - {x: 42, y: 13}
+    - name: nunber_5
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 160
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -15, y: 58}
+        - {x: -32, y: 18}
+        - {x: -32, y: -58}
+        - {x: -25, y: -70}
+        - {x: 21, y: -70}
+        - {x: 37, y: -54}
+        - {x: 46, y: -46}
+        - {x: 46, y: 58}
+    - name: nunber_6
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 0
+        width: 160
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 63}
+        - {x: -30, y: 2}
+        - {x: -30, y: -48}
+        - {x: -25, y: -64}
+        - {x: -11, y: -72}
+        - {x: 40, y: -72}
+        - {x: 46, y: -71}
+        - {x: 46, y: 63}
+    - name: nunber_7
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 0
+        width: 160
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -28, y: 57}
+        - {x: -28, y: -69}
+        - {x: -24, y: -72}
+        - {x: 10, y: -72}
+        - {x: 47, y: 17}
+        - {x: 47, y: 42}
+        - {x: 39, y: 57}
+    - name: nunber_8
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 160
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 49, y: 60}
+        - {x: -14, y: 60}
+        - {x: -28, y: 24}
+        - {x: -28, y: -64}
+        - {x: -19, y: -72}
+        - {x: 32, y: -72}
+        - {x: 48, y: -62}
+        - {x: 52, y: -20}
+        - {x: 52, y: 59}
+    - name: nunber_9
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 0
+        width: 160
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 1, y: 59}
+        - {x: -24, y: 34}
+        - {x: -24, y: -43}
+        - {x: -7, y: -73}
+        - {x: 49, y: -73}
+        - {x: 49, y: 59}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

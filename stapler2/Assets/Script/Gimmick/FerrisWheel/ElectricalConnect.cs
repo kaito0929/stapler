@@ -54,7 +54,7 @@ public class ElectricalConnect : MonoBehaviour {
                 ConnectFlag = true;
                 Spark.SetActive(false);
 
-                rd.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 0, 255));
+                rd.GetComponent<Renderer>().material.color = new Color(255.0f / 255.0f, 143.0f / 255.0f, 247.0f / 255.0f);
 
                 //Rayを飛ばして
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -64,6 +64,14 @@ public class ElectricalConnect : MonoBehaviour {
                     Needle.transform.position = hit.point;
                     //gameObjectと親子関係に
                     Needle.transform.parent = gameObject.transform;
+                }
+            }
+            else if (TouchManager.SelectedGameObject != gameObject)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    //パーティクルの色を変える
+                    rd.GetComponent<Renderer>().material.color = new Color(255, 255, 255);
                 }
             }
         }

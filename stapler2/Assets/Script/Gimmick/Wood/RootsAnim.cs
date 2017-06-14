@@ -40,6 +40,8 @@ public class RootsAnim : MonoBehaviour {
     //パーティクルの色を変化させるための変数
     public Renderer rd;
 
+    private float time;
+
     // Use this for initialization
     void Start () {
         anim = GetComponent<Animation>();
@@ -49,30 +51,34 @@ public class RootsAnim : MonoBehaviour {
         {
             NeedleAnim[i] = MoveNeedle[i].GetComponent<Animation>();
         }
+
+        time = 0;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
+        //木が攻撃時に処理が行われるようにする
         if (woodAttack.GetAttackFlag() == true)
         {
             if (TouchManager.SelectedGameObject == gameObject)
             {
-                AnimStopFlag = true;
-
-                rd.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 0, 255));
-
-                //Rayを飛ばして
-                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit, 100f))
+                if (AnimStopFlag == false)
                 {
-                    //針の位置をタップした位置へと移動させる。
-                    Needle.transform.position = hit.point;
-                    //gameObjectと親子関係に
-                    Needle.transform.parent = gameObject.transform;
-                }
-            }
+                    rd.GetComponent<Renderer>().material.color = new Color(255.0f / 255.0f, 143.0f / 255.0f, 247.0f / 255.0f);
 
+                    //Rayを飛ばして
+                    ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    if (Physics.Raycast(ray, out hit, 100f))
+                    {
+                        //針の位置をタップした位置へと移動させる。
+                        Needle.transform.position = hit.point;
+                        //gameObjectと親子関係に
+                        Needle.transform.parent = gameObject.transform;
+                    }
+                }
+                AnimStopFlag = true;
+            }
             anim.Stop();
         }
         else if (woodAttack.GetAttackFlag() == false && AnimStopFlag == false)
@@ -80,7 +86,27 @@ public class RootsAnim : MonoBehaviour {
             anim.Play();
             NeedleAnimPlay();
         }
-	}
+        
+
+        //木のアニメーションが止められたら時間をtimeに加算
+        if(AnimStopFlag==true)
+        {
+            if (time >= 0)
+            {
+                time += Time.deltaTime;
+            }
+        }
+
+        //timeが1fを超えたならパーティクルの色を白に戻す
+        //その際にtimeを-1fに変えておいて変数に加算させないようにする
+        if (time > 1f)
+        {
+            //パーティクルの色を変える
+            rd.GetComponent<Renderer>().material.color = new Color(255, 255, 255);
+            time = -1f;
+        }
+
+    }
 
 
 

@@ -35,7 +35,7 @@ public class PandaMove : MonoBehaviour {
 
         //アリスがフロア2に到達したかのフラグを取得
         AliceMove alice = Alice.GetComponent<AliceMove>();
-        AliceReachingFlag = alice.GetReachingFlag();
+        AliceReachingFlag = alice.GetFloor2MoveEndFlag();
 
 
         if (AliceReachingFlag == true)

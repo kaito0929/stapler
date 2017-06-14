@@ -18,19 +18,23 @@ public class Floor1Clear : MonoBehaviour {
     private bool[] TapFlag = new bool[2];
 
     //二つのフラグを受けてクリアの判定をする変数
-    private bool OllTapFlag;
+    private bool GimmickClearFlag;
     //クリアの判定を別のスクリプトへ渡す関数
     public bool GetClear()
     {
-        return OllTapFlag;
+        return GimmickClearFlag;
     }
+
+    //正解した時の音を再生するためのフラグ
+    private bool SoundFlag;
 
     // Use this for initialization
     void Start()
     {
         TapFlag[0] = false;
         TapFlag[1] = false;
-        OllTapFlag = false;
+        GimmickClearFlag = false;
+        SoundFlag = false;
     }
 
     // Update is called once per frame
@@ -48,7 +52,21 @@ public class Floor1Clear : MonoBehaviour {
         if (TapFlag[0] == true && TapFlag[1] == true)
         {
             //このフラグがステージ1をクリアしたかのフラグになっている
-            OllTapFlag = true;
+            GimmickClearFlag = true;
+        }
+
+
+        if (GimmickClearFlag == true)
+        {
+            if (SoundFlag == true)
+            {
+                AudioManager.Instance.PlaySE("correct1_01");
+                SoundFlag = false;
+            }
+        }
+        else
+        {
+            SoundFlag = true;
         }
 
     }

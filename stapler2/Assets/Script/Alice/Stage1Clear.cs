@@ -16,6 +16,12 @@ public class Stage1Clear : MonoBehaviour {
     //タップされたかの判定を受け取る変数
     private bool[] TapFlag = new bool[2];
 
+    //ギミックをクリアしたかのフラグ
+    private bool GimmickClearFlag;
+
+    //正解した時の音を再生するためのフラグ
+    private bool SoundFlag;
+
 
     //アリスがどのステージに達しているかのフラグ(ステージ1)
     //ステージの最初からと操作するために必要
@@ -44,6 +50,9 @@ public class Stage1Clear : MonoBehaviour {
         TapFlag[0] = false;
         TapFlag[1] = false;
 
+        GimmickClearFlag = false;
+        SoundFlag = false;
+
         AliceAnim = alice.GetComponent<Animator>();
         AliceAnimInfo = AliceAnim.GetCurrentAnimatorStateInfo(0);
     }
@@ -69,6 +78,9 @@ public class Stage1Clear : MonoBehaviour {
             //アリスがステージ1にいるというフラグはfalseにする
             AliceStage1Flag = false;
 
+            GimmickClearFlag = true;
+
+            //アリスの喜びアニメーションを再生
             AliceAnim.SetTrigger("happy");
             AliceAnim.SetBool("clear",true);
 
@@ -82,7 +94,18 @@ public class Stage1Clear : MonoBehaviour {
         }
 
 
-
+        if(GimmickClearFlag==true)
+        {
+            if (SoundFlag == true)
+            {
+                AudioManager.Instance.PlaySE("correct1_01");
+                SoundFlag = false;
+            }
+        }
+        else
+        {
+            SoundFlag = true;
+        }
 
     }
 }

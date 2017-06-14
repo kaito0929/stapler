@@ -45,7 +45,7 @@ public class TrainConnect : MonoBehaviour {
                 //フラグをtrueにしておく
                 TrainConnectFlag = true;
 
-                rd.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 0, 255));
+                rd.GetComponent<Renderer>().material.color = new Color(255.0f / 255.0f, 143.0f / 255.0f, 247.0f / 255.0f);
 
                 //先頭車両を親にする
                 gameObject.transform.parent = ParentTrain.transform;
@@ -60,6 +60,7 @@ public class TrainConnect : MonoBehaviour {
                     Needle.transform.parent = gameObject.transform;
                 }
             }
+
         }
 
 

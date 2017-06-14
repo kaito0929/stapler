@@ -76,6 +76,7 @@ public class GimmickParent : MonoBehaviour {
         {
             NeedleAnim[i] = MoveNeedle[i].GetComponent<Animation>();
         }
+
     }
 
     // Update is called once per frame
@@ -103,18 +104,32 @@ public class GimmickParent : MonoBehaviour {
                 //ぶつかっている相手と親子関係になる
                 gameObject.transform.parent = other.transform;
 
+                if (TapFlag == false)
+                {
+                    //パーティクルの色を変える
+                    rd.GetComponent<Renderer>().material.color = new Color(255.0f / 255.0f, 143.0f / 255.0f, 247.0f / 255.0f);
+
+                    //Rayを飛ばして
+                    ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    if (Physics.Raycast(ray, out hit, 100f))
+                    {
+                        //針の位置をタップした位置へと移動させる。
+                        Needle.transform.position = hit.point;
+                        //gameObjectと親子関係に
+                        Needle.transform.parent = gameObject.transform;
+                    }
+                }
+
                 TapFlag = true;
 
-                rd.GetComponent<Renderer>().material.SetColor("_Color", new Color(255, 0, 255));
 
-                //Rayを飛ばして
-                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit, 100f))
+            }
+            else if (TouchManager.SelectedGameObject != gameObject)
+            {
+                if (Input.GetMouseButtonDown(0))
                 {
-                    //針の位置をタップした位置へと移動させる。
-                    Needle.transform.position = hit.point;
-                    //gameObjectと親子関係に
-                    Needle.transform.parent = gameObject.transform;
+                    //パーティクルの色を変える
+                    rd.GetComponent<Renderer>().material.color = new Color(255, 255, 255);
                 }
             }
         }

@@ -68,6 +68,7 @@ public class NeedleAnimation : MonoBehaviour
                 //アニメーションを一時停止させる
                 NeedleAnim[num.GetAnimPlayNum()].Stop();
             }
+
             //アニメーションを再生させる
             NeedleAnim[num.GetAnimPlayNum()].Play();
         }

@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//=============================================================
-//魔女が火球に当たった時の処理を行うスクリプト
-//=============================================================
+//======================================
+//魔女の行動を制御するスクリプト
+//移動や攻撃を実行する
+//======================================
 
 public class WitchAction : MonoBehaviour
 {
@@ -19,16 +20,6 @@ public class WitchAction : MonoBehaviour
     }
 
 
-    //アリスがどのステージに達しているかのフラグ(ステージ3)
-    //ステージの最初からと操作するために必要
-    public static bool AliceStage3Flag = true;
-    //そのフラグを渡すための関数
-    //SceneChangeスクリプトに渡す
-    public static bool GetAliceStage3Flag()
-    {
-        return AliceStage3Flag;
-    }
-
     //対象との距離
     private float Distance;
 
@@ -41,6 +32,7 @@ public class WitchAction : MonoBehaviour
     }
     private WitchMoveState witchMoveState;
 
+    //魔女の弾発射の数を制御する変数
     private int WitchShotMax;
     private int WitchShotNum;
 
@@ -50,9 +42,7 @@ public class WitchAction : MonoBehaviour
 
 
     //アリスがフロア3に到達したかのフラグを取得する
-    public AliceMove_Stage3 aliceMove;
-
-
+    public AliceMove aliceMove;
    
 
     // Use this for initialization
@@ -70,7 +60,15 @@ public class WitchAction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //魔女の行動制御
+        WitchActionControl();
+        //魔女がやられる処理
+        WitchDown();
+    }
 
+    //魔女の動きの制御（主に移動と攻撃）
+    void WitchActionControl()
+    {
         WitchMove move = gameObject.GetComponent<WitchMove>();
         Distance = move.GetDistance();
 
@@ -79,6 +77,7 @@ public class WitchAction : MonoBehaviour
         if (aliceMove.GetFloor3MoveEndFlag() == true)
         {
             //攻撃が当たった場合に移動方法を変更
+            //移動方法に伴って弾の発射する数を増やしていく
             switch (witchMoveState)
             {
                 case WitchMoveState.MOVE_CIRCLE://円運動
@@ -101,27 +100,27 @@ public class WitchAction : MonoBehaviour
                     break;
             }
 
-            if (WitchCollNorma >= 0)
+            //魔女が倒されていない状態で待機状態でないならば弾を発射するように
+            if (WitchCollNorma >= 0 && witchMoveState != WitchMoveState.MOVE_STANDBY)
             {
                 shot.WitchShotCreate(WitchShotNum, WitchShotMax);
             }
         }
 
+        //魔女が行動を開始する初期位置との距離を測る
         if (Distance <= 0)
         {
             if (WitchCollNorma == 2)
             {
+                //魔女の動きを八の字移動に変更
                 witchMoveState = WitchMoveState.MOVE_EIGHT;
             }
             else if (WitchCollNorma == 1)
             {
+                //魔女の動きを五芒星の軌道で移動するように変更
                 witchMoveState = WitchMoveState.MOVE_STAR;
             }
         }
-
-
-        //魔女がやられる処理
-        WitchDown();
     }
 
     //魔女に火球が当たるたびに当てるノルマを減らしていく
@@ -149,8 +148,6 @@ public class WitchAction : MonoBehaviour
         //アニメーションを再生して倒したように見せる
         if (WitchCollNorma <= 0)
         {
-            //エンディング画面へ遷移するのでフラグをfalseに戻しておく
-            AliceStage3Flag = false;
             //吹き飛ばされるアニメーションを再生
             WitchAnim.SetTrigger("Finish");
         }

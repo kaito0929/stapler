@@ -63,8 +63,8 @@ public class Retry : MonoBehaviour {
 	void Start () {
         //それぞれのステージにあるスクリプトからフラグを受け取る
         EnrouteStageFlag[0] = Stage1Clear.GetAliceStage1Flag();
-        EnrouteStageFlag[1] = ufoMove.GetAliceStage2Flag();
-        EnrouteStageFlag[2] = WitchAction.GetAliceStage3Flag();
+        EnrouteStageFlag[1] = ufoAction.GetAliceStage2Flag();
+        EnrouteStageFlag[2] = AliceMove_Stage3.GetAliceStage3Flag();
 
         //画面遷移を行うスクリプトを持ったオブジェクトは
         //最初にSetActiveをfalseにしておく

@@ -25,7 +25,7 @@ public class OilCreate : MonoBehaviour {
     //チューブが直ったかのフラグを取る
     public TubeChange tubeFlag;
     //アリスが移動したかのフラグを取る
-    public AliceMove_Stage2 moveFlag;
+    public AliceMove aliceMove;
 
     // Use this for initialization
     void Start () {
@@ -37,7 +37,7 @@ public class OilCreate : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (tubeFlag.GetTubeRepairFlag() == false && moveFlag.GetFloor2MoveEndFlag() == true)
+        if (tubeFlag.GetTubeRepairFlag() == false && aliceMove.GetFloor2MoveEndFlag() == true)
         {
             //時間を加算
             ElapsedTime += Time.deltaTime;
