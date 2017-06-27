@@ -44,8 +44,6 @@ public class GimmickJoint : MonoBehaviour
     public Renderer rd;
 
 
-    //アニメーションを取得
-    private Animator anim;
 
 
     // Use this for initialization
@@ -54,7 +52,6 @@ public class GimmickJoint : MonoBehaviour
         TapFlag = false;
         CollFlag = false;
 
-        anim = GetComponent<Animator>();
 
         MoveNeedle[0] = GameObject.Find("RepelledNeedle1");
         MoveNeedle[1] = GameObject.Find("RepelledNeedle2");
@@ -81,13 +78,6 @@ public class GimmickJoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        //ギミックに止められたのならばじたばたアニメーションを再生させる
-        if (TapFlag == true)
-        {
-            anim.SetTrigger("Stop");
-        }
-
         NeedleAnimPlay();
     }
 
@@ -117,6 +107,7 @@ public class GimmickJoint : MonoBehaviour
 
             TapFlag = true;
         }
+
         else if (TouchManager.SelectedGameObject != gameObject)
         {
             if (Input.GetMouseButtonDown(0))

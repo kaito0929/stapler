@@ -32,7 +32,7 @@ public class Title : MonoBehaviour {
         TitleButtonClickFlag = true;
 
         Stage1Clear.AliceStage1Flag=false;
-        ufoAction.AliceStage2Flag=false;
+        AliceMove_Stage2.AliceStage2Flag=false;
         AliceMove_Stage3.AliceStage3Flag=false;
     }
 

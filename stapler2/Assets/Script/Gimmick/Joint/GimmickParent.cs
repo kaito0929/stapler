@@ -47,18 +47,11 @@ public class GimmickParent : MonoBehaviour {
     //パーティクルの色を変化させるための変数
     public Renderer rd;
 
-
-    //アニメーションを取得
-    private Animator anim;
-
-
     // Use this for initialization
     void Start()
     {
         TapFlag = false;
         CollFlag = false;
-
-        anim = GetComponent<Animator>();
 
         MoveNeedle[0] = GameObject.Find("RepelledNeedle1");
         MoveNeedle[1] = GameObject.Find("RepelledNeedle2");
@@ -86,12 +79,6 @@ public class GimmickParent : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        //ギミックに止められたのならばじたばたアニメーションを再生させる
-        if (TapFlag == true)
-        {
-            anim.SetTrigger("Stop");
-        }
-
         NeedleAnimPlay();
     }
 
@@ -99,17 +86,16 @@ public class GimmickParent : MonoBehaviour {
 
     void OnTriggerStay(Collider other)
     {
+
         //タップしたものがgameObjectだった場合に処理
         if (TouchManager.SelectedGameObject == gameObject && other.gameObject == CollObj)
         {
             //ぶつかっている相手と親子関係になる
             gameObject.transform.parent = other.transform;
-
             if (TapFlag == false)
             {
                 //パーティクルの色を変える
                 rd.GetComponent<Renderer>().material.color = new Color(255.0f / 255.0f, 143.0f / 255.0f, 247.0f / 255.0f);
-
                 //Rayを飛ばして
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit, 100f))
@@ -130,6 +116,7 @@ public class GimmickParent : MonoBehaviour {
                 //パーティクルの色を変える
                 rd.GetComponent<Renderer>().material.color = new Color(255, 255, 255);
             }
+
         }
 
 
@@ -141,7 +128,7 @@ public class GimmickParent : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-        CollFlag = false;
+          CollFlag = false;
     }
 
 

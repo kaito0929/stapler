@@ -35,6 +35,17 @@ public class AliceMove_Stage2 : MonoBehaviour {
     public AliceMove aliceMove;
 
 
+    //アリスがどのステージに達しているかのフラグ(ステージ2)
+    //ステージの最初からと操作するために必要
+    public static bool AliceStage2Flag = true;
+    //そのフラグを渡すための関数
+    //SceneChangeスクリプトに渡す
+    public static bool GetAliceStage2Flag()
+    {
+        return AliceStage2Flag;
+    }
+
+
     // Use this for initialization
     void Start () {
         AliceAnim = GetComponent<Animator>();
@@ -42,10 +53,13 @@ public class AliceMove_Stage2 : MonoBehaviour {
 
         GetFloor1ClearFlag = false;
         GetFloor2ClearFlag = false;
+
+        AliceStage2Flag = true;
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 
         //熊が完全に治ったかのフラグを受け取る
         BearClear touch = Floor1Gimmick.GetComponent<BearClear>();
@@ -80,6 +94,10 @@ public class AliceMove_Stage2 : MonoBehaviour {
             //クリアした時にめくられるページを表示させる
             Stage2_Clear_Obj.SetActive(true);
             black.SetActive(true);
+
+            //アリスがステージ2に移動するので
+            //アリスがステージ1にいるというフラグはfalseにする
+            AliceStage2Flag = false;
         }
 
     }
